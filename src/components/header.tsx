@@ -6,9 +6,9 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { AnimatePresence, motion } from 'framer-motion'
 import Image from 'next/image';
+
 const navigation = [
   { name: 'الرئيسية', href: '/' },
-  { name: 'الدورات', href: '', badge: 'قريبًا' },
   { name: 'الأوبشن الأمريكي', href: '/Optiontrading' },
   { name: 'المؤشرات الفنية', href: '/Indicator' },
   { name: 'الدعم', href: '/Support' },
@@ -53,13 +53,13 @@ export default function Header() {
         <div className="flex items-center">
           <Link href="/" className="flex items-center">
             <Image
-                  src={"img/logo.webp"}
-                  alt={"logo"}
-                  width={60}
-                  height={60}
-                  loading="lazy"
-                  className=" rounded-full mx-2"
-                />
+              src={"img/logo.webp"}
+              alt={"logo"}
+              width={60}
+              height={60}
+              loading="lazy"
+              className="rounded-full mx-2"
+            />
             <span className="text-3xl font-bold text-orange-500 font-sans">
               <span className="text-white font-extrabold p-0 m-0">3</span>zzo
             </span>
@@ -72,14 +72,9 @@ export default function Header() {
             <Link
               key={item.name}
               href={item.href}
-              className="text-lg font-medium text-orange-400 transition hover:bg-orange-500 hover:text-black px-4 py-2 rounded-md font-sans flex items-center gap-1"
+              className="text-lg font-medium text-orange-400 transition hover:bg-orange-500 hover:text-black px-4 py-2 rounded-md font-sans"
             >
               {item.name}
-              {item.badge && (
-                <span className="bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                  {item.badge}
-                </span>
-              )}
             </Link>
           ))}
         </nav>
@@ -124,7 +119,7 @@ export default function Header() {
               transition={{ duration: 0.3 }}
             />
 
-            {/* بدلا من تمرير transition إلى Dialog.Panel مباشرة، استخدم motion.div خارجياً */}
+            {/* استخدام motion.div لتطبيق الانتقال على القائمة */}
             <motion.div
               className="fixed inset-y-0 right-0 z-50 w-4/5 max-w-sm bg-gray-800 p-4"
               initial={{ x: '100%', opacity: 0 }}
@@ -135,14 +130,15 @@ export default function Header() {
               <Dialog.Panel>
                 <div className="flex items-center justify-between border-b border-gray-600 pb-4">
                   <Link href="/" className="flex items-center">
-                  <Image
-                  src={"img/logo.webp"}
-                  alt={"logo"}
-                  width={60}
-                  height={60}
-                  loading="lazy"
-                  className=" rounded-full mx-2"
-                />                  </Link>
+                    <Image
+                      src={"img/logo.webp"}
+                      alt={"logo"}
+                      width={60}
+                      height={60}
+                      loading="lazy"
+                      className="rounded-full mx-2"
+                    />
+                  </Link>
                   <button
                     type="button"
                     onClick={() => setMobileMenuOpen(false)}
@@ -156,15 +152,10 @@ export default function Header() {
                     <Link
                       key={item.name}
                       href={item.href}
-                      className="block text-lg font-semibold text-orange-400 transition hover:bg-orange-500 hover:text-black px-3 py-2 rounded-md font-sans items-center gap-1"
+                      className="block text-lg font-semibold text-orange-400 transition hover:bg-orange-500 hover:text-black px-3 py-2 rounded-md font-sans"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       {item.name}
-                      {item.badge && (
-                        <span className="bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                          {item.badge}
-                        </span>
-                      )}
                     </Link>
                   ))}
                 </div>

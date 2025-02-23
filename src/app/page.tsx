@@ -1,3 +1,4 @@
+import News from "@/components/TradingViewEventsWidget";
 import OptionDeltaCalculator from "@/components/OptionDeltaCalculator";
 
 import Main from "@/components/main";
@@ -14,6 +15,7 @@ export default function Home() {
 
 
         <Welcome />
+        <News />
         <Main />
         <OptionDeltaCalculator />
 

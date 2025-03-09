@@ -205,10 +205,10 @@ const HomePage = () => {
         {/* دعوة للمبتدئين + زر التيليجرام */}
         <section className="my-6 md:my-10 text-center">
           <p className="text-xs md:text-base text-gray-300 mb-4">
-            إذا كنت مبتدئًا، يمكنك زيارة قناتنا التعليمية على تليجرام
+            إذا كنت مبتدئًا، يمكنك زيارة قناتنا الرسمية على تليجرام
           </p>
           <a
-            href="https://t.me/ezzo_edu"
+            href="https://t.me/ezzo_options"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block text-orange-500 font-bold hover:text-orange-400 transition-colors"

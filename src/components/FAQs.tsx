@@ -35,12 +35,12 @@ const FAQs: React.FC = () => {
           نعم، يوجد شروحات مفصّلة للمبتدئين بخطوات واضحة من البداية حتى الاحتراف. 
           يمكنك مشاهدة الفيديوهات التعليمية لدينا أو الانضمام إلى{" "}
           <a
-            href="https://t.me/ezzo_edu"
+            href="https://t.me/ezzo_options"
             target="_blank"
             rel="noopener noreferrer"
             className="text-orange-400 underline"
           >
-            قناتنا التعليمية
+            قناتنا الرسمية 
           </a>.
         </>
       ),

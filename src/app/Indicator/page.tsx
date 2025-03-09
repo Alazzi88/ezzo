@@ -141,43 +141,26 @@ const Indicator: React.FC = () => {
               اختر خطتك المناسبة
             </h3>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-gray-900 p-6 rounded-lg shadow-md text-center relative transition-transform duration-300 hover:shadow-2xl hover:-translate-y-1">
-                <h4 className="text-xl font-semibold text-orange-400">
-                  الاشتراك الشهري
-                </h4>
-                <div className="mt-4">
-                  <p className="text-gray-400 text-sm">249 ريال</p>
-                </div>
-                <p className="mt-2 text-gray-400">شهر واحد</p>
-                <a
-                  href="https://3zzo.aryaf.sa/product/%D9%85%D8%A4%D8%B4%D8%B1-%D9%84%D9%84%D8%AA%D8%AF%D8%A7%D9%88%D9%84"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block mt-6 px-6 py-3 bg-orange-500 text-black rounded-lg shadow hover:bg-orange-400 transition-colors duration-300"
-                >
-                  اشترك الآن
-                </a>
-              </div>
+            <div className="flex justify-center items-center py-8">
+  <div className="bg-gray-900 p-10 rounded-2xl shadow-2xl text-center transition-transform duration-300 hover:-translate-y-1 max-w-md">
+    <h4 className="text-3xl font-bold text-orange-400 mb-4">عرض رمضان</h4>
+    <p className="text-gray-300 text-lg mb-6">اشترك الشهري - شهر واحد</p>
+    <div className="flex flex-col items-center space-y-2 mb-8">
+      <p className="text-gray-400 text-sm">السعر السابق</p>
+      <p className="text-gray-400 text-2xl line-through">249﷼</p>
+      <p className="text-orange-400 text-3xl font-extrabold">199﷼</p>
+    </div>
+    <a
+      href="https://3zzo.aryaf.sa/product/%D9%85%D8%A4%D8%B4%D8%B1-%D9%84%D9%84%D8%AA%D8%AF%D8%A7%D9%88%D9%84"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-block px-10 py-4 bg-orange-500 text-black rounded-full shadow-md hover:bg-orange-400 transition-colors duration-300"
+    >
+      اشترك الآن
+    </a>
+  </div>
+</div>
 
-              <div className="bg-gray-900 p-6 rounded-lg shadow-md text-center relative transition-transform duration-300 hover:shadow-2xl hover:-translate-y-1">
-                <h4 className="text-xl font-semibold text-orange-400">
-                  الاشتراك السنوي
-                </h4>
-                <div className="mt-4">
-                  <p className="text-gray-400 text-sm">1499 ريال</p>
-                </div>
-                <p className="mt-2 text-gray-400">سنة كاملة</p>
-                <a
-                  href="https://3zzo.aryaf.sa/product/%D9%85%D8%A4%D8%B4%D8%B1-%D9%84%D9%84%D8%AA%D8%AF%D8%A7%D9%88%D9%84-3"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block mt-6 px-6 py-3 bg-orange-500 text-black rounded-lg shadow hover:bg-orange-400 transition-colors duration-300"
-                >
-                  اشترك الآن
-                </a>
-              </div>
-            </div>
 
             <div className="mt-12 p-6 bg-gradient-to-r from-orange-500 to-yellow-400 rounded-lg shadow-lg text-center transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
               <a

@@ -151,7 +151,7 @@ const Welcome: React.FC = () => {
                 </p>
                 <div className="mt-10">
                   <Link
-                    href="https://t.me/ezzo_edu"
+                    href="https://t.me/ezzo_options"
                     target="_blank"
                     className="inline-block px-6 py-3 text-lg font-bold text-black bg-orange-500 rounded-md hover:bg-orange-600 hover:text-white transition"
                   >

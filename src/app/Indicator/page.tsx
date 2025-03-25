@@ -4,6 +4,7 @@ import React from "react";
 import Header from "@/components/header";
 import Image from "next/image";
 import FAQs from "@/components/FAQs";
+import UpdateRequest from "@/components/UpdateRequest";
 
 // فيديوهات الشروحات الأساسية
 const videos = [
@@ -30,7 +31,8 @@ const Indicator: React.FC = () => {
       {/* قسم الأسئلة الشائعة */}
       <FAQs />
 
-      <div className="bg-gradient-to-b from-black to-gray-900 py-12 mt-12">
+      <div className="bg-gradient-to-b from-black to-gray-900 py-4 mt-1">
+        <UpdateRequest />
         <div dir="rtl" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* قسم العنوان والوصف */}
           <div className="text-center mb-12">
@@ -64,7 +66,6 @@ const Indicator: React.FC = () => {
                         allowFullScreen
                       ></iframe>
                     </div>
-                    {/* تعديل bottom-0 إلى bottom-12 */}
                     <div className="absolute bottom-12 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-4">
                       <p className="text-orange-500 font-bold text-lg">
                         {video.title}
@@ -75,13 +76,6 @@ const Indicator: React.FC = () => {
               ))}
             </div>
           </div>
-
-          {/* قسم الفيديوهات المتقدمة - (مُعطل في الوقت الحالي) */}
-          {/*
-            <div className="mb-16">
-              ... أي كود للفيديوهات المتقدمة إن رغبت بتفعيله لاحقًا ...
-            </div>
-          */}
 
           {/* قسم المميزات */}
           <div className="bg-gray-800 shadow-lg rounded-lg p-8 mb-16 transition-transform duration-500 hover:scale-[1.01] hover:shadow-2xl">
@@ -142,25 +136,24 @@ const Indicator: React.FC = () => {
             </h3>
 
             <div className="flex justify-center items-center py-8">
-  <div className="bg-gray-900 p-10 rounded-2xl shadow-2xl text-center transition-transform duration-300 hover:-translate-y-1 max-w-md">
-    <h4 className="text-3xl font-bold text-orange-400 mb-4">عرض رمضان</h4>
-    <p className="text-gray-300 text-lg mb-6">اشترك الشهري - شهر واحد</p>
-    <div className="flex flex-col items-center space-y-2 mb-8">
-      <p className="text-gray-400 text-sm">السعر السابق</p>
-      <p className="text-gray-400 text-2xl line-through">249﷼</p>
-      <p className="text-orange-400 text-3xl font-extrabold">199﷼</p>
-    </div>
-    <a
-      href="https://3zzo.aryaf.sa/product/%D9%85%D8%A4%D8%B4%D8%B1-%D9%84%D9%84%D8%AA%D8%AF%D8%A7%D9%88%D9%84"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="inline-block px-10 py-4 bg-orange-500 text-black rounded-full shadow-md hover:bg-orange-400 transition-colors duration-300"
-    >
-      اشترك الآن
-    </a>
-  </div>
-</div>
-
+              <div className="bg-gray-900 p-10 rounded-2xl shadow-2xl text-center transition-transform duration-300 hover:-translate-y-1 max-w-md">
+                <h4 className="text-3xl font-bold text-orange-400 mb-4">عرض رمضان</h4>
+                <p className="text-gray-300 text-lg mb-6">اشترك الشهري - شهر واحد</p>
+                <div className="flex flex-col items-center space-y-2 mb-8">
+                  <p className="text-gray-400 text-sm">السعر السابق</p>
+                  <p className="text-gray-400 text-2xl line-through">249﷼</p>
+                  <p className="text-orange-400 text-3xl font-extrabold">199﷼</p>
+                </div>
+                <a
+                  href="https://3zzo.aryaf.sa/product/%D9%85%D8%A4%D8%B4%D8%B1-%D9%84%D9%84%D8%AA%D8%AF%D8%A7%D9%88%D9%84"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block px-10 py-4 bg-orange-500 text-black rounded-full shadow-md hover:bg-orange-400 transition-colors duration-300"
+                >
+                  اشترك الآن
+                </a>
+              </div>
+            </div>
 
             <div className="mt-12 p-6 bg-gradient-to-r from-orange-500 to-yellow-400 rounded-lg shadow-lg text-center transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
               <a

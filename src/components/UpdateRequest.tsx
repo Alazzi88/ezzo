@@ -32,7 +32,7 @@ const UpdateRequest = () => {
     return (
 <div className="flex items-center justify-center py-4 mb-8">
   <div className="text-center">
-    <h2 className="text-xl mb-4 text-orange-500 animate-pulse text-xl">تم طلب التحديث</h2>
+    <h2 className="text-xl mb-4 text-orange-500 animate-pulse ">تم طلب التحديث</h2>
     <p className="text-orange-600 animate-pulse text-xl">سوف يتم تحديثه بأسرع وقت ممكن.</p>
   </div>
 </div>

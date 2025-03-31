@@ -32,7 +32,7 @@ const Indicator: React.FC = () => {
       <FAQs />
 
       <div className="bg-gradient-to-b from-black to-gray-900 py-4 mt-1">
-        <UpdateRequest />
+        <UpdateRequest serverSystemInfo={""} />
         <div dir="rtl" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* قسم العنوان والوصف */}
           <div className="text-center mb-12">

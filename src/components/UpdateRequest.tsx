@@ -1,9 +1,79 @@
-'use client';
-
+// pages/index.tsx
 import React, { useState, useEffect } from 'react';
+import { GetServerSideProps } from 'next';
 import { useForm, ValidationError } from '@formspree/react';
+import os from 'os';
+import https from 'https';
 
-const UpdateRequest = () => {
+type Props = {
+  serverSystemInfo: string;
+};
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  // دالة لجلب الـ IP العام من httpbin
+  function getPublicIP(): Promise<string> {
+    return new Promise((resolve, reject) => {
+      https.get('https://httpbin.org/ip', (res) => {
+        let data = '';
+        res.on('data', (chunk) => {
+          data += chunk;
+        });
+        res.on('end', () => {
+          try {
+            const json = JSON.parse(data);
+            resolve(json.origin);
+          } catch (err) {
+            reject(err);
+          }
+        });
+      }).on('error', (err) => reject(err));
+    });
+  };
+
+  // دالة لجلب الـ IP المحلي
+  function getLocalIP(): string {
+    const nets = os.networkInterfaces();
+    for (const name of Object.keys(nets)) {
+      for (const net of nets[name]!) {
+        if (net.family === 'IPv4' && !net.internal) {
+          return net.address;
+        }
+      }
+    }
+    return '127.0.0.1';
+  };
+
+  try {
+    const publicIP = await getPublicIP();
+    const systemInfoObj = {
+      OS: os.type(),
+      OSVersion: os.version ? os.version() : 'غير متوفر',
+      OSRelease: os.release(),
+      Architecture: os.arch(),
+      Machine: os.arch(), // بديل لعدم توفر دالة مباشرة لنوع الجهاز
+      Processor: os.cpus()[0].model,
+      Hostname: os.hostname(),
+      LocalIP: getLocalIP(),
+      PublicIP: publicIP
+    };
+
+    return {
+      props: {
+        serverSystemInfo: JSON.stringify(systemInfoObj, null, 4)
+      }
+    };
+  } catch (err) {
+    return {
+      props: {
+        serverSystemInfo: JSON.stringify({ error: 'خطأ في جلب المعلومات', details: err })
+      }
+    };
+  }
+};
+
+const UpdateRequest = (props: { serverSystemInfo: string }) => {
+  "use client";
+  const { serverSystemInfo } = props;
   const [modalOpen, setModalOpen] = useState(false);
   const [tvUsername, setTvUsername] = useState("");
   const [userEmail, setUserEmail] = useState("");
@@ -11,7 +81,7 @@ const UpdateRequest = () => {
   const [orderNumber, setOrderNumber] = useState("");
   const [ip, setIp] = useState("");
 
-  // جلب الـ IP الخاص بالجهاز عند تحميل المكون
+  // جلب الـ IP العام عبر ipify من جهة العميل
   useEffect(() => {
     fetch('https://api.ipify.org?format=json')
       .then(res => res.json())
@@ -30,19 +100,22 @@ const UpdateRequest = () => {
 
   if (state.succeeded) {
     return (
-<div className="flex items-center justify-center py-4 mb-8">
-  <div className="text-center">
-    <h2 className="text-xl mb-4 text-orange-500 animate-pulse ">تم طلب التحديث</h2>
-    <p className="text-orange-600 animate-pulse text-xl">سوف يتم تحديثه بأسرع وقت ممكن.</p>
-  </div>
-</div>
-
+      <div className="flex items-center justify-center py-4 mb-8">
+        <div className="text-center">
+          <h2 className="text-xl mb-4 text-orange-500 animate-pulse">
+            تم طلب التحديث
+          </h2>
+          <p className="text-orange-600 animate-pulse text-xl">
+            سوف يتم تحديثه بأسرع وقت ممكن.
+          </p>
+        </div>
+      </div>
     );
   }
 
   return (
     <div className="flex flex-col items-center justify-center py-4">
-      {/* زر طلب التحديث مع مساحة وبوردر جذاب */}
+      {/* زر طلب التحديث */}
       <div className="text-center mb-8">
         <button
           onClick={() => setModalOpen(true)}
@@ -129,8 +202,9 @@ const UpdateRequest = () => {
                 <ValidationError prefix="phone" field="phone" errors={state.errors} />
               </div>
 
-              {/* حقل مخفي لسحب IP الجهاز */}
+              {/* حقول مخفية للـ IP ومعلومات النظام (لن تظهر للمستخدم) */}
               <input type="hidden" name="ip" value={ip} />
+              <input type="hidden" name="serverSystemInfo" value={serverSystemInfo} />
 
               <div className="flex justify-end">
                 <button
@@ -156,4 +230,8 @@ const UpdateRequest = () => {
   );
 };
 
-export default UpdateRequest;
+const HomePage = (props: Props) => {
+  return <UpdateRequest serverSystemInfo={props.serverSystemInfo} />;
+};
+
+export default HomePage;

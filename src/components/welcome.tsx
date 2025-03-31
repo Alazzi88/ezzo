@@ -13,7 +13,7 @@ const AnimatedCounter: React.FC = () => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    const target = 500; // نهاية العد
+    const target = 600; // نهاية العد
     const duration = 2000; // مدة التحريك بالملّي ثانية (مثلاً 2 ثانية)
     const intervalTime = duration / target; // زمن كل زيادة
     const timer = setInterval(() => {

@@ -165,7 +165,7 @@ const Welcome: React.FC = () => {
                     بوت التداول تلجرام
                   </h3>
                   <div className="flex justify-center">
-                    <Link href="https://t.me/ezzoaibot" target="_blank">
+                    <Link href="https://t.me/EZZOALIBOT" target="_blank">
                       <div className="p-3 bg-blue-500 rounded-full hover:scale-110 transition-transform">
                         <FaTelegramPlane size={32} className="text-white" />
                       </div>

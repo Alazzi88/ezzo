@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, MouseEvent } from "react";
 import Header from "@/components/header";
 import Image from "next/image";
 import FAQs from "@/components/FAQs";
@@ -40,26 +40,33 @@ const sectionVideos: Record<
   { url: string; title: string; thumbnail: string }
 > = {
   free: {
-    url: "https://www.youtube.com/embed/EXAMPLE_FREE_VIDEO",
+    url: "https://www.youtube.com/embed/bVdBpeHcF80?si=tuuusen3CUwYSdMs",
     title: "شرح المؤشر الأساسي",
     thumbnail: "/img/indic.webp",
   },
   pro: {
-    url: "https://www.youtube.com/embed/EXAMPLE_PRO_VIDEO",
+    url: "https://www.youtube.com/embed/QBeCPM-kwFY?si=2BE5Z_2nOqF0lR3l",
     title: "شرح المؤشر البرو",
     thumbnail: "/img/ezzoind.webp",
   },
   spx: {
-    url: "https://www.youtube.com/embed/EXAMPLE_SPX_VIDEO",
+    url: "https://www.youtube.com/embed/DMXkOIfdTtI?si=88GAZv7-jJDpSCNT",
     title: "شرح استراتيجية سباكس وناسداك",
     thumbnail: "/img/spx.webp",
   },
 };
 
 // -----------------------------------------------------------------------------
+// util: تحويل رابط /embed إلى رابط watch?v لليوتيوب
+// -----------------------------------------------------------------------------
+const toYoutubeWatch = (embedUrl: string) => {
+  const id = embedUrl.split("/embed/")[1]?.split("?")[0] ?? "";
+  return `https://www.youtube.com/watch?v=${id}`;
+};
+
+// -----------------------------------------------------------------------------
 // مكوّن بطاقة الفيديو
 // -----------------------------------------------------------------------------
-
 type VideoCardProps = {
   url: string;
   title: string;
@@ -68,6 +75,11 @@ type VideoCardProps = {
 
 const VideoCard: React.FC<VideoCardProps> = ({ url, title, thumbnail }) => {
   const [play, setPlay] = useState(false);
+
+  // منع تحوّل البطاقة إلى وضع التشغيل عند الضغط على زر يوتيوب
+  const openOnYoutube = (e: MouseEvent<HTMLAnchorElement>) => {
+    e.stopPropagation();
+  };
 
   return (
     <div
@@ -106,6 +118,17 @@ const VideoCard: React.FC<VideoCardProps> = ({ url, title, thumbnail }) => {
               </div>
             </>
           )}
+
+          {/* زر يفتح المقطع على يوتيوب */}
+          <a
+            href={toYoutubeWatch(url)}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={openOnYoutube}
+            className="absolute bottom-3 right-3 bg-white/80 backdrop-blur px-3 py-1 rounded-md text-xs font-semibold text-black hover:bg-white transition-colors"
+          >
+            مشاهدة على يوتيوب
+          </a>
         </div>
 
         {/* العنوان */}
@@ -118,9 +141,8 @@ const VideoCard: React.FC<VideoCardProps> = ({ url, title, thumbnail }) => {
 };
 
 // -----------------------------------------------------------------------------
-// الصفحة الرئيسية للمؤشر
+// الصفحة الرئيسية للمؤشر (باقي الكود كما هو دون تغيير)
 // -----------------------------------------------------------------------------
-
 const Indicator: React.FC = () => (
   <>
     <Header />
@@ -321,7 +343,9 @@ const Indicator: React.FC = () => (
                 عرض لفترة محدودة
               </h4>
 
-              <p className="text-gray-300 text-lg mb-6">اشتراك شهري - شهر واحد</p>
+              <p className="text-gray-300 text-lg mb-6">
+                اشتراك شهري - شهر واحد
+              </p>
 
               <div className="flex flex-col items-center space-y-2 mb-8">
                 <p className="text-gray-400 text-sm">السعر السابق</p>

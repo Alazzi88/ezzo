@@ -216,7 +216,7 @@ const Indicator: React.FC = () => (
 
           <div className="flex justify-center">
             <a
-              href="https://www.tradingview.com/script/zoCF274s-3zzo.com/"
+              href="https://www.tradingview.com/script/gn8I8sHG-3zzo-com-free/"
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3 bg-orange-500 text-black font-semibold rounded-md shadow hover:bg-orange-400 transition-colors duration-300"

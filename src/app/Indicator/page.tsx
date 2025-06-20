@@ -17,11 +17,7 @@ type Video = {
 
 // فيديوهات الشروحات الأساسية
 const videos: Video[] = [
-  {
-    url: "https://www.youtube.com/embed/bVdBpeHcF80?si=tuuusen3CUwYSdMs",
-    title: "المؤشر الأساسي",
-    thumbnail: "/img/thumb-basic.webp",
-  },
+  
   {
     url: "https://www.youtube.com/embed/QBeCPM-kwFY?si=2BE5Z_2nOqF0lR3l",
     title: "المؤشر البرو",
@@ -36,14 +32,10 @@ const videos: Video[] = [
 
 // فيديو مخصّص لكل قسم
 const sectionVideos: Record<
-  "free" | "pro" | "spx",
+   "pro" | "spx",
   { url: string; title: string; thumbnail: string }
 > = {
-  free: {
-    url: "https://www.youtube.com/embed/bVdBpeHcF80?si=tuuusen3CUwYSdMs",
-    title: "شرح المؤشر الأساسي",
-    thumbnail: "/img/indic.webp",
-  },
+
   pro: {
     url: "https://www.youtube.com/embed/QBeCPM-kwFY?si=2BE5Z_2nOqF0lR3l",
     title: "شرح المؤشر البرو",
@@ -161,71 +153,7 @@ const Indicator: React.FC = () => (
         {/* ------------------------------------------------------------------- */}
         {/* القسم: المؤشر الأساسي (مجاني) */}
         {/* ------------------------------------------------------------------- */}
-        <section className="bg-gray-800 shadow-lg rounded-lg p-8 mb-16 hover:scale-[1.01] hover:shadow-2xl transition-transform duration-500">
-          <h2 className="text-2xl font-bold text-orange-400 mb-4 text-center">
-            المؤشر الأساسي <span className="text-gray-300">(مجاني)</span>
-          </h2>
-
-          <p className="text-gray-300 mb-6">
-            يستخدم المؤشر الأساسي خوارزميات بسيطة تعتمد على مستويات الدعم
-            والمقاومة لتحليل حركة السعر مما يساعد المتداولين على تحديد اتجاه
-            السوق ونقاط الدخول والخروج الأساسية دون تعقيد.
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-6">
-            <VideoCard
-              url={sectionVideos.free.url}
-              title={sectionVideos.free.title}
-              thumbnail={sectionVideos.free.thumbnail}
-            />
-
-            <div>
-              <ul className="list-disc pl-6 space-y-3 text-gray-300 leading-relaxed mb-6">
-                <li>
-                  <strong>تحديد الدعوم والمقاومات</strong>
-                </li>
-                <li>
-                  <strong>تحديد الاتجاه العام للسوق</strong>
-                </li>
-                <li>
-                  <strong>مناطق الشراء والبيع</strong>
-                </li>
-                <li>
-                  <strong>مناطق العرض والطلب</strong>
-                </li>
-                <li>
-                  <strong>الساعات الذهبية</strong>
-                </li>
-                <li>
-                  <strong>كشف مناطق السيولة</strong>
-                </li>
-              </ul>
-
-              <div className="flex justify-center">
-                <Image
-                  src="/img/indic.webp"
-                  alt="Free Indicator Preview"
-                  width={800}
-                  height={450}
-                  className="rounded-lg w-full h-auto"
-                  loading="lazy"
-                />
-              </div>
-            </div>
-          </div>
-
-          <div className="flex justify-center">
-            <a
-              href="https://www.tradingview.com/script/gn8I8sHG-3zzo-com-free/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-3 bg-orange-500 text-black font-semibold rounded-md shadow hover:bg-orange-400 transition-colors duration-300"
-            >
-              إضافة المؤشر الأساسي
-            </a>
-          </div>
-        </section>
-
+    
         {/* ------------------------------------------------------------------- */}
         {/* القسم: المؤشر البرو */}
         {/* ------------------------------------------------------------------- */}

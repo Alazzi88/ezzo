@@ -18,7 +18,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ar" dir="rtl" className={almarai.variable}>
       <head>
         <title>Ezzo</title>
-        <meta name="title" content="Ezzo" />
+        <title>Ezzo – مؤشر تداول متكامل وإشارات فنية متقدمة</title>
+        <meta
+          name="description"
+          content="اكتشف مؤشر Ezzo للتداول: إشارات فنية متقدمة، مؤشرات سكالبينج، تداول الخيارات (SPX500)، بوت تداول آلي، وتنبيهات TradingView فورية."
+        />
+        <meta
+          name="keywords"
+          content="
+            مؤشر Ezzo, مؤشر للتداول, مؤشر تداول, تحليل فني,
+            إشارات فنية متقدمة, مؤشرات سكالبينج, Scalping Indicators,
+            تداول الخيارات, Options Trading, خيارات SPX, SPX500,
+            بوت تداول آلي, Trading Bot, تنبيهات TradingView فورية,
+            لوحة تحكم Dashboard للتداول, دليل المؤشرات, مقارنة المؤشرات,
+            دعم ومقاومة ديناميكي, مراجعات المؤشرات, محتوى تعليمي للتداول,
+            استراتيجيات فريمات متعددة
+          "
+        />
+
         <meta
           name="description"
           content="اكتشف أفضل المؤشرات للتحليل الفني للتداول..."

@@ -162,10 +162,10 @@ const Welcome: React.FC = () => {
                 {/* بوت التداول تلجرام */}
                 <div className="mt-10 text-center">
                   <h3 className="text-2xl font-semibold text-orange-400 mb-4">
-                    بوت التداول تلجرام
+                  🤖بوت مؤشر إيزو اللحظية⚡
                   </h3>
                   <div className="flex justify-center">
-                    <Link href="https://t.me/EZZOALIBOT" target="_blank">
+                    <Link href="https://t.me/Ezzochartbot" target="_blank">
                       <div className="p-3 bg-blue-500 rounded-full hover:scale-110 transition-transform">
                         <FaTelegramPlane size={32} className="text-white" />
                       </div>

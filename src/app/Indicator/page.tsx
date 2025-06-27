@@ -182,6 +182,9 @@ const Indicator: React.FC = () => (
                 <strong>تحديد الأهداف بدقة</strong>
               </li>
               <li>
+                <strong>تنبيهات في قروبات تلجرام لكل سوق</strong>
+              </li>
+              <li>
                 <strong>إدارة وقف الخسارة تلقائيًا</strong>
               </li>
               <li>

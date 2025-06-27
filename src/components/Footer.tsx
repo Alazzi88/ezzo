@@ -13,7 +13,6 @@ const socialLinks = [
   { icon: <FaYoutube size={28} />, url: 'https://www.youtube.com/@Ezzo3zzo', color: 'bg-gradient-to-r from-red-600 to-orange-500' },
   { icon: <FaTiktok size={28} />, url: 'https://www.tiktok.com/@3zzo.com', color: 'bg-gradient-to-r from-gray-900 to-gray-700' },
   { icon: <FaSnapchatGhost size={28} />, url: 'https://www.snapchat.com/add/ezzo.com', color: 'bg-gradient-to-r from-yellow-400 to-yellow-300' },
-  { icon: <FaGithub size={28} />, url: 'https://github.com/Alazzi88', color: 'bg-gradient-to-r from-gray-800 to-gray-600' },
   // { icon: <FaTelegramPlane size={28} />, url: 'https://t.me/sok191bo', color: 'bg-gradient-to-r from-blue-500 to-blue-700' },
 ];
 

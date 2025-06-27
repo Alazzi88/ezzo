@@ -7,3 +7,5 @@ Host: https://3zzo.com
 
 # Sitemaps
 Sitemap: https://3zzo.com/sitemap.xml
+Sitemap: https://3zzo.com/sitemap-0.xml
+Sitemap: https://3zzo.com/extra-sitemap.xml

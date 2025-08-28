@@ -270,18 +270,18 @@ const Indicator: React.FC = () => (
 
           <div className="flex justify-center items-center py-8">
             <div className="bg-gray-900 p-10 rounded-2xl shadow-2xl text-center transition-transform duration-300 hover:-translate-y-1 max-w-md">
-              <h4 className="text-3xl font-bold text-orange-400 mb-4">
+              {/* <h4 className="text-3xl font-bold text-orange-400 mb-4">
                 عرض لفترة محدودة
-              </h4>
+              </h4> */}
 
               <p className="text-gray-300 text-lg mb-6">
                 اشتراك شهري - شهر واحد
               </p>
 
               <div className="flex flex-col items-center space-y-2 mb-8">
-                <p className="text-gray-400 text-sm">السعر السابق</p>
-                <p className="text-gray-400 text-2xl line-through">249﷼</p>
-                <p className="text-orange-400 text-3xl font-extrabold">199﷼</p>
+                {/* <p className="text-gray-400 text-sm">السعر السابق</p> */}
+                {/* <p className="text-gray-400 text-2xl line-through">249﷼</p> */}
+                <p className="text-orange-400 text-3xl font-extrabold">249﷼</p>
               </div>
 
               <a

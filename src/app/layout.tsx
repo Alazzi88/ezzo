@@ -6,6 +6,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import Footer from "@/components/Footer";
 import Header from "@/components/header";
 import Script from "next/script";
+import { Providers } from "@/app/providers";
 
 const almarai = Almarai({
   subsets: ["latin", "arabic"],
@@ -127,12 +128,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         {/* بداية محتوى الصفحة */}
         <Header />
-        <main className="flex-grow bg-black mt-2 px-0 py-8">
-          <div className="max-w-full mx-auto bg-black p-0 rounded-lg shadow-md">
-            {children}
-          </div>
-        </main>
-
+        <Providers>
+          <main className="flex-grow bg-black mt-2 px-0 py-8">
+            <div className="max-w-full mx-auto bg-black p-0 rounded-lg shadow-md">
+              {children}
+            </div>
+          </main>
+        </Providers>
         <Footer />
         <ScrollToTop />
         {/* نهاية محتوى الصفحة */}

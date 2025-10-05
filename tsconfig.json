@@ -29,6 +29,6 @@
     "global.d.ts", // تأكّد من وجود ملفك التعريفي هنا
     ".next/types/**/*.ts",
     "server.js"
-  ],
+, "src/components/TradingViewWidget.tsx"  ],
   "exclude": ["node_modules"]
 }

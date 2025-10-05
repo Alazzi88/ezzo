@@ -218,55 +218,10 @@ const Indicator: React.FC = () => (
             />
           </div>
         </section>
-
-        {/* ------------------------------------------------------------------- */}
-        {/* القسم: استراتيجية سباكس وناسداك */}
-        {/* ------------------------------------------------------------------- */}
-        <section className="bg-gray-800 shadow-lg rounded-lg p-8 mb-16 hover:scale-[1.01] hover:shadow-2xl transition-transform duration-500">
-          <h3 className="text-xl font-semibold text-orange-500 mb-4 text-center">
-            استراتيجية <span className="text-orange-500">سباكس وناسداك</span>
-          </h3>
-
-          <p className="text-gray-300 leading-relaxed mb-6">
-            تعتمد استراتيجية سباكس وناسداك على مستويات الدعم والمقاومة اليومية
-            لتحديد حركة السوق، مع التركيز على مناطق دخول الـ <strong>كول</strong>{" "}
-            والـ <strong>بوت</strong> باستخدام مؤشرات ديناميكية، وتحديد الأهداف
-            بناءً على نقاط التصحيح واستهداف مستويات السيولة.
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            <VideoCard
-              url={sectionVideos.spx.url}
-              title={sectionVideos.spx.title}
-              thumbnail={sectionVideos.spx.thumbnail}
-            />
-
-            <div className="flex justify-center">
-              <Image
-                src="/img/spx.webp"
-                alt="SPX & NASDAQ Strategy Preview"
-                width={800}
-                height={450}
-                className="rounded-lg w-full h-auto"
-                loading="lazy"
-              />
-            </div>
-          </div>
-        </section>
-
-        {/* ------------------------------------------------------------------- */}
-        {/* قسم الاشتراكات */}
-        {/* ------------------------------------------------------------------- */}
-        <section className="container mx-auto px-4 py-8">
+  <section className="container mx-auto px-4 py-8">
           <h3 className="text-2xl font-bold text-orange-500 mb-8 text-center">
             للإشتراك
           </h3>
-
-          <p className="text-gray-300 text-center mb-6">
-            يشمل الاشتراك: المؤشر{" "}
-            <strong className="text-orange-500">البرو</strong> واستراتيجية{" "}
-            <strong className="text-orange-500">سباكس</strong>.
-          </p>
 
           <div className="flex justify-center items-center py-8">
             <div className="bg-gray-900 p-10 rounded-2xl shadow-2xl text-center transition-transform duration-300 hover:-translate-y-1 max-w-md">

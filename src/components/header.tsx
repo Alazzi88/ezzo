@@ -7,19 +7,19 @@ import Link from 'next/link'
 import { AnimatePresence, motion } from 'framer-motion'
 import Image from 'next/image';
 
-const navigation = [
-  { name: 'الرئيسية', href: '/' },
-  { name: 'الأوبشن الأمريكي', href: '/Optiontrading' },
-  { name: 'المؤشرات الفنية', href: '/Indicator' },
-  { name: 'الدعم', href: '/Support' },
-  { name: 'من نحن', href: '/About' },
-  { name: 'سياسة الخصوصية', href: '/PrivacyPolicy' },
-]
-
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [showHeader, setShowHeader] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
+
+  const navigation = [
+    { name: 'الرئيسية', href: '/' },
+    { name: 'الفيوتشر والحسابات الممولة', href: '/FuturesAndFundedAccounts' },
+    { name: 'الأوبشن الأمريكي', href: '/Optiontrading' },
+    { name: 'المؤشرات الفنية', href: '/Indicator' },
+    { name: 'الدعم', href: '/Support' },
+    { name: 'سياسة الخصوصية', href: '/PrivacyPolicy' },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,7 +40,7 @@ export default function Header() {
 
   return (
     <header
-      dir="rtl"
+      dir='rtl'
       className={`fixed inset-x-0 top-0 z-50 font-sans transition-transform duration-300 ${
         showHeader ? 'bg-gradient-to-b from-black via-transparent to-transparent' : 'bg-black bg-opacity-80'
       }`}
@@ -51,10 +51,10 @@ export default function Header() {
       >
         {/* Logo Section */}
         <div className="flex items-center">
-          <Link href="/" className="flex items-center">
+          <Link href={'/'} className="flex items-center">
             <Image
               src={"img/logo.webp"}
-              alt={"logo"}
+              alt="شعار الموقع"
               width={60}
               height={60}
               loading="lazy"
@@ -70,9 +70,9 @@ export default function Header() {
         <nav className="hidden lg:flex lg:gap-10">
           {navigation.map((item) => (
             <Link
-              key={item.name}
+              key={item.href}
               href={item.href}
-              className="text-lg font-medium text-orange-400 transition hover:bg-orange-500 hover:text-black px-4 py-2 rounded-md font-sans"
+              className={`text-lg font-medium text-orange-400 transition hover:bg-orange-500 hover:text-black px-4 py-2 rounded-md font-sans`}
             >
               {item.name}
             </Link>
@@ -129,10 +129,10 @@ export default function Header() {
             >
               <Dialog.Panel>
                 <div className="flex items-center justify-between border-b border-gray-600 pb-4">
-                  <Link href="/" className="flex items-center">
+                  <Link href={'/'} className="flex items-center">
                     <Image
                       src={"img/logo.webp"}
-                      alt={"logo"}
+                      alt="شعار الموقع"
                       width={60}
                       height={60}
                       loading="lazy"
@@ -150,9 +150,9 @@ export default function Header() {
                 <div className="mt-4 space-y-2">
                   {navigation.map((item) => (
                     <Link
-                      key={item.name}
+                      key={item.href}
                       href={item.href}
-                      className="block text-lg font-semibold text-orange-400 transition hover:bg-orange-500 hover:text-black px-3 py-2 rounded-md font-sans"
+                      className={`block text-lg font-semibold text-orange-400 transition hover:bg-orange-500 hover:text-black px-3 py-2 rounded-md font-sans`}
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       {item.name}

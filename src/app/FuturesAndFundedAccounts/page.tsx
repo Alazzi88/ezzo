@@ -89,87 +89,87 @@ const FuturesAndFundedAccounts = () => {
 				<h2 className="text-3xl font-bold text-orange-400 mb-8 text-center animate-gradient-text">
 					مقارنة تفصيلية بين الفيوتشر، الأسهم، الفوركس، والأوبشن الأمريكي
 				</h2>
-				<div className="overflow-x-auto mb-10 animate-fade-in">
-					<table className="min-w-full text-center text-gray-200 border border-orange-700 rounded-xl overflow-hidden shadow-xl">
+				<div className="overflow-x-auto mb-10 animate-fade-in rounded-xl border border-orange-700 shadow-xl">
+					<table className="min-w-full text-center text-gray-200 text-sm sm:text-base">
 						<thead className="bg-orange-900/80">
 							<tr>
-								<th className="px-4 py-2">الميزة</th>
-								<th className="px-4 py-2">الفيوتشر</th>
-								<th className="px-4 py-2">الأسهم</th>
-								<th className="px-4 py-2">الفوركس</th>
-								<th className="px-4 py-2">الأوبشن الأمريكي</th>
+								<th className="px-2 sm:px-4 py-2 whitespace-nowrap">الميزة</th>
+								<th className="px-2 sm:px-4 py-2 whitespace-nowrap">الفيوتشر</th>
+								<th className="px-2 sm:px-4 py-2 whitespace-nowrap">الأسهم</th>
+								<th className="px-2 sm:px-4 py-2 whitespace-nowrap">الفوركس</th>
+								<th className="px-2 sm:px-4 py-2 whitespace-nowrap">الأوبشن الأمريكي</th>
 							</tr>
 						</thead>
 						<tbody className="bg-black/70">
 							<tr>
-								<td className="px-4 py-2">الرافعة المالية</td>
-								<td>حتى 1:100 (حسب العقد)</td>
-								<td>1:2 غالباً</td>
-								<td>حتى 1:500</td>
-								<td>1:10 إلى 1:20 تقريباً</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">الرافعة المالية</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">حتى 1:100 (حسب العقد)</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">1:2 غالباً</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">حتى 1:500</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">1:10 إلى 1:20 تقريباً</td>
 							</tr>
 							<tr>
-								<td className="px-4 py-2">السيولة</td>
-								<td>مرتفعة جداً</td>
-								<td>مرتفعة</td>
-								<td>مرتفعة جداً</td>
-								<td>مرتفعة (خاصة العقود الرئيسية)</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">السيولة</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">مرتفعة جداً</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">مرتفعة</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">مرتفعة جداً</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">مرتفعة (خاصة العقود الرئيسية)</td>
 							</tr>
 							<tr>
-								<td className="px-4 py-2">التكلفة/العمولات</td>
-								<td>منخفضة (عمولة ثابتة أو متغيرة)</td>
-								<td>عمولة أو سبريد</td>
-								<td>سبريد فقط غالباً</td>
-								<td>عمولة + سبريد + بريميوم</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">التكلفة/العمولات</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">منخفضة (عمولة ثابتة أو متغيرة)</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">عمولة أو سبريد</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">سبريد فقط غالباً</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">عمولة + سبريد + بريميوم</td>
 							</tr>
 							<tr>
-								<td className="px-4 py-2">رأس المال الأدنى</td>
-								<td>من 500$ إلى 5000$ (حسب الوسيط)</td>
-								<td>من 100$ إلى آلاف الدولارات</td>
-								<td>من 10$ إلى 100$ غالباً</td>
-								<td>من 500$ إلى 2000$ (حسب الاستراتيجية)</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">رأس المال الأدنى</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">من 500$ إلى 5000$ (حسب الوسيط)</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">من 100$ إلى آلاف الدولارات</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">من 10$ إلى 100$ غالباً</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">من 500$ إلى 2000$ (حسب الاستراتيجية)</td>
 							</tr>
 							<tr>
-								<td className="px-4 py-2">إمكانية البيع على المكشوف</td>
-								<td>نعم</td>
-								<td>أحياناً</td>
-								<td>نعم</td>
-								<td>نعم (عبر عقود البيع)</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">إمكانية البيع على المكشوف</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">نعم</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">أحياناً</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">نعم</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">نعم (عبر عقود البيع)</td>
 							</tr>
 							<tr>
-								<td className="px-4 py-2">الأرباح المحتملة</td>
-								<td>مرتفعة جداً مع المخاطرة</td>
-								<td>متوسطة إلى مرتفعة</td>
-								<td>متوسطة إلى مرتفعة</td>
-								<td>مرتفعة جداً (حسب الاستراتيجية)</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">الأرباح المحتملة</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">مرتفعة جداً مع المخاطرة</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">متوسطة إلى مرتفعة</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">متوسطة إلى مرتفعة</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">مرتفعة جداً (حسب الاستراتيجية)</td>
 							</tr>
 							<tr>
-								<td className="px-4 py-2">الخسارة المحتملة</td>
-								<td>قد تتجاوز رأس المال (في بعض الحالات)</td>
-								<td>محدودة برأس المال</td>
-								<td>قد تتجاوز رأس المال (رافعة عالية)</td>
-								<td>محدودة بالقسط المدفوع (البريميوم)</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">الخسارة المحتملة</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">قد تتجاوز رأس المال (في بعض الحالات)</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">محدودة برأس المال</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">قد تتجاوز رأس المال (رافعة عالية)</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">محدودة بالقسط المدفوع (البريميوم)</td>
 							</tr>
 							<tr>
-								<td className="px-4 py-2">المخاطرة</td>
-								<td>مرتفعة جداً</td>
-								<td>متوسطة</td>
-								<td>مرتفعة جداً</td>
-								<td>مرتفعة (إذا لم يتم إدارة العقود بشكل صحيح)</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">المخاطرة</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">مرتفعة جداً</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">متوسطة</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">مرتفعة جداً</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">مرتفعة (إذا لم يتم إدارة العقود بشكل صحيح)</td>
 							</tr>
 							<tr>
-								<td className="px-4 py-2">ساعات التداول</td>
-								<td>23 ساعة تقريباً</td>
-								<td>7-8 ساعات</td>
-								<td>24 ساعة</td>
-								<td>6.5 ساعة (جلسة السوق الأمريكي)</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">ساعات التداول</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">23 ساعة تقريباً</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">7-8 ساعات</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">24 ساعة</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">6.5 ساعة (جلسة السوق الأمريكي)</td>
 							</tr>
 							<tr>
-								<td className="px-4 py-2">التعقيد</td>
-								<td>متوسط إلى مرتفع</td>
-								<td>منخفض</td>
-								<td>متوسط</td>
-								<td>مرتفع (يتطلب فهم استراتيجيات متعددة)</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">التعقيد</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">متوسط إلى مرتفع</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">منخفض</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">متوسط</td>
+								<td className="px-2 sm:px-4 py-2 whitespace-nowrap">مرتفع (يتطلب فهم استراتيجيات متعددة)</td>
 							</tr>
 						</tbody>
 					</table>

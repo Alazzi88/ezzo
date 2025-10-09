@@ -1,13 +1,8 @@
 "use client";
 
-import React, { useState, MouseEvent } from "react";
-import Header from "@/components/header";
+import { MouseEvent, useState } from "react";
 import Image from "next/image";
 import FAQs from "@/components/FAQs";
-
-// -----------------------------------------------------------------------------
-// بيانات الفيديوهات
-// -----------------------------------------------------------------------------
 
 type Video = {
   url: string;
@@ -15,50 +10,19 @@ type Video = {
   thumbnail: string;
 };
 
-// فيديوهات الشروحات الأساسية
-const videos: Video[] = [
-  
-  {
-    url: "https://www.youtube.com/embed/QBeCPM-kwFY?si=2BE5Z_2nOqF0lR3l",
-    title: "المؤشر البرو",
-    thumbnail: "/img/thumb-pro.webp",
-  },
-  {
-    url: "https://www.youtube.com/embed/DMXkOIfdTtI?si=88GAZv7-jJDpSCNT",
-    title: "استراتيجية سباكس",
-    thumbnail: "/img/thumb-spx.webp",
-  },
-];
-
-// فيديو مخصّص لكل قسم
-const sectionVideos: Record<
-   "pro" | "spx",
-  { url: string; title: string; thumbnail: string }
-> = {
-
+const sectionVideos: Record<"pro", Video> = {
   pro: {
     url: "https://www.youtube.com/embed/QBeCPM-kwFY?si=2BE5Z_2nOqF0lR3l",
     title: "شرح المؤشر البرو",
     thumbnail: "/img/ezzoind.webp",
   },
-  spx: {
-    url: "https://www.youtube.com/embed/DMXkOIfdTtI?si=88GAZv7-jJDpSCNT",
-    title: "شرح استراتيجية سباكس وناسداك",
-    thumbnail: "/img/spx.webp",
-  },
 };
 
-// -----------------------------------------------------------------------------
-// util: تحويل رابط /embed إلى رابط watch?v لليوتيوب
-// -----------------------------------------------------------------------------
 const toYoutubeWatch = (embedUrl: string) => {
   const id = embedUrl.split("/embed/")[1]?.split("?")[0] ?? "";
   return `https://www.youtube.com/watch?v=${id}`;
 };
 
-// -----------------------------------------------------------------------------
-// مكوّن بطاقة الفيديو
-// -----------------------------------------------------------------------------
 type VideoCardProps = {
   url: string;
   title: string;
@@ -68,22 +32,20 @@ type VideoCardProps = {
 const VideoCard: React.FC<VideoCardProps> = ({ url, title, thumbnail }) => {
   const [play, setPlay] = useState(false);
 
-  // منع تحوّل البطاقة إلى وضع التشغيل عند الضغط على زر يوتيوب
-  const openOnYoutube = (e: MouseEvent<HTMLAnchorElement>) => {
-    e.stopPropagation();
+  const openOnYoutube = (event: MouseEvent<HTMLAnchorElement>) => {
+    event.stopPropagation();
   };
 
   return (
     <div
-      className="relative rounded-xl p-[2px] bg-gradient-to-r from-orange-500 via-orange-400 to-orange-500 hover:from-orange-400 hover:to-orange-600 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl cursor-pointer"
+      className="gradient-card cursor-pointer overflow-hidden p-1 text-right transition-transform duration-300 hover:-translate-y-1"
       onClick={() => setPlay(true)}
     >
-      <div className="bg-gray-900 rounded-xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-[1.02]">
-        {/* الفيديو أو الغلاف */}
-        <div className="relative w-full h-0 pb-[56.25%]">
+      <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-black/70">
+        <div className="relative w-full pt-[56.25%]">
           {play ? (
             <iframe
-              className="absolute top-0 left-0 w-full h-full rounded-xl"
+              className="absolute inset-0 h-full w-full rounded-3xl"
               src={url}
               title={title}
               allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -91,177 +53,82 @@ const VideoCard: React.FC<VideoCardProps> = ({ url, title, thumbnail }) => {
             />
           ) : (
             <>
-              <Image
-                src={thumbnail}
-                alt={title}
-                fill
-                className="object-cover rounded-xl"
-              />
-              {/* أيقونة تشغيل */}
+              <Image src={thumbnail} alt={title} fill className="rounded-3xl object-cover" />
               <div className="absolute inset-0 flex items-center justify-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  className="w-16 h-16 text-white/90"
-                  fill="currentColor"
-                >
-                  <path d="M8 5v14l11-7z" />
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-16 w-16 text-orange-300">
+                  <path fill="currentColor" d="M8 5v14l11-7z" />
                 </svg>
               </div>
             </>
           )}
-
-          {/* زر يفتح المقطع على يوتيوب */}
           <a
             href={toYoutubeWatch(url)}
             target="_blank"
             rel="noopener noreferrer"
             onClick={openOnYoutube}
-            className="absolute bottom-3 right-3 bg-white/80 backdrop-blur px-3 py-1 rounded-md text-xs font-semibold text-black hover:bg-white transition-colors"
+            className="absolute bottom-4 left-4 rounded-full border border-white/10 bg-white/80 px-3 py-1 text-xs font-semibold text-black transition-colors hover:bg-white"
           >
             مشاهدة على يوتيوب
           </a>
         </div>
-
-        {/* العنوان */}
-        <div className="p-4">
-          <p className="text-orange-500 font-bold text-lg text-center">{title}</p>
+        <div className="p-5">
+          <p className="text-center text-lg font-bold text-orange-300">{title}</p>
         </div>
       </div>
     </div>
   );
 };
 
-// -----------------------------------------------------------------------------
-// الصفحة الرئيسية للمؤشر (باقي الكود كما هو دون تغيير)
-// -----------------------------------------------------------------------------
 const Indicator: React.FC = () => (
-  <>
-    <Header />
-    <FAQs />
-
-    {/* الخلفية المتدرجة */}
-    <div className="bg-gradient-to-b from-black to-gray-900 py-4 mt-1">
-      <div dir="rtl" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* العنوان الرئيسي */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-extrabold text-orange-500 sm:text-5xl transition-transform duration-500 hover:scale-105">
-            تعرف على كيفية عمل مؤشراتنا واستراتيجياتنا
-          </h1>
-        </div>
-
-        {/* ------------------------------------------------------------------- */}
-        {/* القسم: المؤشر الأساسي (مجاني) */}
-        {/* ------------------------------------------------------------------- */}
-    
-        {/* ------------------------------------------------------------------- */}
-        {/* القسم: المؤشر البرو */}
-        {/* ------------------------------------------------------------------- */}
-        <section className="bg-gray-800 shadow-lg rounded-lg p-8 mb-16 hover:scale-[1.01] hover:shadow-2xl transition-transform duration-500">
-          <h2 className="text-2xl font-bold text-orange-400 mb-4 text-center">
-            المؤشر <span className="text-orange-500">البرو</span>
-          </h2>
-
-          <p className="text-gray-300 mb-6">
-            المؤشر البرو مبني على مفاهيم الـ ICT ويجمع بين رصد الفجوات السعرية
-            وكتل الأوامر بمختلف أنواعها، بالإضافة إلى اهداف واضحة ووقف خسارة.
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-6">
-            <VideoCard
-              url={sectionVideos.pro.url}
-              title={sectionVideos.pro.title}
-              thumbnail={sectionVideos.pro.thumbnail}
-            />
-
-            <ul className="list-disc pl-6 space-y-3 text-gray-300 leading-relaxed mb-6">
-              <li>
-                <strong>نقاط الدخول المثالية</strong>
-              </li>
-              <li>
-                <strong>تحديد الأهداف بدقة</strong>
-              </li>
-              <li>
-                <strong>تنبيهات في قروبات تلجرام لكل سوق</strong>
-              </li>
-              <li>
-                <strong>إدارة وقف الخسارة تلقائيًا</strong>
-              </li>
-              <li>
-                <strong>رصد الفجوات السعرية (Fair Value Gaps)</strong>
-              </li>
-              <li>
-                <strong>كشف كتل الأوامر الشرائية والبيعية (Order Blocks)</strong>
-              </li>
-              <li>
-                <strong>
-                  كشف كتل الأوامر الشرائية أو البيعية (Breaker Blocks)
-                </strong>
-              </li>
-              <li>
-                <strong>الساعات الذهبية</strong>
-              </li>
-              <li>
-                <strong>كشف مناطق السيولة</strong>
-              </li>
-            </ul>
-          </div>
-
-          <div className="flex justify-center mb-8">
-            <Image
-              src="/img/ezzoind.webp"
-              alt="EZZO Pro Indicator Preview"
-              width={800}
-              height={450}
-              className="rounded-lg w-full h-auto"
-              loading="lazy"
-            />
-          </div>
-        </section>
-  <section className="container mx-auto px-4 py-8">
-          <h3 className="text-2xl font-bold text-orange-500 mb-8 text-center">
-            للإشتراك
-          </h3>
-
-          <div className="flex justify-center items-center py-8">
-            <div className="bg-gray-900 p-10 rounded-2xl shadow-2xl text-center transition-transform duration-300 hover:-translate-y-1 max-w-md">
-              {/* <h4 className="text-3xl font-bold text-orange-400 mb-4">
-                عرض لفترة محدودة
-              </h4> */}
-
-              <p className="text-gray-300 text-lg mb-6">
-                اشتراك شهري - شهر واحد
-              </p>
-
-              <div className="flex flex-col items-center space-y-2 mb-8">
-                {/* <p className="text-gray-400 text-sm">السعر السابق</p> */}
-                {/* <p className="text-gray-400 text-2xl line-through">249﷼</p> */}
-                <p className="text-orange-400 text-3xl font-extrabold">249﷼</p>
-              </div>
-
-              <a
-                href="https://3zzo.aryaf.sa/product/%D9%85%D8%A4%D8%B4%D8%B1-%D9%84%D9%84%D8%AA%D8%AF%D8%A7%D9%88%D9%84"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block px-10 py-4 bg-orange-500 text-black rounded-full shadow-md hover:bg-orange-400 transition-colors duration-300"
-              >
-                اشترك الآن
-              </a>
-            </div>
-          </div>
-
-          <div className="mt-12 p-6 bg-gradient-to-r from-orange-500 to-yellow-400 rounded-lg shadow-lg text-center transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
-            <a
-              href="https://3zzo.aryaf.sa/"
-              className="inline-block px-6 py-3 bg-white text-orange-500 font-semibold rounded-lg shadow hover:bg-gray-100 transition-colors duration-300"
-            >
-              اكتشف المزيد
-            </a>
-          </div>
-        </section>
-      </div>
+  <div className="relative isolate pb-24 pt-28">
+    <div className="pointer-events-none absolute inset-0 -z-10">
+      <div className="absolute left-[18%] top-[-18%] h-80 w-80 rounded-full bg-orange-500/20 blur-[160px]" />
+      <div className="absolute bottom-[-25%] right-[12%] h-[360px] w-[360px] rounded-full bg-rose-500/18 blur-[190px]" />
     </div>
-  </>
+
+    <section className="page-shell text-center">
+      <span className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-4 py-1 text-xs font-semibold uppercase tracking-[4px] text-orange-100">
+        مؤشرات Ezzo الاحترافية
+      </span>
+      <h1 className="mt-6 text-3xl font-extrabold text-white sm:text-4xl">
+        تعرف على كيفية عمل مؤشراتنا واستراتيجياتنا
+      </h1>
+      <p className="section-subheading mx-auto max-w-3xl">
+        أدوات تحليلية متقدمة تعتمد على منهجية ICT وتكملها تنبيهات لحظية وخطط تنفيذ دقيقة لأسواق الفيوتشر وناسداك.
+      </p>
+    </section>
+
+    <section className="page-shell mt-16 space-y-16">
+      <div className="glass-panel px-6 py-10 sm:px-10">
+        <h2 className="text-2xl font-bold text-orange-300 text-center">المؤشر البرو</h2>
+        <p className="mt-4 text-center text-sm leading-7 text-gray-300">
+          المؤشر البرو مبني على مفاهيم ICT ويركز على رصد الفجوات السعرية، كتل الأوامر، وتحديد أهداف واضحة مع وقف خسارة محسوب لكل صفقة.
+        </p>
+        <div className="mt-8 grid gap-8 md:grid-cols-2 md:items-center">
+          <VideoCard {...sectionVideos.pro} />
+          <ul className="list-disc space-y-3 pr-5 text-sm leading-7 text-gray-200">
+            <li>نقاط دخول مبنية على مناطق سيولة مؤكدة.</li>
+            <li>تحديد أهداف ووقف خسارة ديناميكي.</li>
+            <li>تنبيهات فورية عبر منصات المتابعة الخاصة بالفريق.</li>
+            <li>كشف Fair Value Gaps تلقائياً.</li>
+            <li>تتبع Order Blocks وBreaker Blocks بدقة.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section className="page-shell mt-20">
+      <div className="glass-panel px-6 py-10 sm:px-10 text-center">
+        <h2 className="text-2xl font-bold text-orange-300">أسئلة شائعة</h2>
+        <p className="mt-3 text-sm leading-7 text-gray-300">
+          إجابات سريعة على أكثر الاستفسارات تكراراً حول مؤشراتنا، أنظمة التنبيه، وخطط الاشتراك.
+        </p>
+        <div className="mt-8 text-right">
+          <FAQs />
+        </div>
+      </div>
+    </section>
+  </div>
 );
 
 export default Indicator;

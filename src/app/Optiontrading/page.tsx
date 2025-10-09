@@ -1,395 +1,388 @@
-'use client'
+'use client';
 
-import React from 'react';
 import Image from 'next/image';
 import OptionDeltaCalculator from '@/components/OptionDeltaCalculator';
-import TelegramButton from '@/components/TelegramButton';
+
+const conceptBullets = [
+  {
+    title: 'Call Option (خيار الشراء)',
+    description:
+      'يمنح المشتري الحق في شراء الأصل الأساسي بسعر محدد قبل أو عند تاريخ الانتهاء، مع مخاطرة محدودة بالقسط المدفوع.',
+  },
+  {
+    title: 'Put Option (خيار البيع)',
+    description:
+      'يمنح المشتري الحق في بيع الأصل الأساسي بسعر محدد قبل أو عند تاريخ الانتهاء، ويُستخدم غالباً للتحوط من الهبوط.',
+  },
+];
+
+const profitExamples = [
+  {
+    title: 'مثال على Call Option',
+    details: [
+      'سعر السهم الحالي: 100 دولار',
+      'سعر التنفيذ (Strike): 105 دولارات',
+      'قيمة القسط (Premium): 2 دولار',
+    ],
+    outcomes: [
+      'إذا ارتفع سعر السهم إلى 110 دولارات: الربح = (110 - 105) - 2 = 3 دولارات.',
+      'إذا لم يتجاوز سعر السهم 105 دولارات: الخسارة = 2 دولار (قيمة القسط).',
+    ],
+  },
+  {
+    title: 'مثال على Put Option',
+    details: [
+      'سعر السهم الحالي: 100 دولار',
+      'سعر التنفيذ (Strike): 95 دولاراً',
+      'قيمة القسط (Premium): 1.5 دولار',
+    ],
+    outcomes: [
+      'إذا انخفض سعر السهم إلى 90 دولاراً: الربح = (95 - 90) - 1.5 = 3.5 دولارات.',
+      'إذا لم ينخفض سعر السهم تحت 95 دولاراً: الخسارة = 1.5 دولار (القسط).',
+    ],
+  },
+];
+
+const advantages = [
+  'تحقيق أرباح في الأسواق الصاعدة والهابطة.',
+  'استخدام الأوبشن كأداة للتحوط من المخاطر.',
+  'تحديد مقدار الخسارة مسبقاً من خلال القسط المدفوع.',
+  'تنوع استراتيجيات الأوبشن بما يلائم مستويات مختلفة من المخاطرة.',
+];
+
+const comparisonRows = [
+  {
+    feature: 'رأس المال المطلوب',
+    option: 'منخفض نسبياً',
+    stocks: 'مرتفع',
+  },
+  {
+    feature: 'المخاطر',
+    option: 'محدودة بالقسط المدفوع',
+    stocks: 'قد تكون كبيرة',
+  },
+  {
+    feature: 'المرونة',
+    option: 'عالية بسبب تنوع الاستراتيجيات',
+    stocks: 'محدودة',
+  },
+];
+
+const risks = [
+  'إمكانية خسارة القسط بالكامل إذا لم يتحرك السعر كما هو متوقع.',
+  'التأثير الكبير لتغير الزمن (Theta) على قيمة العقد.',
+  'الحاجة إلى إدارة مخاطر دقيقة، خاصة للمبتدئين.',
+];
+
+const strategies = [
+  {
+    title: '1. استراتيجية Covered Call',
+    description: 'امتلاك أسهم وبيع عقود Call لتحصيل قسط إضافي مع الحفاظ على الأصول الأساسية.',
+  },
+  {
+    title: '2. استراتيجية Protective Put',
+    description: 'شراء عقود Put لحماية المحفظة من الهبوط دون بيع المراكز الحالية.',
+  },
+  {
+    title: '3. استراتيجية Iron Condor',
+    description: 'الجمع بين بيع وشراء Call وPut في وقت واحد للاستفادة من التذبذب المنخفض.',
+  },
+  {
+    title: '4. استراتيجية Straddle',
+    description: 'شراء Call وPut بنفس السعر المستهدف وتاريخ الانتهاء للمضاربة على حركة قوية في أي اتجاه.',
+  },
+];
+
+const profitTips = [
+  'Call Options: يتحقق الربح إذا ارتفع سعر الأصل فوق سعر التنفيذ مضافاً إليه القسط.',
+  'Put Options: يتحقق الربح إذا انخفض سعر الأصل تحت سعر التنفيذ مطروحاً منه القسط.',
+  'استغل استراتيجيات مثل Straddle وStrangle للتعامل مع التقلبات الكبيرة.',
+];
+
+const strikeGuidelines = [
+  'At-The-Money (ATM) لحركة سعرية معتدلة.',
+  'In-The-Money (ITM) لتقليل المخاطر وزيادة احتمالية النجاح.',
+  'Out-Of-The-Money (OTM) لحركات كبيرة وبقسط أقل.',
+  'استخدم Protective Put كأداة إضافية لحماية الاستثمارات.',
+];
+
+const platforms = [
+  {
+    name: 'دراية جلوبال (Derayah Global)',
+    description: 'منصة سعودية معتمدة تتيح تداول الأوبشن مع دعم باللغة العربية ووصول موسّع للأسواق.',
+  },
+  {
+    name: 'منصة سهم',
+    description: 'واجهة عربية سهلة الاستخدام مع أدوات جاهزة لتداول عقود الأوبشن الأمريكية.',
+  },
+];
+
+const tutorials = [
+  {
+    title: 'كيفية فتح حساب جديد في دراية',
+    url: 'https://www.youtube.com/embed/C--tTWoqr4I?si=SUM2ssJkjQx441Bq',
+    label: 'كيفية فتح حساب جديد في دراية',
+  },
+  {
+    title: 'كيفية فتح حساب جديد في دراية جلوبال',
+    url: 'https://www.youtube.com/embed/CRtCKG0WGzg?si=XjXPkFZb29m1x6R8',
+    label: 'حساب دراية جلوبال',
+  },
+  {
+    title: 'كيفية فتح حساب تجريبي في دراية جلوبال',
+    url: 'https://www.youtube.com/embed/nYTo6aSIUZ4?si=OwAeA244EOFASlr_',
+    label: 'حساب تجريبي دراية جلوبال',
+  },
+  {
+    title: 'إيداع وسحب الأموال',
+    url: 'https://www.youtube.com/embed/ALnlQhRK2x4?si=f68cRbI0WeIduNTi',
+    label: 'إيداع وسحب الأموال',
+  },
+  {
+    title: 'طريقة تفعيل الأسعار المباشرة',
+    url: 'https://www.youtube.com/embed/r5oLATw58LY?si=X_qAThf2rFsGd8PU',
+    label: 'تفعيل الأسعار المباشرة',
+  },
+  {
+    title: 'دخول صفقة والخروج منها وأوامر دراية',
+    url: 'https://www.youtube.com/embed/6nY_wWcwLbI?si=YVzpld2OvUeXMYV_',
+    label: 'أوامر دراية',
+  },
+  {
+    title: 'مفهوم الأوبشن الأمريكي',
+    url: 'https://www.youtube.com/embed/MjPDWqQHn-U?si=26JFH6hQJPfiRLLJ',
+    label: 'مفهوم الأوبشن الأمريكي',
+  },
+  {
+    title: 'شرح صفقات تطبيق Webull',
+    url: 'https://www.youtube.com/embed/nYDU9gTBcJo?si=TwiQhUdgC2vhx7sY',
+    label: 'صفقات Webull',
+  },
+];
 
 const HomePage = () => {
   return (
-    <div className="min-h-screen bg-black text-white font-sans mt-20 ">
-      <header className="text-center border-b border-orange-600 py-4">
-        <h1 className="text-xl md:text-4xl font-extrabold text-orange-500 mb-4 leading-normal">
-          دليلك إلى الأوبشن الأمريكي
-        </h1>
-        <p className="text-xs md:text-base text-gray-300 px-2 md:px-4 max-w-2xl mx-auto leading-loose">
-          استكشف الأوبشن الأمريكي، كيفية تداوله، الاستراتيجيات الفعالة، والمخاطر المحتملة لتحقيق أقصى استفادة من استثمارك.
+    <div className="relative isolate pb-28 pt-28">
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute left-[18%] top-[-20%] h-80 w-80 rounded-full bg-orange-500/20 blur-[160px]" />
+        <div className="absolute bottom-[-25%] right-[12%] h-[360px] w-[360px] rounded-full bg-rose-500/18 blur-[190px]" />
+      </div>
+
+      <section className="page-shell grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+        <div className="space-y-6 text-right">
+          <span className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-4 py-1 text-xs font-semibold uppercase tracking-[4px] text-orange-100">
+            دليلك إلى الأوبشن
+          </span>
+          <h1 className="text-3xl font-extrabold text-white sm:text-4xl lg:text-5xl">
+            دليلك إلى الأوبشن الأمريكي بإدارة مخاطر محسوبة
+          </h1>
+          <p className="section-subheading max-w-xl">
+            استكشف كيفية تداول الأوبشن الأمريكي، من المفاهيم الأساسية إلى الاستراتيجيات المتقدمة، مع تسليط الضوء على أهم المخاطر وكيفية إدارتها لتحقيق أكبر استفادة من استثمارك.
+          </p>
+        </div>
+        <div className="relative order-first h-72 w-full overflow-hidden rounded-3xl border border-white/10 bg-black/60 lg:order-last">
+          <Image src="/img/trading.webp" alt="التداول بالأوبشن" fill className="object-cover" priority />
+        </div>
+      </section>
+
+      <section className="page-shell mt-16">
+        <div className="glass-panel px-6 py-10 sm:px-10">
+          <h2 className="section-heading text-center">ما هو الأوبشن؟</h2>
+          <p className="section-subheading mx-auto max-w-3xl text-center">
+            الأوبشن هو عقد مالي مشتق يمنح المشتري الحق، وليس الالتزام، في شراء أو بيع أصل معين بسعر محدد خلال فترة زمنية معينة. ينقسم إلى نوعين رئيسيين:
+          </p>
+          <div className="mt-10 grid gap-6 sm:grid-cols-2">
+            {conceptBullets.map(({ title, description }) => (
+              <div key={title} className="gradient-card h-full p-6 text-right">
+                <h3 className="text-lg font-bold text-orange-300">{title}</h3>
+                <p className="mt-3 text-sm leading-7 text-gray-200">{description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="page-shell mt-20">
+        <h2 className="section-heading text-center">أمثلة واقعية على الربح والخسارة</h2>
+        <p className="section-subheading mx-auto max-w-3xl text-center">
+          أمثلة عملية توضّح كيفية تغير قيمة العقود حسب حركة الأصل الأساسي وقيمة القسط المدفوع.
         </p>
-      </header>
+        <div className="mt-12 grid gap-8 lg:grid-cols-2">
+          {profitExamples.map(({ title, details, outcomes }) => (
+            <div key={title} className="gradient-card h-full p-8 text-right">
+              <h3 className="text-xl font-bold text-orange-300">{title}</h3>
+              <ul className="mt-4 space-y-2 text-sm text-gray-300">
+                {details.map((detail) => (
+                  <li key={detail}>{detail}</li>
+                ))}
+              </ul>
+              <div className="card-divider my-6" />
+              <ul className="space-y-3 text-sm leading-7 text-gray-200">
+                {outcomes.map((outcome) => (
+                  <li key={outcome}>{outcome}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
 
-      <main className="mx-auto px-4 py-4 md:py-8  leading-loose max-w-screen-md md:max-w-screen-lg lg:max-w-screen-xl ">
-        {/* إضافة الصورة */}
-        <section className="my-6 md:my-10 text-center">
-          <div className="relative w-full h-64 md:h-96">
-            <Image
-              src="/img/trading.webp"
-              alt="صورة تعبيرية للتداول بالأوبشن"
-              fill
-              style={{ objectFit: 'cover' }}
-              priority={true}
-            />
+      <section className="page-shell mt-20">
+        <div className="glass-panel px-6 py-10 sm:px-10">
+          <h2 className="section-heading text-center">فوائد التداول بعقود الأوبشن</h2>
+          <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {advantages.map((item) => (
+              <div key={item} className="gradient-card h-full p-6 text-sm leading-7 text-gray-200">
+                {item}
+              </div>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* مفهوم الأوبشن */}
-        <section className="my-6 md:my-10">
-          <h2 className="text-lg md:text-2xl font-bold text-orange-500 mb-4">ما هو الأوبشن؟</h2>
-          <p className="text-gray-300 text-xs md:text-base mb-4">
-            الأوبشن هو عقد مالي مشتق يمنح المشتري الحق، ولكن ليس الالتزام، في شراء أو بيع أصل أساسي مثل
-            الأسهم أو المؤشرات بسعر محدد (Strike Price) خلال فترة زمنية معينة. ينقسم الأوبشن إلى نوعين رئيسيين:
+      <section className="page-shell mt-20">
+        <div className="glass-panel overflow-hidden px-0 pb-6 pt-8 sm:px-8">
+          <h2 className="section-heading text-center">مقارنة بين الأوبشن والأسهم</h2>
+          <p className="section-subheading mx-auto max-w-3xl text-center">
+            معرفة الفروقات الأساسية تساعدك على تحديد الأداة الأنسب لأهدافك الاستثمارية.
           </p>
-          <ul className="list-disc list-inside text-gray-300 text-xs md:text-base space-y-2 mb-4">
-            <li>
-              <strong className="text-orange-400">Call Option (خيار الشراء):</strong> يمنح المشتري الحق في شراء
-              الأصل الأساسي بسعر محدد قبل أو عند تاريخ الانتهاء.
-            </li>
-            <li>
-              <strong className="text-orange-400">Put Option (خيار البيع):</strong> يمنح المشتري الحق في بيع
-              الأصل الأساسي بسعر محدد قبل أو عند تاريخ الانتهاء.
-            </li>
-          </ul>
-          <p className="text-gray-300 text-xs md:text-base">
-            الأوبشن أداة مرنة تُستخدم لأغراض متعددة مثل المضاربة، التحوط، وتوليد الدخل من خلال الاستراتيجيات المختلفة.
-          </p>
-        </section>
+          <div className="mt-8 overflow-x-auto px-2">
+            <table className="min-w-full divide-y divide-white/10 text-sm text-gray-100">
+              <thead>
+                <tr className="bg-white/5 text-xs uppercase tracking-widest text-orange-200">
+                  <th className="whitespace-nowrap px-4 py-3 text-right">الميزة</th>
+                  <th className="whitespace-nowrap px-4 py-3 text-right">الأوبشن</th>
+                  <th className="whitespace-nowrap px-4 py-3 text-right">الأسهم</th>
+                </tr>
+              </thead>
+              <tbody className="bg-black/60">
+                {comparisonRows.map(({ feature, option, stocks }) => (
+                  <tr key={feature} className="border-b border-white/5">
+                    <td className="whitespace-nowrap px-4 py-3 font-semibold text-orange-200">{feature}</td>
+                    <td className="whitespace-nowrap px-4 py-3 text-gray-200">{option}</td>
+                    <td className="whitespace-nowrap px-4 py-3 text-gray-200">{stocks}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
 
-        {/* أمثلة الربح والخسارة */}
-        <section className="my-6 md:my-10">
-          <h2 className="text-lg md:text-2xl font-bold text-orange-500 mb-4">أمثلة على الربح والخسارة في الأوبشن</h2>
+      <section className="page-shell mt-20">
+        <div className="glass-panel px-6 py-10 sm:px-10">
+          <h2 className="section-heading text-center">مخاطر يجب الانتباه لها</h2>
+          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {risks.map((risk) => (
+              <div key={risk} className="gradient-card h-full p-6 text-sm leading-7 text-gray-200">
+                {risk}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-          <div className="p-4 border border-orange-500 rounded mb-6">
-            <h3 className="text-base md:text-xl text-orange-400 font-semibold mb-2">مثال على Call Option</h3>
-            <p className="text-gray-300 text-xs md:text-base mb-2">
-              <strong>سعر السهم الحالي:</strong> 100 دولار<br/>
-              <strong>Strike Price:</strong> 105 دولار<br/>
-              <strong>Premium (القسط):</strong> 2 دولار
+      <section className="page-shell mt-20">
+        <div className="glass-panel px-6 py-10 sm:px-10">
+          <div className="relative mb-8 h-48 overflow-hidden rounded-3xl border border-white/10 bg-black/60 sm:h-56">
+            <Image src="/img/tik.webp" alt="لوحة متابعة صفقات الأوبشن" fill loading="lazy" className="object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/30 to-transparent" />
+            <div className="absolute bottom-4 right-4 rounded-full bg-black/60 px-3 py-1 text-[11px] font-semibold text-orange-100 backdrop-blur">
+              تنظيم الاستراتيجيات
+            </div>
+          </div>
+          <h2 className="section-heading text-center">استراتيجيات تداول الأوبشن</h2>
+          <div className="mt-10 grid gap-6 sm:grid-cols-2">
+            {strategies.map(({ title, description }) => (
+              <div key={title} className="gradient-card h-full p-6 text-right">
+                <h3 className="text-lg font-bold text-orange-300">{title}</h3>
+                <p className="mt-3 text-sm leading-7 text-gray-200">{description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="page-shell mt-20">
+        <div className="grid gap-8 lg:grid-cols-2">
+          <div className="glass-panel h-full px-6 py-10 sm:px-10">
+            <h2 className="text-2xl font-bold text-white">كيفية تحقيق الربح من العقود</h2>
+            <p className="mt-4 text-sm leading-7 text-gray-300">
+              يعتمد نجاحك على قراءة حركة السعر المتوقعة ومراقبة القسط المدفوع، إلى جانب اختيار الاستراتيجية التي تتماشى مع خطتك لإدارة المخاطر.
             </p>
-            <ul className="list-disc list-inside text-gray-300 text-xs md:text-base space-y-2">
-              <li>إذا ارتفع سعر السهم إلى 110 دولار: الربح = (110 - 105) - 2 = 3 دولارات.</li>
-              <li>إذا لم يتجاوز سعر السهم 105 دولار: الخسارة = 2 دولار (قيمة القسط).</li>
+            <ul className="mt-6 space-y-3 text-sm leading-7 text-gray-200">
+              {profitTips.map((tip) => (
+                <li key={tip}>{tip}</li>
+              ))}
             </ul>
           </div>
-
-          <div className="p-4 border border-orange-500 rounded">
-            <h3 className="text-base md:text-xl text-orange-400 font-semibold mb-2">مثال على Put Option</h3>
-            <p className="text-gray-300 text-xs md:text-base mb-2">
-              <strong>سعر السهم الحالي:</strong> 100 دولار<br/>
-              <strong>Strike Price:</strong> 95 دولار<br/>
-              <strong>Premium (القسط):</strong> 1.5 دولار
+          <div className="glass-panel h-full px-6 py-10 sm:px-10">
+            <h2 className="text-2xl font-bold text-white">اختيار Strike Price المناسب</h2>
+            <p className="mt-4 text-sm leading-7 text-gray-300">
+              اختيار السعر المستهدف يعتمد على توقعاتك لحركة الأصل والزمن المتبقي حتى انتهاء العقد، بالإضافة إلى نسبة المخاطرة التي تفضّلها.
             </p>
-            <ul className="list-disc list-inside text-gray-300 text-xs md:text-base space-y-2">
-              <li>إذا انخفض سعر السهم إلى 90 دولار: الربح = (95 - 90) - 1.5 = 3.5 دولارات.</li>
-              <li>إذا لم ينخفض سعر السهم تحت 95 دولار: الخسارة = 1.5 دولار (قيمة القسط).</li>
+            <ul className="mt-6 space-y-3 text-sm leading-7 text-gray-200">
+              {strikeGuidelines.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
             </ul>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Delta */}
-        <section className="my-6 md:my-10">
-          <h2 className="text-lg md:text-2xl font-bold text-orange-500 mb-4">Delta (دلتا)</h2>
-          <p className="text-gray-300 text-xs md:text-base mb-2">
-            <strong>Delta</strong> تقيس التغير في سعر الأوبشن بالنسبة لتغير سعر الأصل الأساسي بمقدار دولار واحد.
+      <section className="page-shell mt-20">
+        <div className="glass-panel px-6 py-10 sm:px-10">
+          <h2 className="section-heading text-center">حاسبة دلتا الأوبشن</h2>
+          <p className="section-subheading mx-auto max-w-3xl text-center">
+            استخدم الحاسبة لتقدير السعر المستهدف للعقد بالاعتماد على حركة السهم والدلتا الحالية.
           </p>
-          <p className="text-gray-400 text-xs md:text-sm">
-            <strong>مثال:</strong> إذا كان لديك Call Option مع Delta تساوي 0.6، فهذا يعني أن سعر الأوبشن سيرتفع
-            بمقدار 0.6 دولار لكل دولار يزيد في سعر الأصل الأساسي.
-          </p>
-        </section>
-
-        {/* Theta */}
-        <section className="my-6 md:my-10">
-          <h2 className="text-lg md:text-2xl font-bold text-orange-500 mb-4">Theta (ثيتا)</h2>
-          <p className="text-gray-300 text-xs md:text-base mb-2">
-            <strong>Theta</strong> تقيس مقدار التناقص في قيمة الأوبشن يوميًا بسبب مرور الوقت (Time Decay).
-          </p>
-          <p className="text-gray-400 text-xs md:text-sm">
-            <strong>مثال:</strong> إذا كان Theta يساوي -0.05، فهذا يعني أن قيمة الأوبشن ستنخفض بمقدار 0.05
-            دولار يوميًا مع مرور الوقت، إذا بقيت العوامل الأخرى ثابتة.
-          </p>
-        </section>
-
-        {/* Implied Volatility */}
-        <section className="my-6 md:my-10">
-          <h2 className="text-lg md:text-2xl font-bold text-orange-500 mb-4">Implied Volatility (التقلب الضمني)</h2>
-          <p className="text-gray-300 text-xs md:text-base mb-4">
-            <strong>Implied Volatility (IV)</strong> هو تقدير السوق لمدى تقلب سعر الأصل الأساسي في المستقبل.
-            يعكس التقلب الضمني توقعات المستثمرين بشأن حركة السعر المحتملة ويؤثر بشكل مباشر على سعر الأوبشن.
-          </p>
-          <ul className="list-disc list-inside text-gray-300 text-xs md:text-base space-y-2 mb-4">
-            <li><strong className="text-orange-400">تقلب ضمني مرتفع:</strong> توقعات بتقلبات كبيرة، مما يؤدي إلى ارتفاع قسط الأوبشن.</li>
-            <li><strong className="text-orange-400">تقلب ضمني منخفض:</strong> توقعات باستقرار السعر، مما يؤدي إلى انخفاض قسط الأوبشن.</li>
-          </ul>
-          <p className="text-gray-300 text-xs md:text-base">
-            فهم <strong>Implied Volatility</strong> يساعدك في تحديد ما إذا كان سعر الأوبشن مبالغًا فيه أو مقيمًا بأقل من قيمته.
-          </p>
-        </section>
-
-        {/* استراتيجيات التداول */}
-        <section className="my-6 md:my-10">
-          <h2 className="text-lg md:text-2xl font-bold text-orange-500 mb-4">استراتيجيات تداول الأوبشن</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="p-4 border border-orange-500 rounded bg-black/50">
-              <h3 className="text-base md:text-xl text-orange-400 font-semibold mb-2">1. استراتيجية Covered Call</h3>
-              <p className="text-gray-300 text-xs md:text-base">
-                تعتمد هذه الاستراتيجية على امتلاك أسهم وبيع Call Option لتحصيل قسط إضافي.
-              </p>
-            </div>
-
-            <div className="p-4 border border-orange-500 rounded bg-black/50">
-              <h3 className="text-base md:text-xl text-orange-400 font-semibold mb-2">2. استراتيجية Protective Put</h3>
-              <p className="text-gray-300 text-xs md:text-base">
-                تُستخدم للتحوّط ضد الخسائر المحتملة في الأسهم.
-              </p>
-            </div>
-
-            <div className="p-4 border border-orange-500 rounded bg-black/50">
-              <h3 className="text-base md:text-xl text-orange-400 font-semibold mb-2">3. استراتيجية Iron Condor</h3>
-              <p className="text-gray-300 text-xs md:text-base">
-                تجمع بين بيع وشراء Call وPut في وقت واحد لتحقيق ربح عند تذبذب منخفض.
-              </p>
-            </div>
-
-            <div className="p-4 border border-orange-500 rounded bg-black/50">
-              <h3 className="text-base md:text-xl text-orange-400 font-semibold mb-2">4. استراتيجية Straddle</h3>
-              <p className="text-gray-300 text-xs md:text-base">
-                شراء Call وPut بنفس السعر المستهدف وتاريخ الانتهاء، للمضاربة على حركة سعرية كبيرة.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* كيفية تحقيق الربح */}
-        <section className="my-6 md:my-10">
-          <h2 className="text-lg md:text-2xl font-bold text-orange-500 mb-4">كيفية تحقيق الربح من عقود الأوبشن</h2>
-          <p className="text-gray-300 text-xs md:text-base mb-4">
-            لتحقيق الربح، يجب أن تتحرك الأسعار حسب توقعاتك قبل انتهاء صلاحية العقد:
-          </p>
-          <ul className="list-disc list-inside text-gray-300 text-xs md:text-base space-y-2">
-            <li><strong className="text-orange-400">Call Options:</strong> الربح إذا ارتفع سعر الأصل فوق Strike Price + القسط.</li>
-            <li><strong className="text-orange-400">Put Options:</strong> الربح إذا انخفض سعر الأصل تحت Strike Price - القسط.</li>
-            <li>الاستفادة من التقلبات باستراتيجيات مثل Straddle وStrangle.</li>
-          </ul>
-        </section>
-
-        {/* إدارة المخاطر واختيار Strike Price */}
-        <section className="my-6 md:my-10">
-          <h2 className="text-lg md:text-2xl font-bold text-orange-500 mb-4">إدارة المخاطر واختيار Strike Price المناسب</h2>
-          <p className="text-gray-300 text-xs md:text-base mb-4">
-            عند اختيار Strike Price:
-          </p>
-          <ul className="list-disc list-inside text-gray-300 text-xs md:text-base space-y-2">
-            <li>At-The-Money (ATM) لحركة سعرية معتدلة.</li>
-            <li>In-The-Money (ITM) لتقليل المخاطر وزيادة احتمالية الربح.</li>
-            <li>Out-Of-The-Money (OTM) لحركات سعرية كبيرة وبأقل قسط.</li>
-            <li>استخدم Protective Put لحماية الاستثمارات.</li>
-          </ul>
-        </section>
-
-        {/* حاسبة الدلتا */}
-        <section className="my-6 md:my-10">
-          <h2 className="text-lg md:text-2xl font-bold text-orange-500 mb-4">حاسبة دلتا الأوبشن</h2>
-          <div className="p-4 bg-black/50 rounded border border-orange-500">
+          <div className="mt-10 rounded-3xl border border-white/10 bg-black/70 p-6">
             <OptionDeltaCalculator />
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* المنصات المعتمدة */}
-        <section className="my-6 md:my-10">
-          <h2 className="text-lg md:text-2xl font-bold text-orange-500 mb-4">المنصات المعتمدة في السعودية لتداول الأوبشن الأمريكي</h2>
-          <ul className="list-disc list-inside text-gray-300 text-xs md:text-base space-y-2">
-            <li><strong className="text-orange-400">دراية جلوبال (Derayah Global):</strong> وصول للأسواق العالمية ودعم بالعربية.</li>
-            <li><strong className="text-orange-400">منصة سهم:</strong> منصة معتمدة محليًا لسهولة تداول الأوبشن.</li>
-          </ul>
-        </section>
+      <section className="page-shell mt-20">
+        <div className="glass-panel px-6 py-10 sm:px-10">
+          <h2 className="section-heading text-center">منصات معتمدة في السعودية</h2>
+          <div className="mt-8 grid gap-6 sm:grid-cols-2">
+            {platforms.map(({ name, description }) => (
+              <div key={name} className="gradient-card h-full p-6 text-right">
+                <h3 className="text-lg font-bold text-orange-300">{name}</h3>
+                <p className="mt-3 text-sm leading-7 text-gray-200">{description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-        {/* دعوة للمبتدئين + زر التيليجرام */}
-        <section className="my-6 md:my-10 text-center">
-          <p className="text-xs md:text-base text-gray-300 mb-4">
-            إذا كنت مبتدئًا، يمكنك زيارة قناتنا الرسمية على تليجرام
+      <section className="page-shell mt-20">
+        <div className="glass-panel px-6 py-10 sm:px-10">
+          <h2 className="section-heading text-center">شروحات بالفيديو للمبتدئين</h2>
+          <p className="section-subheading mx-auto max-w-3xl text-center">
+            شاهد قائمة الفيديوهات المختارة لتتبع خطوات الإعداد والتداول من البداية وحتى التطبيق العملي.
           </p>
-          <a
-            href="https://t.me/ezzo_options"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block text-orange-500 font-bold hover:text-orange-400 transition-colors"
-          >
-            <TelegramButton />
-          </a>
-        </section>
-
-        {/* شروحات بالفيديو للمبتدئين */}
-      {/* شروحات بالفيديو للمبتدئين */}
-<section className="my-6 md:my-10">
-  <h2 className="text-lg md:text-2xl font-bold text-orange-500 mb-4">شروحات للمبتدئين</h2>
-  <p className="text-gray-300 text-xs md:text-base mb-4">
-    فيما يلي بعض الفيديوهات التعليمية التي تشرح مبادئ الأوبشن للمبتدئين.
-  </p>
-  
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-    {/* الفيديو 1 */}
-    <div className="relative rounded-xl p-[2px] bg-gradient-to-r from-orange-500 via-orange-400 to-orange-500 hover:from-orange-400 hover:to-orange-600 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
-      <div className="bg-gray-900 rounded-xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-[1.02]">
-        <div className="relative w-full h-0 pb-[56.25%]">
-          <iframe
-            className="absolute top-0 left-0 w-full h-full rounded-xl"
-            src="https://www.youtube.com/embed/C--tTWoqr4I?si=SUM2ssJkjQx441Bq"
-            title="كيفية فتح حساب جديد في دراية"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
+          <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {tutorials.map(({ title, url, label }) => (
+              <div key={title} className="gradient-card overflow-hidden p-3">
+                <div className="relative w-full pt-[56.25%]">
+                  <iframe
+                    className="absolute inset-0 h-full w-full rounded-2xl"
+                    src={url}
+                    title={title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+                <div className="mt-5 text-right">
+                  <h3 className="text-lg font-bold text-orange-300">{title}</h3>
+                  <p className="mt-2 text-sm text-gray-200">{label}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-        {/* شريط العنوان السفلي مع تعديل bottom */}
-        <div className="absolute bottom-12 left-0 w-full p-4 bg-black/80">
-          <p className="text-orange-500 font-bold text-lg">
-            كيفية فتح حساب جديد في دراية
-          </p>
-        </div>
-      </div>
-    </div>
-
-    {/* الفيديو 2 */}
-    <div className="relative rounded-xl p-[2px] bg-gradient-to-r from-orange-500 via-orange-400 to-orange-500 hover:from-orange-400 hover:to-orange-600 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
-      <div className="bg-gray-900 rounded-xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-[1.02]">
-        <div className="relative w-full h-0 pb-[56.25%]">
-          <iframe
-            className="absolute top-0 left-0 w-full h-full rounded-xl"
-            src="https://www.youtube.com/embed/CRtCKG0WGzg?si=IvtLfk9wsLRnuxG1"
-            title="كيفية فتح حساب دراية جلوبال"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-        </div>
-        <div className="absolute bottom-12 left-0 w-full p-4 bg-black/80">
-          <p className="text-orange-500 font-bold text-lg">
-            كيفية فتح حساب دراية جلوبال
-          </p>
-        </div>
-      </div>
-    </div>
-
-    {/* الفيديو 3 */}
-    <div className="relative rounded-xl p-[2px] bg-gradient-to-r from-orange-500 via-orange-400 to-orange-500 hover:from-orange-400 hover:to-orange-600 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
-      <div className="bg-gray-900 rounded-xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-[1.02]">
-        <div className="relative w-full h-0 pb-[56.25%]">
-          <iframe
-            className="absolute top-0 left-0 w-full h-full rounded-xl"
-            src="https://www.youtube.com/embed/nYTo6aSIUZ4?si=lv9WGI13TJN-EbT_"
-            title="فتح حساب تجريبي في دراية جلوبال"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-        </div>
-        <div className="absolute bottom-12 left-0 w-full p-4 bg-black/80">
-          <p className="text-orange-500 font-bold text-lg">
-            فتح حساب تجريبي في دراية جلوبال
-          </p>
-        </div>
-      </div>
-    </div>
-
-    {/* الفيديو 4 */}
-    <div className="relative rounded-xl p-[2px] bg-gradient-to-r from-orange-500 via-orange-400 to-orange-500 hover:from-orange-400 hover:to-orange-600 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
-      <div className="bg-gray-900 rounded-xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-[1.02]">
-        <div className="relative w-full h-0 pb-[56.25%]">
-          <iframe
-            className="absolute top-0 left-0 w-full h-full rounded-xl"
-            src="https://www.youtube.com/embed/ALnlQhRK2x4?si=f68cRbI0WeIduNTi"
-            title="ايداع وسحب الاموال"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-        </div>
-        <div className="absolute bottom-12 left-0 w-full p-4 bg-black/80">
-          <p className="text-orange-500 font-bold text-lg">
-            ايداع وسحب الاموال
-          </p>
-        </div>
-      </div>
-    </div>
-
-    {/* الفيديو 5 */}
-    <div className="relative rounded-xl p-[2px] bg-gradient-to-r from-orange-500 via-orange-400 to-orange-500 hover:from-orange-400 hover:to-orange-600 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
-      <div className="bg-gray-900 rounded-xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-[1.02]">
-        <div className="relative w-full h-0 pb-[56.25%]">
-          <iframe
-            className="absolute top-0 left-0 w-full h-full rounded-xl"
-            src="https://www.youtube.com/embed/r5oLATw58LY?si=X_qAThf2rFsGd8PU"
-            title="طريقة تفعيل الأسعار المباشرة"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-        </div>
-        <div className="absolute bottom-12 left-0 w-full p-4 bg-black/80">
-          <p className="text-orange-500 font-bold text-lg">
-            طريقة تفعيل الأسعار المباشرة
-          </p>
-        </div>
-      </div>
-    </div>
-
-    {/* الفيديو 6 */}
-    <div className="relative rounded-xl p-[2px] bg-gradient-to-r from-orange-500 via-orange-400 to-orange-500 hover:from-orange-400 hover:to-orange-600 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
-      <div className="bg-gray-900 rounded-xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-[1.02]">
-        <div className="relative w-full h-0 pb-[56.25%]">
-          <iframe
-            className="absolute top-0 left-0 w-full h-full rounded-xl"
-            src="https://www.youtube.com/embed/6nY_wWcwLbI?si=YVzpld2OvUeXMYV_"
-            title="دخول صفقة والخروج منها واوامر دراية"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-        </div>
-        <div className="absolute bottom-12 left-0 w-full p-4 bg-black/80">
-          <p className="text-orange-500 font-bold text-lg">
-            دخول صفقة والخروج منها واوامر دراية
-          </p>
-        </div>
-      </div>
-    </div>
-
-    {/* الفيديو 7 */}
-    <div className="relative rounded-xl p-[2px] bg-gradient-to-r from-orange-500 via-orange-400 to-orange-500 hover:from-orange-400 hover:to-orange-600 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
-      <div className="bg-gray-900 rounded-xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-[1.02]">
-        <div className="relative w-full h-0 pb-[56.25%]">
-          <iframe
-            className="absolute top-0 left-0 w-full h-full rounded-xl"
-            src="https://www.youtube.com/embed/MjPDWqQHn-U?si=26JFH6hQJPfiRLLJ"
-            title="مفهوم الاوبشن الامريكي"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-        </div>
-        <div className="absolute bottom-12 left-0 w-full p-4 bg-black/80">
-          <p className="text-orange-500 font-bold text-lg">
-            مفهوم الاوبشن الامريكي
-          </p>
-        </div>
-      </div>
-    </div>
-
-    {/* الفيديو 8 */}
-    <div className="relative rounded-xl p-[2px] bg-gradient-to-r from-orange-500 via-orange-400 to-orange-500 hover:from-orange-400 hover:to-orange-600 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
-      <div className="bg-gray-900 rounded-xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-[1.02]">
-        <div className="relative w-full h-0 pb-[56.25%]">
-          <iframe
-            className="absolute top-0 left-0 w-full h-full rounded-xl"
-            src="https://www.youtube.com/embed/nYDU9gTBcJo?si=TwiQhUdgC2vhx7sY"
-            title="شرح ودخول صفقات في تطبيق webull والاستفاده منه"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-        </div>
-        <div className="absolute bottom-12 left-0 w-full p-4 bg-black/80">
-          <p className="text-orange-500 font-bold text-lg">
-            شرح ودخول صفقات في تطبيق webull والاستفاده منه
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-      </main>
+      </section>
     </div>
   );
 };

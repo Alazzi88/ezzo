@@ -1,76 +1,62 @@
-// src/pages/index.tsx
+import products, { Product } from '@/app/products';
+import Image from 'next/image';
 
-import products, { Product } from "@/app/products"; // تأكد من تعديل المسار حسب هيكل المشروع
-import Header from "@/components/header";
-import Image from "next/image";
-import React from "react";
-
-const Page: React.FC = () => {
+const AboutPage: React.FC = () => {
   return (
-    <>
-      <Header />
+    <div className="relative isolate pb-24 pt-32">
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute left-[18%] top-[-18%] h-80 w-80 rounded-full bg-orange-500/20 blur-[160px]" />
+        <div className="absolute bottom-[-25%] right-[12%] h-[420px] w-[420px] rounded-full bg-rose-500/18 blur-[200px]" />
+      </div>
 
-      {/* المقدمة الجديدة حول البرمجة */}
-      <section className="relative isolate mt-20 overflow-hidden bg-black px-6 py-24 sm:py-32 lg:px-8">
-        {/* خلفية بتدرج برتقالي داكن */}
-        <div className="absolute inset-0 -z-10 mt-20 bg-[radial-gradient(ellipse_at_center,theme(colors.orange.700),black)] opacity-70" />
-
-        {/* عنصر زخرفي بتأثير ثلاثي الأبعاد */}
-        <div className="absolute inset-y-0 right-1/4 -z-10 w-[150%] origin-bottom-right skew-x-[20deg] bg-gradient-to-l from-orange-700 to-transparent opacity-40 shadow-2xl" />
-
-        <div className="mx-auto max-w-2xl lg:max-w-4xl text-center">
-          <Image
-          loading='lazy'
-            alt="Logo"
-            src="/img/logo.webp"
-            width={64}
-            height={64}
-            className="mx-auto h-16 mb-8 rounded-full"
-          />
-          <figure className="mt-10">
-              <p>
-              "أنا مبرمج مواقع ومتداول، وأصنع أدوات برمجية تساعدك في التداول بفعالية وكفاءة."
-              </p>
-        
-          </figure>
-        </div>
+      <section className="page-shell text-center">
+        <Image
+          src="/img/logo.webp"
+          alt="شعار Ezzo"
+          width={72}
+          height={72}
+          className="mx-auto h-16 w-16 rounded-full border border-white/10"
+          loading="lazy"
+        />
+        <h1 className="mt-6 text-3xl font-extrabold text-white sm:text-4xl">حلول برمجية واستثمارية لصناعة التداول</h1>
+        <p className="section-subheading mx-auto max-w-3xl">
+          Ezzo يجمع بين الخبرة البرمجية ومهارات التداول لتقديم أدوات متقدمة، مؤشرات ذكية، ومحتوى تدريبي يواكب متطلبات المتداولين في الفيوتشر والأوبشن.
+        </p>
       </section>
 
-      {/* قسم المشاريع البرمجية */}
-      <section className="bg-black px-6 py-24 sm:py-32 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <h2 className="text-3xl  font-bold text-orange-500 mb-12 text-center">المشاريع البرمجية</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <section className="page-shell mt-20">
+        <div className="glass-panel px-6 py-10 sm:px-10">
+          <h2 className="section-heading text-center">أعمال برمجية مختارة</h2>
+          <p className="section-subheading mx-auto max-w-3xl text-center">
+            مكتبة المشاريع البرمجية تعكس قدراتنا على تصميم أنظمة احترافية تدعم المتداولين بالأدوات المناسبة في كل مرحلة.
+          </p>
+
+          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {products.map((product: Product) => (
-              <div
-                key={product.id}
-                className="bg-gray-800 rounded-lg overflow-hidden shadow-lg border-2 border-black transition-transform transform hover:scale-105"
-              >
-                {/* إضافة ظل برتقالي للفيديو */}
-                <div className="aspect-w-16 aspect-h-9 drop-shadow-[0_4px_6px_rgba(249,115,21,0.5)]">
+              <div key={product.id} className="gradient-card overflow-hidden">
+                <div className="relative w-full pt-[56.25%]">
                   <iframe
                     src={product.imageLink}
-                    title={`Project ${product.id}`}
-                    frameBorder="0"
+                    title={product.title}
+                    className="absolute inset-0 h-full w-full rounded-3xl border border-white/10"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
-                    className="w-full h-full border-b-2 border-orange-500"
-                  ></iframe>
+                  />
                 </div>
-                <div className="p-4">
-                  <h3 className="text-xl font-semibold text-orange-400">{product.title}</h3>
-        
-                  <a href={product.imageLink} className="text-orange-500 mt-4 inline-block hover:underline">
-                    مشاهدة المشروع &rarr;
-                  </a>
+                <div className="p-6 text-right">
+                  <h3 className="text-lg font-semibold text-orange-300">{product.title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-gray-300">
+                    تجربة رقمية مصممة بدقة لرفع كفاءة إدارة الأعمال أو التداول.
+                  </p>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </section>
-    </>
+
+    </div>
   );
 };
 
-export default Page;
+export default AboutPage;

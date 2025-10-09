@@ -4,13 +4,16 @@ const TradingViewWidget = () => {
   const container = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (!container.current) return;
-    container.current.innerHTML = '';
-    const script = document.createElement("script");
-    script.src = "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
-    script.type = "text/javascript";
-    script.async = true;
-    script.innerHTML = `
+    const renderWidget = () => {
+      if (!container.current) return;
+      container.current.innerHTML = '';
+      const width = window.innerWidth;
+      const chartHeight = width < 480 ? 480 : width < 768 ? 560 : width < 1024 ? 640 : 720;
+      const script = document.createElement("script");
+      script.src = "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
+      script.type = "text/javascript";
+      script.async = true;
+      script.innerHTML = `
       {
         "allow_symbol_change": false,
         "calendar": false,
@@ -33,19 +36,40 @@ const TradingViewWidget = () => {
         "withdateranges": false,
         "compareSymbols": [],
         "studies": [],
-        "autosize": true
+        "autosize": false,
+        "width": "100%",
+        "height": "${chartHeight}"
       }`;
-    container.current.appendChild(script);
+      container.current.appendChild(script);
+    };
+
+    renderWidget();
+
+    const handleResize = () => {
+      renderWidget();
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   return (
-    <div className="tradingview-widget-container flex justify-center items-center" ref={container} style={{ width: '100%', maxWidth: 1200, minWidth: 260, minHeight: 610, margin: '0 auto', direction: 'ltr', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <div className="tradingview-widget-container__widget w-full"
-        style={{ maxWidth: '90vw', width: '97vw' }}
-      ></div>
-      <div className="tradingview-widget-copyright">
-        <a href="https://ar.tradingview.com/symbols/CAPITALCOM-US100/" rel="noopener nofollow" target="_blank">
-          <span className="blue-text">Track all markets on TradingView</span>
+    <div
+      ref={container}
+      className="tradingview-widget-container relative mx-auto flex w-full max-w-5xl flex-col items-center justify-center overflow-hidden rounded-3xl border border-white/10 bg-black/80 px-2 py-4 backdrop-blur-md"
+      style={{ direction: 'ltr' }}
+    >
+      <div className="tradingview-widget-container__widget h-full w-full" />
+      <div className="mt-3 text-xs text-gray-400">
+        <a
+          href="https://ar.tradingview.com/symbols/CAPITALCOM-US100/"
+          rel="noopener nofollow"
+          target="_blank"
+          className="transition-colors hover:text-orange-300"
+        >
+          Track all markets on TradingView
         </a>
       </div>
     </div>

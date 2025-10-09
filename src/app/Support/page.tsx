@@ -1,118 +1,129 @@
 'use client';
 
-import Header from '@/components/header';
-import { useForm, ValidationError } from "@formspree/react";
+import { useForm, ValidationError } from '@formspree/react';
+
+const contactDetails = [
+  { label: 'البريد الإلكتروني', value: '3zzoezzo@gmail.com', href: 'mailto:3zzoezzo@gmail.com' },
+  { label: 'واتساب الدعم', value: '+966503405496', href: 'https://wa.me/966503405496' },
+  { label: 'ساعات العمل', value: 'من 9 صباحاً حتى 5 مساءً (بتوقيت السعودية)' },
+];
 
 export default function SupportPage() {
-  // استبدل "YOUR_FORMSPREE_FORM_ID" بمعرف النموذج الخاص بك من Formspree
-  const [state, handleSubmit] = useForm("mleyqqlg");
-  
+  const [state, handleSubmit] = useForm('mleyqqlg');
+
   if (state.succeeded) {
     return (
-      <>
-        <Header/>
-        <div className="min-h-screen   bg-gradient-to-br from-orange-00 to-black">
-          <div className="pt-40 flex flex-col items-center justify-center px-6">
-            <div className="w-full max-w-4xl bg-black bg-opacity-90 p-8 rounded-lg shadow-lg mt-10">
-              <div className="text-center py-20">
-                <h2 className="text-3xl font-bold text-orange-400">شكراً لتواصلك معنا!</h2>
-                <p className="text-lg text-gray-300 mt-4">سنقوم بالرد عليك في أقرب وقت ممكن.</p>
-              </div>
-            </div>
-          </div>
+      <div className="page-shell flex min-h-[70vh] items-center justify-center pt-32">
+        <div className="glass-panel max-w-2xl px-8 py-16 text-center">
+          <h1 className="text-3xl font-extrabold text-white sm:text-4xl">شكراً لتواصلك معنا!</h1>
+          <p className="mt-4 text-base leading-7 text-gray-300 sm:text-lg">
+            تم استلام رسالتك بنجاح وسنقوم بالرد عليك في أقرب وقت ممكن. نقدر ثقتك بفريق Ezzo.
+          </p>
         </div>
-      </>
+      </div>
     );
   }
 
   return (
-    <>
-      <Header/>
-      <div className="min-h-screen rounded-3xl my-20 bg-gradient-to-br from-orange-600 to-black">
-        <div className="pt-20 flex flex-col items-center justify-center px-6">
-          <div className="w-full max-w-4xl bg-black bg-opacity-90 p-8 rounded-lg shadow-lg mt-10">
-            <h1 className="text-4xl font-bold text-orange-400 mb-6 text-center">الدعم الفني</h1>
-            <p className="text-lg text-gray-300 mb-8 text-center">
-              نحن هنا لمساعدتك. إذا كنت بحاجة إلى دعم، يرجى استخدام النموذج أدناه أو التواصل معنا مباشرة عبر طرق التواصل.
-            </p>
-
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {/* إدخال الاسم */}
-              <div>
-                <label className="block text-lg font-medium text-orange-300 mb-1" htmlFor="name">الاسم:</label>
-                <input
-                  id="name"
-                  type="text"
-                  name="name"
-                  required
-                  className="mt-1 block w-full px-4 py-3 rounded-md bg-gray-800 text-white border-orange-500 shadow-sm focus:ring-orange-500 focus:border-orange-500"
-                />
-                <ValidationError 
-                  prefix="الاسم" 
-                  field="name" 
-                  errors={state.errors}
-                  className="text-red-500 mt-1"
-                />
-              </div>
-
-              {/* إدخال البريد الإلكتروني */}
-              <div>
-                <label className="block text-lg font-medium text-orange-300 mb-1" htmlFor="email">البريد الإلكتروني:</label>
-                <input
-                  id="email"
-                  type="email"
-                  name="email"
-                  required
-                  className="mt-1 block w-full px-4 py-3 rounded-md bg-gray-800 text-white border-orange-500 shadow-sm focus:ring-orange-500 focus:border-orange-500"
-                />
-                <ValidationError 
-                  prefix="البريد الإلكتروني" 
-                  field="email" 
-                  errors={state.errors}
-                  className="text-red-500 mt-1"
-                />
-              </div>
-
-              {/* إدخال الرسالة */}
-              <div>
-                <label className="block text-lg font-medium text-orange-300 mb-1" htmlFor="message">الرسالة:</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  required
-                  rows={5}
-                  className="mt-1 block w-full px-4 py-3 rounded-md bg-gray-800 text-white border-orange-500 shadow-sm focus:ring-orange-500 focus:border-orange-500"
-                ></textarea>
-                <ValidationError 
-                  prefix="الرسالة" 
-                  field="message" 
-                  errors={state.errors}
-                  className="text-red-500 mt-1"
-                />
-              </div>
-
-              {/* زر الإرسال */}
-              <button
-                type="submit"
-                disabled={state.submitting}
-                className="w-full bg-orange-600 text-black py-3 px-6 rounded-md shadow-md hover:bg-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-colors"
-              >
-                {state.submitting ? 'جارٍ الإرسال...' : 'إرسال الرسالة'}
-              </button>
-            </form>
-
-            {/* طرق التواصل الأخرى */}
-            <div className="mt-12">
-              <h3 className="text-2xl font-bold text-orange-400 mb-4">طرق التواصل الأخرى:</h3>
-              <ul className="text-lg text-gray-300 space-y-2">
-                <li><strong>البريد الإلكتروني:</strong> <a href="mailto:3zzoezzo@gmail.com" className="text-orange-300 hover:underline">3zzoezzo@gmail.com</a></li>
-                <li dir='rtl'><strong>رقم الهاتف:</strong> +966503405496</li>
-                <li><strong>أوقات العمل:</strong> الدعم الفني متاح طوال أيام الأسبوع من الساعة 9 صباحاً وحتى 5 مساءً.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+    <div className="relative isolate pb-24 pt-32">
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute left-[20%] top-[-20%] h-80 w-80 rounded-full bg-orange-500/20 blur-[170px]" />
+        <div className="absolute bottom-[-25%] right-[15%] h-[360px] w-[360px] rounded-full bg-rose-400/20 blur-[180px]" />
       </div>
-    </>
+
+      <section className="page-shell text-center">
+        <span className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-4 py-1 text-xs font-semibold uppercase tracking-[4px] text-orange-100">
+          دعم فني متكامل
+        </span>
+        <h1 className="mt-6 text-3xl font-extrabold text-white sm:text-4xl">يسعدنا مساعدتك في أي وقت</h1>
+        <p className="section-subheading mx-auto max-w-3xl">
+          أرسل لنا تفاصيل طلبك أو استفسارك وسيقوم فريق Ezzo بالرد عليك خلال ساعات العمل الرسمية.
+        </p>
+      </section>
+
+      <section className="page-shell mt-14 grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+        <form onSubmit={handleSubmit} className="glass-panel px-6 py-10 sm:px-10">
+          <h2 className="text-2xl font-bold text-white">أرسل رسالة مباشرة</h2>
+          <p className="mt-3 text-sm leading-7 text-gray-300">
+            يرجى تزويدنا بأكبر قدر ممكن من التفاصيل لنتمكن من خدمتك بالشكل الأمثل.
+          </p>
+
+          <div className="mt-8 space-y-6">
+            <div className="text-right">
+              <label htmlFor="name" className="block text-sm font-semibold text-orange-200">
+                الاسم الكامل
+              </label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                required
+                className="mt-2 w-full rounded-2xl border border-white/10 bg-black/60 px-4 py-3 text-sm text-white placeholder:text-gray-500 focus:border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500/40"
+              />
+              <ValidationError prefix="الاسم" field="name" errors={state.errors} className="mt-2 text-sm text-rose-400" />
+            </div>
+
+            <div className="text-right">
+              <label htmlFor="email" className="block text-sm font-semibold text-orange-200">
+                البريد الإلكتروني
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                className="mt-2 w-full rounded-2xl border border-white/10 bg-black/60 px-4 py-3 text-sm text-white placeholder:text-gray-500 focus:border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500/40"
+              />
+              <ValidationError prefix="البريد الإلكتروني" field="email" errors={state.errors} className="mt-2 text-sm text-rose-400" />
+            </div>
+
+            <div className="text-right">
+              <label htmlFor="message" className="block text-sm font-semibold text-orange-200">
+                الرسالة
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                required
+                rows={5}
+                className="mt-2 w-full rounded-2xl border border-white/10 bg-black/60 px-4 py-3 text-sm text-white placeholder:text-gray-500 focus:border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500/40"
+              />
+              <ValidationError prefix="الرسالة" field="message" errors={state.errors} className="mt-2 text-sm text-rose-400" />
+            </div>
+
+            <button
+              type="submit"
+              disabled={state.submitting}
+              className="w-full rounded-full bg-gradient-to-r from-orange-500 via-orange-400 to-amber-300 px-6 py-3 text-sm font-semibold text-black shadow-[0_25px_55px_-25px_rgba(251,146,60,0.95)] transition-transform duration-300 hover:-translate-y-1 disabled:cursor-not-allowed disabled:opacity-70"
+            >
+              {state.submitting ? 'جارٍ الإرسال...' : 'إرسال الرسالة'}
+            </button>
+          </div>
+        </form>
+
+        <div className="glass-panel px-6 py-10 sm:px-10">
+          <h2 className="text-2xl font-bold text-white">طرق تواصل إضافية</h2>
+          <p className="mt-3 text-sm leading-7 text-gray-300">
+            يمكنك الوصول إلينا عبر القنوات التالية خلال ساعات العمل الرسمية.
+          </p>
+          <ul className="mt-8 space-y-4 text-right text-sm text-gray-200">
+            {contactDetails.map(({ label, value, href }) => (
+              <li key={label}>
+                <span className="block text-xs font-semibold uppercase tracking-widest text-orange-300/80">
+                  {label}
+                </span>
+                {href ? (
+                  <a href={href} className="text-base text-orange-100 transition-colors hover:text-orange-200">
+                    {value}
+                  </a>
+                ) : (
+                  <span className="text-base text-gray-200">{value}</span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    </div>
   );
 }

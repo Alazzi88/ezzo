@@ -1,30 +1,29 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { Dialog } from '@headlessui/react'
-import { XMarkIcon } from '@heroicons/react/24/outline'
+import { Fragment, useEffect, useState } from 'react'
 import Link from 'next/link'
-import { AnimatePresence, motion } from 'framer-motion'
-import Image from 'next/image';
+import Image from 'next/image'
+import { Dialog, Transition } from '@headlessui/react'
+
+const navigation = [
+  { name: 'الرئيسية', href: '/' },
+  { name: 'الفيوتشر والحسابات الممولة', href: '/FuturesAndFundedAccounts' },
+  { name: 'الأوبشن الأمريكي', href: '/Optiontrading' },
+  { name: 'المؤشرات الفنية', href: '/Indicator' },
+  { name: 'الدورات التدريبية', href: '/Coursies' },
+  { name: 'الدعم', href: '/Support' },
+  { name: 'سياسة الخصوصية', href: '/PrivacyPolicy' },
+]
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [showHeader, setShowHeader] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
 
-  const navigation = [
-    { name: 'الرئيسية', href: '/' },
-    { name: 'الفيوتشر والحسابات الممولة', href: '/FuturesAndFundedAccounts' },
-    { name: 'الأوبشن الأمريكي', href: '/Optiontrading' },
-    { name: 'المؤشرات الفنية', href: '/Indicator' },
-    { name: 'الدعم', href: '/Support' },
-    { name: 'سياسة الخصوصية', href: '/PrivacyPolicy' },
-  ];
-
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY
-      if (currentScrollY > lastScrollY && currentScrollY > 50) {
+      if (currentScrollY > lastScrollY && currentScrollY > 80) {
         setShowHeader(false)
       } else {
         setShowHeader(true)
@@ -38,132 +37,127 @@ export default function Header() {
     }
   }, [lastScrollY])
 
+  useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [mobileMenuOpen])
+
   return (
     <header
-      dir='rtl'
-      className={`fixed inset-x-0 top-0 z-50 font-sans transition-transform duration-300 ${
-        showHeader ? 'bg-gradient-to-b from-black via-transparent to-transparent' : 'bg-black bg-opacity-80'
+      dir="rtl"
+      className={`fixed inset-x-0 top-0 z-50 border-b border-white/10 backdrop-blur-xl transition-transform duration-300 ${
+        showHeader ? 'translate-y-0 bg-black/45' : '-translate-y-full bg-black/70 shadow-lg'
       }`}
     >
-      <nav
-        className="w-full flex items-center justify-between px-4 py-4 sm:px-6 lg:px-8"
-        aria-label="Global"
-      >
-        {/* Logo Section */}
-        <div className="flex items-center">
-          <Link href={'/'} className="flex items-center">
-            <Image
-              src={"img/logo.webp"}
-              alt="شعار الموقع"
-              width={60}
-              height={60}
-              loading="lazy"
-              className="rounded-full mx-2"
-            />
-            <span className="text-3xl font-bold text-orange-500 font-sans">
-              <span className="text-white font-extrabold p-0 m-0">3</span>zzo
-            </span>
-          </Link>
-        </div>
+      <div className="page-shell flex items-center justify-between py-4">
+        <Link href="/" className="flex items-center gap-3">
+          <Image
+            src="/img/logo.webp"
+            alt="شعار الموقع"
+            width={54}
+            height={54}
+            loading="lazy"
+            className="rounded-full border border-white/10"
+          />
+          <span className="text-2xl font-extrabold text-orange-400">
+            <span className="text-white">3</span>zzo
+          </span>
+        </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden lg:flex lg:gap-10">
+        <nav className="hidden items-center gap-2 lg:flex">
           {navigation.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className={`text-lg font-medium text-orange-400 transition hover:bg-orange-500 hover:text-black px-4 py-2 rounded-md font-sans`}
+              className="rounded-full px-4 py-2 text-sm font-semibold text-gray-100 transition-all duration-300 hover:bg-white/10 hover:text-white"
             >
               {item.name}
             </Link>
           ))}
         </nav>
 
-        {/* Mobile Menu Button */}
-        <div className="lg:hidden">
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen(true)}
-            className="inline-flex items-center justify-center rounded-md p-2 text-orange-500 hover:text-orange-500 focus:outline-none"
-          >
-            <svg
-              className="h-7 w-7"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth="2"
-              aria-hidden="true"
-            >
-              <line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" strokeLinecap="round" />
-              <line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" strokeLinecap="round" />
-              <line x1="3" y1="18" x2="21" y2="18" stroke="currentColor" strokeLinecap="round" />
-            </svg>
-          </button>
-        </div>
-      </nav>
+        <button
+          type="button"
+          onClick={() => setMobileMenuOpen(true)}
+          className="inline-flex items-center justify-center rounded-full border border-orange-300/30 p-2 text-orange-200 transition-all duration-300 hover:border-orange-200 hover:text-orange-100 lg:hidden"
+          aria-label="فتح القائمة"
+        >
+          <svg className="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <line x1="3" y1="6" x2="21" y2="6" strokeLinecap="round" />
+            <line x1="3" y1="12" x2="21" y2="12" strokeLinecap="round" />
+            <line x1="3" y1="18" x2="21" y2="18" strokeLinecap="round" />
+          </svg>
+        </button>
+      </div>
 
-      {/* Mobile Menu with Framer Motion */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <Dialog
-            open={mobileMenuOpen}
-            onClose={() => setMobileMenuOpen(false)}
-            className="lg:hidden"
+      <Transition.Root show={mobileMenuOpen} as={Fragment}>
+        <Dialog as="div" className="lg:hidden" onClose={setMobileMenuOpen}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-200"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
           >
-            {/* خلفية شفافة بتأثير Fade In/Out */}
-            <motion.div
-              className="fixed inset-0 z-40 bg-black bg-opacity-50"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-            />
+            <div className="fixed inset-0 z-40 bg-black/70" />
+          </Transition.Child>
 
-            {/* استخدام motion.div لتطبيق الانتقال على القائمة */}
-            <motion.div
-              className="fixed inset-y-0 right-0 z-50 w-4/5 max-w-sm bg-gray-800 p-4"
-              initial={{ x: '100%', opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: '100%', opacity: 0 }}
-              transition={{ duration: 0.3, ease: 'easeOut' }}
-            >
-              <Dialog.Panel>
-                <div className="flex items-center justify-between border-b border-gray-600 pb-4">
-                  <Link href={'/'} className="flex items-center">
-                    <Image
-                      src={"img/logo.webp"}
-                      alt="شعار الموقع"
-                      width={60}
-                      height={60}
-                      loading="lazy"
-                      className="rounded-full mx-2"
-                    />
-                  </Link>
-                  <button
-                    type="button"
+          <Transition.Child
+            as={Fragment}
+            enter="transform transition ease-out duration-300"
+            enterFrom="translate-x-full"
+            enterTo="translate-x-0"
+            leave="transform transition ease-in duration-200"
+            leaveFrom="translate-x-0"
+            leaveTo="translate-x-full"
+          >
+            <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-4/5 max-w-sm overflow-y-auto bg-gray-950/95 px-6 py-6 backdrop-blur-xl">
+              <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                <Link href="/" className="flex items-center gap-3" onClick={() => setMobileMenuOpen(false)}>
+                  <Image
+                    src="/img/logo.webp"
+                    alt="شعار الموقع"
+                    width={48}
+                    height={48}
+                    loading="lazy"
+                    className="rounded-full border border-white/10"
+                  />
+                  <span className="text-lg font-bold text-orange-300">
+                    <span className="text-white">3</span>zzo
+                  </span>
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="rounded-full border border-orange-400/30 p-2 text-orange-200 transition-colors hover:border-orange-200 hover:text-white"
+                  aria-label="إغلاق القائمة"
+                >
+                  <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <line x1="5" y1="5" x2="19" y2="19" strokeLinecap="round" />
+                    <line x1="19" y1="5" x2="5" y2="19" strokeLinecap="round" />
+                  </svg>
+                </button>
+              </div>
+              <div className="mt-6 space-y-3">
+                {navigation.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="rounded-md p-2 text-orange-500 hover:text-orange-500 focus:outline-none"
+                    className="block rounded-full border border-white/5 bg-white/5 px-4 py-3 text-sm font-semibold text-gray-100 transition-all duration-300 hover:bg-orange-500 hover:text-black"
                   >
-                    <XMarkIcon aria-hidden="true" className="h-6 w-6" />
-                  </button>
-                </div>
-                <div className="mt-4 space-y-2">
-                  {navigation.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className={`block text-lg font-semibold text-orange-400 transition hover:bg-orange-500 hover:text-black px-3 py-2 rounded-md font-sans`}
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                </div>
-              </Dialog.Panel>
-            </motion.div>
-          </Dialog>
-        )}
-      </AnimatePresence>
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            </Dialog.Panel>
+          </Transition.Child>
+        </Dialog>
+      </Transition.Root>
     </header>
   )
 }

@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import Header from "@/components/header";
 import Script from "next/script";
 import { Providers } from "@/app/providers";
+import ScrollAnimator from "@/components/ScrollAnimator";
 
 const almarai = Almarai({
   subsets: ["latin", "arabic"],
@@ -18,7 +19,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ar" dir="rtl" className={almarai.variable}>
       <head>
-        <title>Ezzo</title>
         <title>Ezzo – مؤشر تداول متكامل وإشارات فنية متقدمة</title>
         <meta
           name="description"
@@ -26,24 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <meta
           name="keywords"
-          content="
-            مؤشر Ezzo, مؤشر للتداول, مؤشر تداول, تحليل فني,
-            إشارات فنية متقدمة, مؤشرات سكالبينج, Scalping Indicators,
-            تداول الخيارات, Options Trading, خيارات SPX, SPX500,
-            بوت تداول آلي, Trading Bot, تنبيهات TradingView فورية,
-            لوحة تحكم Dashboard للتداول, دليل المؤشرات, مقارنة المؤشرات,
-            دعم ومقاومة ديناميكي, مراجعات المؤشرات, محتوى تعليمي للتداول,
-            استراتيجيات فريمات متعددة
-          "
-        />
-
-        <meta
-          name="description"
-          content="اكتشف أفضل المؤشرات للتحليل الفني للتداول..."
-        />
-        <meta
-          name="keywords"
-          content="مؤشر تداول, تحليلات فنية, أدوات تداول..."
+          content="مؤشر Ezzo, مؤشر للتداول, مؤشر تداول, تحليل فني, مؤشرات سكالبينج, تداول الخيارات, Options Trading, خيارات SPX, SPX500, بوت تداول آلي, Trading Bot, تنبيهات TradingView, لوحة تحكم للتداول, محتوى تعليمي للتداول"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -114,7 +97,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
 
-      <body className="font-sans text-orange-300 antialiased bg-black min-h-screen flex flex-col">
+      <body className="font-sans antialiased">
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe
@@ -126,32 +109,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </noscript>
         {/* End Google Tag Manager (noscript) */}
 
-        {/* بداية محتوى الصفحة */}
-        <Header />
-        <Providers>
-          <main className="flex-grow bg-black mt-2 px-0 py-8">
-            <div className="max-w-full mx-auto bg-black p-0 rounded-lg shadow-md">
-              {children}
-            </div>
-          </main>
-        </Providers>
-        <Footer />
-        <ScrollToTop />
-        {/* نهاية محتوى الصفحة */}
+        <div className="relative flex min-h-screen flex-col overflow-hidden text-gray-100">
+          <div className="pointer-events-none absolute inset-0 -z-10">
+            <div className="absolute -top-24 left-1/4 h-72 w-72 rounded-full bg-orange-500/20 blur-[140px] animate-pulse-glow" />
+            <div className="absolute bottom-[-10%] right-1/3 h-80 w-80 rounded-full bg-orange-400/15 blur-[160px] animate-pulse-glow" />
+            <div className="absolute inset-0 grid-overlay opacity-40" />
+          </div>
 
-        {/* يمكنك هنا (أو في أي مكان تريده بالـ Body) إضافة كود عرض الإعلانات أو مربعات AdSense 
-            مثال: 
-            <ins className="adsbygoogle"
-              style={{ display: "block" }}
-              data-ad-client="ca-pub-9870463298829321"
-              data-ad-slot="1234567890"
-              data-ad-format="auto"
-              data-full-width-responsive="true"
-            />
-            <Script id="ads-init" strategy="afterInteractive">{`
-              (adsbygoogle = window.adsbygoogle || []).push({});
-            `}</Script>
-        */}
+          <Header />
+          <Providers>
+            <ScrollAnimator />
+            <main className="relative z-10 flex-grow pt-28 pb-24">
+              {children}
+            </main>
+          </Providers>
+          <Footer />
+          <ScrollToTop />
+        </div>
       </body>
     </html>
   );

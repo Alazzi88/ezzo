@@ -1,111 +1,81 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import Header from "@/components/header";
+'use client';
+
+import Image from 'next/image';
+import { useState } from 'react';
+
+type Video = { id: number; title: string; url: string; thumbnail: string };
+
+const videos: Video[] = [
+  { id: 1, title: 'الفيديو الأول', url: 'https://www.youtube.com/embed/dQw4w9WgXcQ', thumbnail: '/img/trading-analysis.webp' },
+  { id: 2, title: 'الفيديو الثاني', url: 'https://www.youtube.com/embed/3JZ_D3ELwOQ', thumbnail: '/img/indic.webp' },
+  { id: 3, title: 'الفيديو الثالث', url: 'https://www.youtube.com/embed/tgbNymZ7vqY', thumbnail: '/img/trading3.webp' },
+];
 
 export default function VideosPage() {
-  const validEmail = "yalazzi88@gmail.com";
-  const validPassword = "12345";
+  const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [email, setEmail] = useState<string | null>(null);
-  const [selectedVideo, setSelectedVideo] = useState<{ title: string; url: string } | null>(null);
-
-  const videos = [
-    { id: 1, title: "الفيديو الأول", url: "https://www.youtube.com/embed/dQw4w9WgXcQ", thumbnail: "/img/video1.jpg" },
-    { id: 2, title: "الفيديو الثاني", url: "https://www.youtube.com/embed/3JZ_D3ELwOQ", thumbnail: "/img/video2.jpg" },
-    { id: 3, title: "الفيديو الثالث", url: "https://www.youtube.com/embed/tgbNymZ7vqY", thumbnail: "/img/video3.jpg" },
-  ];
-
-  useEffect(() => {
-    const storedEmail = localStorage.getItem("email");
-    const storedPassword = localStorage.getItem("password");
-    const authStatus = localStorage.getItem("isAuthenticated");
-
-    if (storedEmail === validEmail && storedPassword === validPassword && authStatus === "true") {
-      setIsAuthenticated(true);
-      setEmail(storedEmail);
-    }
-  }, []);
-
-  const openModal = (video: { title: string; url: string }) => {
-    setSelectedVideo(video);
-  };
-
-  const closeModal = () => {
-    setSelectedVideo(null);
-  };
+  const openModal = (video: Video) => setSelectedVideo(video);
+  const closeModal = () => setSelectedVideo(null);
 
   return (
-    <>
-      <Header />
-      {isAuthenticated ? (
-        <div className="min-h-screen bg-black py-12">
-          <div className="max-w-3xl mx-auto bg-gray-900 shadow-lg rounded-lg p-6">
-            <h1 className="text-2xl font-bold text-orange-500 text-center mb-6">
-              مرحبًا بك، {email}
-            </h1>
-            <p className="text-gray-300 text-center mb-6">
-              تم تسجيل الدخول بنجاح.
-            </p>
-            <h2 className="text-xl font-semibold text-orange-400 mb-4 text-center">
-              قائمة الفيديوهات
-            </h2>
-            <div className="space-y-6">
-              {videos.map((video) => (
-                <div
-                  key={video.id}
-                  className="bg-gray-800 rounded-lg overflow-hidden shadow-md cursor-pointer"
-                  onClick={() => openModal(video)}
-                >
-                  <img
-                    src={video.thumbnail}
-                    alt={video.title}
-                    className="w-full h-48 object-cover"
-                  />
-                  <div className="p-4">
-                    <h3 className="text-lg font-bold text-orange-400 mb-2">
-                      {video.title}
-                    </h3>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      ) : (
-        <div className="min-h-screen flex items-center justify-center bg-black">
-          <div className="text-center p-6 bg-gray-900 border-l-4 border-orange-500 shadow-lg rounded-lg">
-            <h2 className="text-orange-500 font-bold text-lg mb-2">تنبيه!</h2>
-            <p className="text-gray-300 mb-4">
-              ليس لديك صلاحية لعرض هذا المحتوى. يرجى تسجيل الدخول باستخدام بيانات صحيحة.
-            </p>
-          </div>
-        </div>
-      )}
+    <div className="relative isolate pb-24 pt-32">
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute left-[18%] top-[-18%] h-80 w-80 rounded-full bg-orange-500/20 blur-[160px]" />
+        <div className="absolute bottom-[-25%] right-[12%] h-[360px] w-[360px] rounded-full bg-rose-500/20 blur-[190px]" />
+      </div>
 
-      {/* Modal */}
+      <section className="page-shell text-center">
+        <h1 className="text-3xl font-extrabold text-white sm:text-4xl">مكتبة فيديوهات Ezzo</h1>
+        <p className="section-subheading mx-auto max-w-2xl">
+          مجموعة مختارة من الشروحات المرئية تغطي أساسيات الأوبشن، التحليل الفني، وأفضل الممارسات التطبيقية.
+        </p>
+      </section>
+
+      <section className="page-shell mt-16 grid gap-8 lg:grid-cols-3">
+        {videos.map((video) => (
+          <button
+            key={video.id}
+            type="button"
+            onClick={() => openModal(video)}
+            className="gradient-card h-full overflow-hidden text-right transition-transform duration-300 hover:-translate-y-1"
+          >
+            <div className="relative h-48 w-full overflow-hidden rounded-3xl border border-white/10 bg-black/60">
+              <Image src={video.thumbnail} alt={video.title} fill loading="lazy" className="object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent" />
+              <div className="absolute bottom-3 right-3 rounded-full bg-black/60 px-3 py-1 text-[11px] font-semibold text-orange-100 backdrop-blur">
+                اضغط للمشاهدة
+              </div>
+            </div>
+            <div className="p-6">
+              <h3 className="text-lg font-bold text-orange-300">{video.title}</h3>
+              <p className="mt-3 text-sm text-gray-300">انقر للمشاهدة الفورية</p>
+            </div>
+          </button>
+        ))}
+      </section>
+
       {selectedVideo && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
-          <div className="bg-gray-900 p-6 rounded-lg max-w-2xl mt-5 w-full relative">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
+          <div className="glass-panel relative w-full max-w-3xl px-6 py-8">
             <button
+              type="button"
               onClick={closeModal}
-              className="absolute top-2 right-2 text-gray-300 hover:text-white text-2xl"
+              className="absolute left-4 top-4 rounded-full border border-white/15 p-2 text-orange-200 transition-colors hover:border-orange-200 hover:text-white"
             >
-              &times;
+              ×
             </button>
-            <h2 className="text-orange-400 text-2xl font-bold mb-4 text-center">{selectedVideo.title}</h2>
-            <div className="relative" style={{ paddingBottom: "56.25%" }}>
+            <h2 className="text-2xl font-bold text-orange-300 text-center">{selectedVideo.title}</h2>
+            <div className="relative mt-6 w-full pt-[56.25%]">
               <iframe
+                className="absolute inset-0 h-full w-full rounded-2xl border border-white/10"
                 src={selectedVideo.url}
                 title={selectedVideo.title}
-                className="absolute top-0 left-0 w-full h-full"
                 allowFullScreen
               />
             </div>
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }

@@ -249,20 +249,7 @@ const Welcome: React.FC = () => {
       </section>
 
       <section className="page-shell mt-12">
-        <div className="flex flex-col gap-6">
-          <div className="text-right">
-            <span className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[4px] text-orange-100">
-              بث مباشر للأسواق
-            </span>
-            <h2 className="mt-4 text-2xl font-extrabold text-white sm:text-3xl">
-              شريط أسعار ديناميكي لأبرز مؤشرات وأسواق التداول
-            </h2>
-            <p className="mt-3 text-sm leading-7 text-gray-300 sm:text-base">
-              تابع تحركات أهم الأصول مثل ناسداك وستاندرد آند بورز والذهب والبتكوين في لحظتها مع واجهة أنيقة تتماشى مع تصميم المنصة.
-            </p>
-          </div>
-          <TradingViewTicker />
-        </div>
+        <TradingViewTicker />
       </section>
 
       <section className="page-shell mt-14">

@@ -57,6 +57,51 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             }
           `}
         </Script>
+        <Script id="structured-data-course" type="application/ld+json" strategy="afterInteractive">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "Course",
+              "name": "دورة التحليل الفني للفيوتشر",
+              "description": "برنامج تدريبي متكامل لتعلم التحليل الفني وخطط التداول في أسواق الفيوتشر والحسابات الممولة مع دعم من فريق Ezzo.",
+              "provider": {
+                "@type": "Organization",
+                "name": "Ezzo",
+                "url": "https://3zzo.com"
+              },
+              "inLanguage": "ar",
+              "offers": {
+                "@type": "Offer",
+                "url": "https://3zzo.com/Coursies",
+                "priceCurrency": "SAR",
+                "availability": "https://schema.org/InStock"
+              }
+            }
+          `}
+        </Script>
+        <Script id="structured-data-indicator" type="application/ld+json" strategy="afterInteractive">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "SoftwareApplication",
+              "name": "مؤشر Ezzo اللحظي",
+              "operatingSystem": "Web",
+              "applicationCategory": "BusinessApplication",
+              "description": "مؤشر تداول لحظي يوفّر قراءات السيولة وتنبيهات فورية لمتداولي الفيوتشر والحسابات الممولة.",
+              "creator": {
+                "@type": "Organization",
+                "name": "Ezzo",
+                "url": "https://3zzo.com"
+              },
+              "offers": {
+                "@type": "Offer",
+                "url": "https://3zzo.com/Indicator",
+                "priceCurrency": "SAR",
+                "availability": "https://schema.org/InStock"
+              }
+            }
+          `}
+        </Script>
 
         {/* Google Tag Manager */}
         <Script id="google-tag-manager" strategy="afterInteractive">

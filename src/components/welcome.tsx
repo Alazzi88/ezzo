@@ -198,7 +198,28 @@ const products: ProductCardProps[] = [
   },
 ];
 
+type ShowcaseImage = {
+  src: string;
+  title: string;
+};
+
+const SHOWCASE_IMAGES: ShowcaseImage[] = [
+  { src: '/img/trading1.webp', title: 'ابدأ ببناء استراتيجيتك بثقة' },
+  { src: '/img/trading2.webp', title: 'مؤشر Ezzo اللحظي' },
+  { src: '/img/trading3.webp', title: 'توازن بين التحليل والالتزام بالخطة' },
+];
+
 const Welcome: React.FC = () => {
+  const [showcaseIndex, setShowcaseIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setShowcaseIndex((prev) => (prev + 1) % SHOWCASE_IMAGES.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="relative isolate pb-10">
       <div className="pointer-events-none absolute inset-0 -z-10">
@@ -253,59 +274,17 @@ const Welcome: React.FC = () => {
       </section>
 
       <section className="page-shell mt-14">
-        <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="relative h-72 overflow-hidden rounded-3xl border border-white/10 bg-black/60 shadow-[0_30px_80px_-45px_rgba(251,146,60,0.75)] sm:h-[420px]">
-            <Image
-              src="/img/trading1.webp"
-              alt="غرفة تداول متكاملة بإضاءة احترافية"
-              fill
-              loading="lazy"
-              className="object-cover transition-transform duration-[4000ms] ease-out hover:scale-[1.05]"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/40" />
-            <div className="absolute bottom-6 left-6 right-6 text-left">
-              <span className="rounded-full border border-orange-400/40 bg-orange-500/20 px-3 py-1 text-[10px] font-semibold uppercase tracking-[3px] text-orange-100">
-                رحلة تعلّم موجهة
-              </span>
-              <h3 className="mt-3 text-2xl font-bold text-white sm:text-3xl">ابدأ ببناء استراتيجيتك بثقة</h3>
-              <p className="mt-2 text-sm text-gray-200 sm:text-base">
-                دروس تطبيقية، نماذج جاهزة، ومحتوى تفاعلي يهيئك للانضمام إلى دورتنا المتقدمة عندما ترغب بالانتقال للمرحلة التالية، مع بناء معرفة عملية بالتعلم المستمر واختبار السوق قبل خطوات التنفيذ.
-              </p>
-            </div>
-          </div>
-          <div className="grid gap-6">
-            <div className="relative h-40 overflow-hidden rounded-3xl border border-white/10 bg-black/60 shadow-[0_20px_50px_-35px_rgba(251,146,60,0.7)] sm:h-48">
-              <Image
-                src="/img/trading2.webp"
-                alt="جلسة متابعة للأسواق مع أداة تتبع الأداء"
-                fill
-                loading="lazy"
-                className="object-cover transition-transform duration-[4000ms] ease-out hover:scale-[1.05]"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/20 to-transparent" />
-              <div className="absolute left-5 top-5 max-w-[220px]">
-                <h4 className="text-lg font-semibold text-white">مؤشر Ezzo اللحظي</h4>
-                <p className="mt-1 text-xs text-gray-200">
-                  مؤشر Ezzo اللحظي يرصد اتجاهات السيولة ويقدّم تنبيهات معدّة مسبقاً لدعم قرارك، بينما تبقى خطوة التنفيذ بين يديك.
-                </p>
-              </div>
-            </div>
-            <div className="relative h-40 overflow-hidden rounded-3xl border border-white/10 bg-black/60 shadow-[0_20px_50px_-35px_rgba(251,146,60,0.7)] sm:h-48">
-              <Image
-                src="/img/trading3.webp"
-                alt="خطة تداول مدونة بخط اليد بجوار جهاز لوحي"
-                fill
-                loading="lazy"
-                className="object-cover transition-transform duration-[4000ms] ease-out hover:scale-[1.05]"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/30 to-transparent" />
-              <div className="absolute left-5 top-5 max-w-[220px]">
-                <h4 className="text-lg font-semibold text-white">توازن بين التحليل والالتزام بالخطة</h4>
-                <p className="mt-1 text-xs text-gray-200">
-                  خطط تداول مختصة بالفيوتشر تضبط رأس المال قبل التنفيذ وتوثق قراراتك لحظة بلحظة.
-                </p>
-              </div>
-            </div>
+        <div className="relative h-72 overflow-hidden rounded-3xl border border-white/10 bg-black/60 shadow-[0_30px_80px_-45px_rgba(251,146,60,0.75)] sm:h-[420px]">
+          <Image
+            src={SHOWCASE_IMAGES[showcaseIndex].src}
+            alt={SHOWCASE_IMAGES[showcaseIndex].title}
+            fill
+            loading="lazy"
+            className="object-cover transition-transform duration-[4000ms] ease-out hover:scale-[1.05]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/40" />
+          <div className="absolute bottom-6 left-6 right-6 text-left">
+            <h3 className="text-2xl font-bold text-white sm:text-3xl">{SHOWCASE_IMAGES[showcaseIndex].title}</h3>
           </div>
         </div>
       </section>

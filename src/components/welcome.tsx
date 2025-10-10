@@ -209,12 +209,12 @@ const Welcome: React.FC = () => {
       <section className="page-shell pt-16 text-center sm:pt-24">
         <div className="flex flex-wrap justify-center gap-3 text-[11px] text-orange-100 sm:text-xs">
           <Link
-            href="https://t.me/ezzo_options"
+            href="https://t.me/ezzo_trading"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-full border border-orange-400/30 bg-orange-500/15 px-4 py-1 transition-all duration-300 hover:-translate-y-0.5 hover:bg-orange-500/25"
           >
-            قناة تيليجرام ezzo_options ↗
+            قناة تيليجرام ezzo_trading ↗
           </Link>
           <Link
             href="https://www.snapchat.com/add/ezzo.com"

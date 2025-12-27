@@ -248,6 +248,7 @@ const Welcome: React.FC<WelcomeProps> = ({ heroImageSlot }) => {
               href="https://t.me/ezzo_trading"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Join our Telegram channel"
               className="inline-flex items-center gap-2 rounded-full border border-orange-400/30 bg-orange-500/15 px-4 py-1 transition-all duration-300 hover:-translate-y-0.5 hover:bg-orange-500/25"
             >
               قناة تيليجرام <span className="ezzo-text">Ezzo</span>_trading ↗
@@ -256,6 +257,7 @@ const Welcome: React.FC<WelcomeProps> = ({ heroImageSlot }) => {
               href="https://www.snapchat.com/add/ezzo.com"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Follow us on Snapchat"
               className="inline-flex items-center gap-2 rounded-full border border-yellow-300/30 bg-yellow-400/10 px-4 py-1 text-yellow-100 transition-all duration-300 hover:-translate-y-0.5 hover:bg-yellow-400/20"
             >
               سناب شات <span className="ezzo-text">Ezzo</span> ↗
@@ -306,25 +308,22 @@ const Welcome: React.FC<WelcomeProps> = ({ heroImageSlot }) => {
       <FadeIn direction="up" delay={0.3} className="page-shell mt-14">
         <div className="relative aspect-video w-full overflow-hidden rounded-3xl border border-white/10 bg-black/60 shadow-[0_30px_80px_-45px_rgba(251,146,60,0.75)] sm:aspect-[21/9]">
           {/* Render Server Component for LCP (first image) */}
-          {showcaseIndex === 0 && heroImageSlot ? (
-            heroImageSlot
-          ) : (
-            <>
-              <Image
-                src={SHOWCASE_IMAGES[showcaseIndex].src}
-                alt={SHOWCASE_IMAGES[showcaseIndex].title}
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
-                priority
-                loading="eager"
-                className="object-cover transition-transform duration-[4000ms] ease-out hover:scale-[1.05]"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/40" />
-              <div className="absolute bottom-6 left-6 right-6 text-left">
-                <h3 className="text-2xl font-bold text-white sm:text-3xl">{SHOWCASE_IMAGES[showcaseIndex].title}</h3>
-              </div>
-            </>
-          )}
+
+          <>
+            <Image
+              src={SHOWCASE_IMAGES[showcaseIndex].src}
+              alt={SHOWCASE_IMAGES[showcaseIndex].title}
+              fill
+              priority={showcaseIndex === 0}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
+              className="object-cover transition-transform duration-[4000ms] ease-out hover:scale-[1.05]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/40" />
+            <div className="absolute bottom-6 left-6 right-6 text-left">
+              <h3 className="text-2xl font-bold text-white sm:text-3xl">{SHOWCASE_IMAGES[showcaseIndex].title}</h3>
+            </div>
+          </>
+
         </div>
       </FadeIn>
 

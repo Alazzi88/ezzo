@@ -16,10 +16,10 @@ export default function ScriptLoader() {
         // Scripts will ONLY load on user interaction (scroll, click, etc.)
 
         // Or load on user interaction
-        window.addEventListener('scroll', handleInteraction, { once: true });
-        window.addEventListener('mousemove', handleInteraction, { once: true });
-        window.addEventListener('touchstart', handleInteraction, { once: true });
-        window.addEventListener('click', handleInteraction, { once: true });
+        window.addEventListener('scroll', handleInteraction, { passive: true, once: true });
+        window.addEventListener('mousemove', handleInteraction, { passive: true, once: true });
+        window.addEventListener('touchstart', handleInteraction, { passive: true, once: true });
+        window.addEventListener('click', handleInteraction, { passive: true, once: true });
 
         return () => {
             window.removeEventListener('scroll', handleInteraction);

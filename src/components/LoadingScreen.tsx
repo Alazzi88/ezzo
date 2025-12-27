@@ -12,28 +12,19 @@ const LoadingScreen: React.FC = () => {
             setIsExiting(true);
             setTimeout(() => {
                 setIsLoading(false);
-            }, 600);
+            }, 600); // This timeout is for the exit animation, so we keep it.
         };
 
         if (document.readyState === 'complete') {
-            setTimeout(handleLoad, 1200);
+            handleLoad();
         } else {
-            window.addEventListener('load', () => {
-                setTimeout(handleLoad, 500);
-            });
+            window.addEventListener('load', handleLoad);
         }
 
-        const fallbackTimer = setTimeout(() => {
-            if (isLoading) {
-                handleLoad();
-            }
-        }, 4000);
-
         return () => {
-            clearTimeout(fallbackTimer);
             window.removeEventListener('load', handleLoad);
         };
-    }, [isLoading]);
+    }, []);
 
     if (!isLoading) return null;
 

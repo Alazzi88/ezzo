@@ -9,6 +9,7 @@ import { Providers } from "@/app/providers";
 import dynamic from "next/dynamic";
 import ScriptLoader from "@/components/ScriptLoader";
 import LoadingScreen from "@/components/LoadingScreen";
+import { LazyMotion, domAnimation } from "framer-motion";
 
 // Lazy load Footer (below the fold)
 const Footer = dynamic(() => import("@/components/Footer"), { ssr: true });
@@ -159,23 +160,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </noscript>
         {/* End Google Tag Manager (noscript) */}
 
-        <div className="relative flex min-h-screen flex-col overflow-hidden text-gray-100">
-          <div className="pointer-events-none absolute inset-0 -z-10">
-            <div className="absolute -top-24 left-1/4 h-72 w-72 rounded-full bg-orange-500/20 blur-[80px] sm:blur-[140px] animate-pulse-glow" />
-            <div className="absolute bottom-[-10%] right-1/3 h-80 w-80 rounded-full bg-orange-400/15 blur-[80px] sm:blur-[160px] animate-pulse-glow" />
-            <div className="absolute inset-0 grid-overlay opacity-40" />
+        <LazyMotion features={domAnimation}>
+          <div className="relative flex min-h-screen flex-col overflow-hidden text-gray-100">
+            <div className="pointer-events-none absolute inset-0 -z-10">
+              <div className="absolute -top-24 left-1/4 h-72 w-72 rounded-full bg-orange-500/20 blur-[80px] sm:blur-[140px] animate-pulse-glow" />
+              <div className="absolute bottom-[-10%] right-1/3 h-80 w-80 rounded-full bg-orange-400/15 blur-[80px] sm:blur-[160px] animate-pulse-glow" />
+              <div className="absolute inset-0 grid-overlay opacity-40" />
+            </div>
+
+            <Header />
+            <Providers>
+
+              <main className="relative z-10 flex-grow pt-28 pb-24">
+                {children}
+              </main>
+            </Providers>
+            <Footer />
+            <ScrollToTop />
           </div>
-
-          <Header />
-          <Providers>
-
-            <main className="relative z-10 flex-grow pt-28 pb-24">
-              {children}
-            </main>
-          </Providers>
-          <Footer />
-          <ScrollToTop />
-        </div>
+        </LazyMotion>
       </body>
     </html>
   );

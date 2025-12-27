@@ -51,7 +51,7 @@ export default function Header() {
         }`}
     >
       <div className="page-shell flex items-center justify-between py-4">
-        <FadeIn direction="down" delay={0.1}>
+        <div>
           <Link href="/" className="flex items-center gap-3">
             <Image
               src="/img/logo.webp"
@@ -65,11 +65,11 @@ export default function Header() {
               <span className="text-white">3</span>zzo
             </span>
           </Link>
-        </FadeIn>
+        </div>
 
-        <StaggerContainer className="hidden items-center gap-2 lg:flex" delay={0.2} staggerChildren={0.05}>
+        <div className="hidden items-center gap-2 lg:flex">
           {navigation.map((item) => (
-            <StaggerItem key={item.href}>
+            <div key={item.href}>
               <Link
                 href={item.href}
                 prefetch={false}
@@ -79,24 +79,24 @@ export default function Header() {
                 <span className="absolute inset-0 bg-white/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100 rounded-full" />
                 <span className="absolute bottom-0 left-1/2 h-0.5 w-0 -translate-x-1/2 bg-orange-400 transition-all duration-300 group-hover:w-1/2" />
               </Link>
-            </StaggerItem>
+            </div>
           ))}
-        </StaggerContainer>
+        </div>
 
-        <FadeIn direction="down" delay={0.1} className="lg:hidden">
+        <div className="lg:hidden">
           <button
             type="button"
             onClick={() => setMobileMenuOpen(true)}
-            className="inline-flex items-center justify-center rounded-full border border-orange-300/30 p-2 text-orange-200 transition-all duration-300 hover:border-orange-200 hover:text-orange-100"
+            className="inline-flex items-center justify-center rounded-full border border-orange-400/50 bg-black/40 p-2 text-orange-300 transition-all duration-300 hover:border-orange-300 hover:text-orange-200"
             aria-label="فتح القائمة"
           >
-            <svg className="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg className="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <line x1="3" y1="6" x2="21" y2="6" strokeLinecap="round" />
               <line x1="3" y1="12" x2="21" y2="12" strokeLinecap="round" />
               <line x1="3" y1="18" x2="21" y2="18" strokeLinecap="round" />
             </svg>
           </button>
-        </FadeIn>
+        </div>
       </div>
 
       <Transition.Root show={mobileMenuOpen} as={Fragment}>
@@ -122,7 +122,7 @@ export default function Header() {
             leaveFrom="translate-x-0"
             leaveTo="translate-x-full"
           >
-            <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-4/5 max-w-sm overflow-y-auto bg-gray-950/95 px-6 py-6 backdrop-blur-xl">
+            <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-4/5 max-w-sm overflow-y-auto bg-black px-6 py-6 backdrop-blur-xl ring-1 ring-white/10">
               <div className="flex items-center justify-between border-b border-white/10 pb-4">
                 <Link href="/" className="flex items-center gap-3" onClick={() => setMobileMenuOpen(false)}>
                   <Image

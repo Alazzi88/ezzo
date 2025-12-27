@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { m, useInView } from 'framer-motion';
 
 type FadeInProps = {
     children: React.ReactNode;
@@ -53,7 +53,7 @@ export const FadeIn = ({
     const variants = getVariants();
 
     return (
-        <motion.div
+        <m.div
             ref={ref}
             initial="hidden"
             animate={isInView ? 'visible' : 'hidden'}
@@ -63,7 +63,7 @@ export const FadeIn = ({
             style={{ willChange: 'transform, opacity' }}
         >
             {children}
-        </motion.div>
+        </m.div>
     );
 };
 
@@ -86,7 +86,7 @@ export const ScaleIn = ({
     const isInView = useInView(ref, { once, margin: "-50px" });
 
     return (
-        <motion.div
+        <m.div
             ref={ref}
             initial={{ opacity: 0, scale: 0.9 }}
             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
@@ -95,7 +95,7 @@ export const ScaleIn = ({
             style={{ willChange: 'transform, opacity' }}
         >
             {children}
-        </motion.div>
+        </m.div>
     );
 };
 
@@ -118,7 +118,7 @@ export const StaggerContainer = ({
     const isInView = useInView(ref, { once, margin: "-50px" });
 
     return (
-        <motion.div
+        <m.div
             ref={ref}
             initial="hidden"
             animate={isInView ? 'visible' : 'hidden'}
@@ -135,7 +135,7 @@ export const StaggerContainer = ({
             className={className}
         >
             {children}
-        </motion.div>
+        </m.div>
     );
 };
 
@@ -146,7 +146,7 @@ type StaggerItemProps = {
 
 export const StaggerItem = ({ children, className = '' }: StaggerItemProps) => {
     return (
-        <motion.div
+        <m.div
             variants={{
                 hidden: { opacity: 0, y: 20 },
                 visible: { opacity: 1, y: 0 },
@@ -156,7 +156,7 @@ export const StaggerItem = ({ children, className = '' }: StaggerItemProps) => {
             style={{ willChange: 'transform, opacity' }}
         >
             {children}
-        </motion.div>
+        </m.div>
     );
 };
 
@@ -167,13 +167,13 @@ type HoverCardProps = {
 
 export const HoverCard = ({ children, className = '' }: HoverCardProps) => {
     return (
-        <motion.div
+        <m.div
             whileHover={{ y: -5 }}
             transition={{ duration: 0.3 }}
             className={className}
             style={{ willChange: 'transform' }}
         >
             {children}
-        </motion.div>
+        </m.div>
     );
 };

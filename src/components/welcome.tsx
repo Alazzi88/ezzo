@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
+import { FadeIn, HoverCard, ScaleIn, StaggerContainer, StaggerItem } from './animations/MotionComponents';
 
 // Lazy load heavy components
 const Advertisement = dynamic(() => import('./Advertisement'), { ssr: false });
@@ -22,8 +23,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ img, title, description, link
   const isExternal = link ? /^https?:\/\//.test(link) : false;
 
   return (
-    <div className="gradient-card group h-full p-7 text-center relative overflow-hidden">
-
+    <HoverCard className="gradient-card group h-full p-7 text-center relative overflow-hidden">
       <div className="relative z-10 mx-auto flex h-48 w-full max-w-xs items-center justify-center overflow-hidden rounded-3xl border border-white/10 bg-black/70 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.8)] group-hover:border-orange-400/30 transition-colors duration-300">
         <Image
           src={img}
@@ -50,7 +50,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ img, title, description, link
           </Link>
         </div>
       )}
-    </div>
+    </HoverCard>
   );
 };
 
@@ -103,14 +103,14 @@ const AnimatedCounter: React.FC = () => {
   }, [hasAnimated]);
 
   return (
-    <div ref={counterRef} className="gradient-card group flex h-full flex-col items-center justify-center gap-4 px-6 py-8 text-center relative overflow-hidden">
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-shimmer" />
+    <HoverCard className="gradient-card group flex h-full flex-col items-center justify-center gap-4 px-6 py-8 text-center relative overflow-hidden">
+      <div ref={counterRef} className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-shimmer" />
       <p className="text-2xl font-semibold text-orange-200 relative z-10">أكثر من</p>
       <p className="text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-orange-400 to-rose-500 relative z-10 drop-shadow-[0_0_15px_rgba(251,191,36,0.5)]">
         {count}+
       </p>
       <p className="text-lg font-medium text-gray-200 relative z-10">عميل يثق في أدوات <span className="ezzo-text">Ezzo</span> الاحترافية</p>
-    </div>
+    </HoverCard>
   );
 };
 
@@ -119,6 +119,7 @@ type StatItem = {
   suffix?: string;
   label: string;
   description: string;
+  description2?: string;
 };
 
 const StatCard: React.FC<StatItem> = ({ value, suffix = '', label, description }) => {
@@ -170,15 +171,15 @@ const StatCard: React.FC<StatItem> = ({ value, suffix = '', label, description }
   }, [hasAnimated, value]);
 
   return (
-    <div ref={cardRef} className="gradient-card group h-full px-6 py-8 text-center relative overflow-hidden">
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-shimmer" />
+    <HoverCard className="gradient-card group h-full px-6 py-8 text-center relative overflow-hidden">
+      <div ref={cardRef} className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-shimmer" />
       <p className="text-4xl font-extrabold text-orange-300 relative z-10 group-hover:text-orange-200 transition-colors duration-300 drop-shadow-[0_0_10px_rgba(251,146,60,0.4)]">
         {displayValue}
         {suffix}
       </p>
       <p className="mt-3 text-lg font-semibold text-white relative z-10">{label}</p>
       <p className="mt-3 text-sm leading-7 text-gray-300 relative z-10">{description}</p>
-    </div>
+    </HoverCard>
   );
 };
 
@@ -186,7 +187,7 @@ const stats: StatItem[] = [
   {
     value: 80,
     suffix: '%',
-    label: 'نسبة دقة المؤشر البرو',
+    label: 'نسبة دقة استراتيجية ايزو',
     description: 'نتائج مثبتة في اختبارات باك-تست حقيقية مع إدارة مخاطر محكمة.',
   },
 ];
@@ -194,10 +195,10 @@ const stats: StatItem[] = [
 const products: ProductCardProps[] = [
   {
     img: '/img/ezzoind.webp',
-    title: 'مؤشر <span className="ezzo-text">Ezzo</span> اللحظي',
+    title: 'استراتيجية ايزو',
     description: 'احصل على نقاط دخول وخروج محسوبة مع تنبيهات لحظية لأسواق الفيوتشر والحسابات الممولة.',
     link: '/Indicator',
-    linkText: 'استكشف المؤشر',
+    linkText: 'استكشف الاستراتيجية',
   },
   {
     img: '/img/trading-analysis.webp',
@@ -215,7 +216,6 @@ type ShowcaseImage = {
 
 const SHOWCASE_IMAGES: ShowcaseImage[] = [
   { src: '/img/trading1.webp', title: 'ابدأ ببناء استراتيجيتك بثقة' },
-  { src: '/img/trading2.webp', title: 'مؤشر <span className="ezzo-text">Ezzo</span> اللحظي' },
   { src: '/img/trading3.webp', title: 'توازن بين التحليل والالتزام بالخطة' },
 ];
 
@@ -237,64 +237,73 @@ const Welcome: React.FC<WelcomeProps> = ({ heroImageSlot }) => {
   return (
     <div className="relative isolate pb-10">
       <div className="pointer-events-none absolute inset-0 -z-10 hidden sm:block">
-        <div className="absolute -top-40 right-[20%] h-96 w-96 rounded-full bg-orange-500/25 blur-[160px]" />
-        <div className="absolute bottom-[-30%] left-[10%] h-[420px] w-[420px] rounded-full bg-rose-500/20 blur-[180px]" />
+        <div className="absolute -top-40 right-[20%] h-96 w-96 rounded-full bg-orange-500/25 blur-[100px] sm:blur-[160px]" />
+        <div className="absolute bottom-[-30%] left-[10%] h-[420px] w-[420px] rounded-full bg-rose-500/20 blur-[100px] sm:blur-[180px]" />
       </div>
 
       <section className="page-shell pt-16 text-center sm:pt-24">
-        <div className="flex flex-wrap justify-center gap-3 text-[11px] text-orange-100 sm:text-xs">
-          <Link
-            href="https://t.me/ezzo_trading"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border border-orange-400/30 bg-orange-500/15 px-4 py-1 transition-all duration-300 hover:-translate-y-0.5 hover:bg-orange-500/25"
-          >
-            قناة تيليجرام <span className="ezzo-text">Ezzo</span>_trading ↗
-          </Link>
-          <Link
-            href="https://www.snapchat.com/add/ezzo.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border border-yellow-300/30 bg-yellow-400/10 px-4 py-1 text-yellow-100 transition-all duration-300 hover:-translate-y-0.5 hover:bg-yellow-400/20"
-          >
-            سناب شات <span className="ezzo-text">Ezzo</span> ↗
-          </Link>
-        </div>
-        <div className="relative z-10 container mx-auto px-4 h-full flex flex-col justify-center items-center text-center">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 animate-fade-in-up">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-orange-500 to-red-500">
-              تداول بذكاء
-            </span>
-            <br />
-            <span className="text-gray-200">مع أدوات <span className="ezzo-text">Ezzo</span> الاحترافية</span>
-          </h1>
-
-          <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto animate-fade-in-up delay-100">
-            نقدم لك أفضل المؤشرات الفنية وأدوات التحليل لمساعدتك في اتخاذ قرارات تداول مدروسة وتحقيق أرباح مستدامة في أسواق المال.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up delay-200">
-            <a
-              href="#products"
-              className="px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-600 text-white rounded-full font-bold text-lg hover:shadow-lg hover:shadow-orange-500/30 transition-all duration-300 transform hover:-translate-y-1"
+        <StaggerContainer className="flex flex-col items-center">
+          <StaggerItem className="flex flex-wrap justify-center gap-3 text-[11px] text-orange-100 sm:text-xs">
+            <Link
+              href="https://t.me/ezzo_trading"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-orange-400/30 bg-orange-500/15 px-4 py-1 transition-all duration-300 hover:-translate-y-0.5 hover:bg-orange-500/25"
             >
-              استكشف منتجاتنا
-            </a>
-            <a
-              href="#contact"
-              className="px-8 py-4 bg-white/10 backdrop-blur-md text-white rounded-full font-bold text-lg border border-white/20 hover:bg-white/20 transition-all duration-300"
+              قناة تيليجرام <span className="ezzo-text">Ezzo</span>_trading ↗
+            </Link>
+            <Link
+              href="https://www.snapchat.com/add/ezzo.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-yellow-300/30 bg-yellow-400/10 px-4 py-1 text-yellow-100 transition-all duration-300 hover:-translate-y-0.5 hover:bg-yellow-400/20"
             >
-              تواصل معنا
-            </a>
+              سناب شات <span className="ezzo-text">Ezzo</span> ↗
+            </Link>
+          </StaggerItem>
+
+          <div className="relative z-10 container mx-auto px-4 h-full flex flex-col justify-center items-center text-center mt-6">
+            <StaggerItem>
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-orange-500 to-red-500">
+                  تداول بذكاء
+                </span>
+                <br />
+                <span className="text-gray-200">مع أدوات <span className="ezzo-text">Ezzo</span> الاحترافية</span>
+              </h1>
+            </StaggerItem>
+
+            <StaggerItem>
+              <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+                نقدم لك أفضل الاستراتيجيات الفنية وأدوات التحليل لمساعدتك في اتخاذ قرارات تداول مدروسة وتحقيق أرباح مستدامة في أسواق المال.
+              </p>
+            </StaggerItem>
+
+            <StaggerItem>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a
+                  href="#products"
+                  className="px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-600 text-white rounded-full font-bold text-lg hover:shadow-lg hover:shadow-orange-500/30 transition-all duration-300 transform hover:-translate-y-1"
+                >
+                  استكشف منتجاتنا
+                </a>
+                <a
+                  href="#contact"
+                  className="px-8 py-4 bg-white/10 backdrop-blur-md text-white rounded-full font-bold text-lg border border-white/20 hover:bg-white/20 transition-all duration-300"
+                >
+                  تواصل معنا
+                </a>
+              </div>
+            </StaggerItem>
           </div>
-        </div>
+        </StaggerContainer>
       </section>
 
-      <section className="page-shell mt-12">
+      <FadeIn direction="up" delay={0.2} className="page-shell mt-12">
         <TradingViewTicker />
-      </section>
+      </FadeIn>
 
-      <section className="page-shell mt-14">
+      <FadeIn direction="up" delay={0.3} className="page-shell mt-14">
         <div className="relative aspect-video w-full overflow-hidden rounded-3xl border border-white/10 bg-black/60 shadow-[0_30px_80px_-45px_rgba(251,146,60,0.75)] sm:aspect-[21/9]">
           {/* Render Server Component for LCP (first image) */}
           {showcaseIndex === 0 && heroImageSlot ? (
@@ -317,37 +326,43 @@ const Welcome: React.FC<WelcomeProps> = ({ heroImageSlot }) => {
             </>
           )}
         </div>
-      </section>
+      </FadeIn>
 
       <Advertisement />
 
       <section className="page-shell mt-16">
         <div className="mx-auto grid max-w-5xl gap-6 sm:grid-cols-2">
-          <AnimatedCounter />
-          {stats.map((stat) => (
-            <StatCard key={stat.label} {...stat} />
+          <FadeIn direction="right" delay={0.1}>
+            <AnimatedCounter />
+          </FadeIn>
+          {stats.map((stat, idx) => (
+            <FadeIn key={stat.label} direction="left" delay={0.1 + idx * 0.1}>
+              <StatCard {...stat} />
+            </FadeIn>
           ))}
         </div>
       </section>
 
       <section id="services" className="page-shell mt-20">
-        <div className="glass-panel px-4 py-8 sm:px-8 sm:py-12">
+        <FadeIn className="glass-panel px-4 py-8 sm:px-8 sm:py-12">
           <div className="text-center">
             <h2 className="section-heading">خدمات <span className="ezzo-text">Ezzo</span> الرئيسية</h2>
             <p className="section-subheading mx-auto max-w-3xl">
-              اكتشف مؤشراتنا اللحظية ومساراتنا التعليمية المصممة لتقوية قراراتك وتطوير تداولك بخطوات واضحة.
+              اكتشف استراتيجياتنا اللحظية ومساراتنا التعليمية المصممة لتقوية قراراتك وتطوير تداولك بخطوات واضحة.
             </p>
           </div>
           <div className="mt-10 grid gap-6 md:grid-cols-2">
-            {products.map((product) => (
-              <ProductCard key={product.title} {...product} />
+            {products.map((product, idx) => (
+              <ScaleIn key={product.title} delay={idx * 0.1}>
+                <ProductCard {...product} />
+              </ScaleIn>
             ))}
           </div>
-        </div>
+        </FadeIn>
       </section>
 
       <section className="page-shell mt-20">
-        <div className="glass-panel overflow-hidden px-6 py-10 sm:px-10">
+        <FadeIn direction="up" className="glass-panel overflow-hidden px-6 py-10 sm:px-10">
           <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-center">
             <div className="relative order-2 h-72 w-full overflow-hidden rounded-3xl border border-white/10 bg-black/50 lg:order-1">
               <Image
@@ -386,7 +401,7 @@ const Welcome: React.FC<WelcomeProps> = ({ heroImageSlot }) => {
               </div>
             </div>
           </div>
-        </div>
+        </FadeIn>
       </section>
 
 

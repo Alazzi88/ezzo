@@ -14,7 +14,7 @@ const sectionVideos: Record<"pro", Video> = {
   pro: {
     embedSrc:
       "https://player.vimeo.com/video/1146169599?context=Vimeo%5CController%5CApi%5CResources%5CVideoController.&h=ac10a1d18d&s=f315a039a934276c5187f4384bbcc6c6ec265a88_1765724774",
-    title: "شرح المؤشر البرو",
+    title: "شرح استراتيجية ايزو البرو",
     thumbnail: "/img/ezzoind.webp",
   },
 };
@@ -71,10 +71,10 @@ const Indicator: React.FC = () => (
 
     <section className="page-shell text-center">
       <span className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-4 py-1 text-xs font-semibold uppercase tracking-[4px] text-orange-100">
-        مؤشرات Ezzo الاحترافية
+        استراتيجيات Ezzo الاحترافية
       </span>
       <h1 className="mt-6 text-3xl font-extrabold text-white sm:text-4xl">
-        تعرف على كيفية عمل مؤشراتنا واستراتيجياتنا
+        تعرف على كيفية عمل استراتيجياتنا
       </h1>
       <p className="section-subheading mx-auto max-w-3xl">
         أدوات تحليلية متقدمة تعتمد على منهجية ICT وتكملها تنبيهات لحظية وخطط تنفيذ دقيقة لأسواق الفيوتشر وناسداك.
@@ -83,9 +83,9 @@ const Indicator: React.FC = () => (
 
     <section className="page-shell mt-16 space-y-16">
       <div className="glass-panel px-6 py-10 sm:px-10">
-        <h2 className="text-2xl font-bold text-orange-300 text-center">المؤشر البرو</h2>
+        <h2 className="text-2xl font-bold text-orange-300 text-center">استراتيجية ايزو البرو</h2>
         <p className="mt-4 text-center text-sm leading-7 text-gray-300">
-          المؤشر البرو مبني على مفاهيم ICT ويركز على رصد الفجوات السعرية، كتل الأوامر، وتحديد أهداف واضحة مع وقف خسارة محسوب لكل صفقة.
+          استراتيجية ايزو البرو مبنية على مفاهيم ICT وتركز على رصد الفجوات السعرية، كتل الأوامر، وتحديد أهداف واضحة مع وقف خسارة محسوب لكل صفقة.
         </p>
         <div className="mt-8 grid gap-8 md:grid-cols-2 md:items-center">
           <VideoCard {...sectionVideos.pro} />
@@ -102,7 +102,7 @@ const Indicator: React.FC = () => (
       <div className="glass-panel px-6 py-10 sm:px-10 text-center">
         <h2 className="text-2xl font-bold text-orange-300">أسئلة شائعة</h2>
         <p className="mt-3 text-sm leading-7 text-gray-300">
-          إجابات سريعة على أكثر الاستفسارات تكراراً حول مؤشراتنا، أنظمة التنبيه، وخطط الاشتراك.
+          إجابات سريعة على أكثر الاستفسارات تكراراً حول استراتيجياتنا، أنظمة التنبيه، وخطط الاشتراك.
         </p>
         <div className="mt-8 text-right">
           <FAQs />

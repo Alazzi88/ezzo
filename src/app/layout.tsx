@@ -24,14 +24,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ar" dir="rtl" className={almarai.variable}>
       <head>
-        <title>Ezzo | مؤشر تداول احترافي - إشارات فنية متقدمة للفيوتشر والحسابات الممولة</title>
+        <title>Ezzo | استراتيجية ايزو احترافية - إشارات فنية متقدمة للفيوتشر والحسابات الممولة</title>
         <meta
           name="description"
-          content="مؤشر Ezzo للتداول - أفضل مؤشر تداول لحظي للفيوتشر والحسابات الممولة. احصل على إشارات فنية دقيقة، تحليل SPX500، تنبيهات TradingView، ودورات تعليمية احترافية. ابدأ رحلتك في عالم التداول مع Ezzo."
+          content="استراتيجية ايزو للتداول - أفضل استراتيجية ايزو لحظية للفيوتشر والحسابات الممولة. احصل على إشارات فنية دقيقة، تحليل SPX500، تنبيهات TradingView، ودورات تعليمية احترافية. ابدأ رحلتك في عالم التداول مع Ezzo."
         />
         <meta
           name="keywords"
-          content="مؤشر تداول, مؤشر Ezzo, تداول الفيوتشر, Futures Trading, مؤشر فني, تحليل فني, إشارات تداول, SPX500, الحسابات الممولة, Funded Accounts, سكالبينج, Scalping, TradingView, بوت تداول, Trading Bot, دورة تداول, تعلم التداول, Ezzo Trading, مؤشر لحظي, تداول العملات, فوركس, Forex, أفضل مؤشر تداول, مؤشر تداول مجاني, استراتيجية تداول, تداول احترافي"
+          content="استراتيجية تداول, استراتيجية ايزو, تداول الفيوتشر, Futures Trading, مؤشر فني, تحليل فني, إشارات تداول, SPX500, الحسابات الممولة, Funded Accounts, سكالبينج, Scalping, TradingView, بوت تداول, Trading Bot, دورة تداول, تعلم التداول, Ezzo Trading, استراتيجية لحظية, تداول العملات, فوركس, Forex, أفضل استراتيجية تداول, استراتيجية تداول مجانية, استراتيجية تداول, تداول احترافي"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -39,10 +39,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="canonical" href="https://3zzo.com" />
 
         {/* Open Graph Meta Tags */}
-        <meta property="og:title" content="Ezzo | مؤشر تداول احترافي - إشارات فنية للفيوتشر" />
+        <meta property="og:title" content="Ezzo | استراتيجية ايزو احترافية - إشارات فنية للفيوتشر" />
         <meta
           property="og:description"
-          content="أفضل مؤشر تداول لحظي للفيوتشر والحسابات الممولة. إشارات دقيقة، تحليل فني متقدم، ودورات تعليمية."
+          content="أفضل استراتيجية ايزو لحظية للفيوتشر والحسابات الممولة. إشارات دقيقة، تحليل فني متقدم، ودورات تعليمية."
         />
         <meta property="og:url" content="https://3zzo.com" />
         <meta property="og:type" content="website" />
@@ -54,8 +54,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Ezzo | مؤشر تداول احترافي" />
-        <meta name="twitter:description" content="أفضل مؤشر تداول لحظي للفيوتشر والحسابات الممولة" />
+        <meta name="twitter:title" content="Ezzo | استراتيجية ايزو احترافية" />
+        <meta name="twitter:description" content="أفضل استراتيجية ايزو لحظية للفيوتشر والحسابات الممولة" />
         <meta name="twitter:image" content="https://3zzo.com/img/logo.webp" />
 
         <link rel="icon" href="/favicon.ico" />
@@ -122,10 +122,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {
               "@context": "https://schema.org",
               "@type": "SoftwareApplication",
-              "name": "مؤشر Ezzo اللحظي",
+              "name": "استراتيجية ايزو",
               "operatingSystem": "Web",
               "applicationCategory": "BusinessApplication",
-              "description": "مؤشر تداول لحظي يوفّر قراءات السيولة وتنبيهات فورية لمتداولي الفيوتشر والحسابات الممولة.",
+              "description": "استراتيجية تداول لحظية توفّر قراءات السيولة وتنبيهات فورية لمتداولي الفيوتشر والحسابات الممولة.",
               "creator": {
                 "@type": "Organization",
                 "name": "Ezzo",
@@ -161,8 +161,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         <div className="relative flex min-h-screen flex-col overflow-hidden text-gray-100">
           <div className="pointer-events-none absolute inset-0 -z-10">
-            <div className="absolute -top-24 left-1/4 h-72 w-72 rounded-full bg-orange-500/20 blur-[140px] animate-pulse-glow" />
-            <div className="absolute bottom-[-10%] right-1/3 h-80 w-80 rounded-full bg-orange-400/15 blur-[160px] animate-pulse-glow" />
+            <div className="absolute -top-24 left-1/4 h-72 w-72 rounded-full bg-orange-500/20 blur-[80px] sm:blur-[140px] animate-pulse-glow" />
+            <div className="absolute bottom-[-10%] right-1/3 h-80 w-80 rounded-full bg-orange-400/15 blur-[80px] sm:blur-[160px] animate-pulse-glow" />
             <div className="absolute inset-0 grid-overlay opacity-40" />
           </div>
 

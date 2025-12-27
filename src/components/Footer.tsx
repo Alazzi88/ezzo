@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { InstagramIcon, TikTokIcon, SnapchatIcon, TelegramIcon } from './SocialIcons';
+import { FadeIn, StaggerContainer } from './animations/MotionComponents';
 
 const socialLinks = [
   { icon: <InstagramIcon size={22} />, url: 'https://www.instagram.com/3zzoezzo/', color: 'from-pink-500/80 via-orange-400/80 to-amber-400/80' },
@@ -11,14 +12,14 @@ const socialLinks = [
 const navigationLinks = [
   { label: 'الرئيسية', href: '/' },
   { label: 'الفيوتشر والحسابات الممولة', href: '/FuturesAndFundedAccounts' },
-  { label: 'المؤشرات الفنية', href: '/Indicator' },
+  { label: 'استراتيجتنا بالتداول', href: '/Indicator' },
   { label: 'الدعم الفني', href: '/Support' },
   { label: 'سياسة الخصوصية', href: '/PrivacyPolicy' },
 ];
 
 const resourceLinks = [
   { label: 'الدورات التدريبية', href: '/Coursies' },
-  { label: 'مؤشر <span className="ezzo-text">Ezzo</span>', href: '/Indicator' },
+  { label: 'استراتيجية ايزو', href: '/Indicator' },
 ];
 
 const contactDetails = [
@@ -33,8 +34,8 @@ const Footer = () => {
     <footer className="relative z-10 mt-24 px-4 sm:px-6 lg:px-10">
       <div className="page-shell">
         <div className="glass-panel overflow-hidden px-6 py-10 sm:px-10">
-          <div className="grid gap-10 lg:grid-cols-[1.3fr_1fr_1fr_1.2fr]">
-            <div className="space-y-5">
+          <StaggerContainer className="grid gap-10 lg:grid-cols-[1.3fr_1fr_1fr_1.2fr]" staggerChildren={0.1}>
+            <FadeIn direction="up" className="space-y-5">
               <div>
                 <p className="text-2xl font-extrabold text-orange-400">
                   <span className="ezzo-text">Ezzo</span>
@@ -57,9 +58,9 @@ const Footer = () => {
                   </a>
                 ))}
               </div>
-            </div>
+            </FadeIn>
 
-            <div>
+            <FadeIn direction="up" className="delay-100">
               <p className="mb-4 text-lg font-semibold text-orange-300">روابط سريعة</p>
               <ul className="space-y-3 text-sm text-gray-300">
                 {navigationLinks.map(({ label, href }) => (
@@ -70,9 +71,9 @@ const Footer = () => {
                   </li>
                 ))}
               </ul>
-            </div>
+            </FadeIn>
 
-            <div>
+            <FadeIn direction="up" className="delay-200">
               <p className="mb-4 text-lg font-semibold text-orange-300">خدماتنا</p>
               <ul className="space-y-3 text-sm text-gray-300">
                 {resourceLinks.map(({ label, href }) => (
@@ -83,9 +84,9 @@ const Footer = () => {
                   </li>
                 ))}
               </ul>
-            </div>
+            </FadeIn>
 
-            <div className="space-y-4">
+            <FadeIn direction="up" className="space-y-4 delay-300">
               <p className="text-lg font-semibold text-orange-300">تواصل معنا</p>
               <ul className="space-y-3 text-sm text-gray-300">
                 {contactDetails.map(({ label, value, href }) => (
@@ -103,15 +104,15 @@ const Footer = () => {
                   </li>
                 ))}
               </ul>
-            </div>
-          </div>
+            </FadeIn>
+          </StaggerContainer>
 
           <div className="card-divider my-8" />
 
-          <div className="flex flex-col gap-4 text-xs text-gray-400 sm:flex-row sm:items-center sm:justify-between">
+          <FadeIn direction="up" delay={0.4} className="flex flex-col gap-4 text-xs text-gray-400 sm:flex-row sm:items-center sm:justify-between">
             <p>© 2026 <span className="ezzo-text">Ezzo</span>. جميع الحقوق محفوظة.</p>
             <p>صُمم بعناية لدعم المتداولين الطموحين في أسواق الفيوتشر والحسابات الممولة.</p>
-          </div>
+          </FadeIn>
         </div>
       </div>
     </footer>

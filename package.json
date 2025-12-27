@@ -19,7 +19,7 @@
     "@heroicons/react": "^2.2.0",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "axios": "^1.7.8",
-    "framer-motion": "^11.13.3",
+    "framer-motion": "^12.23.26",
     "jsonwebtoken": "^9.0.2",
     "next": "^16.0.10",
     "next-sitemap": "^4.2.3",

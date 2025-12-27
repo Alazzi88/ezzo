@@ -4,11 +4,12 @@ import { Fragment, useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Dialog, Transition } from '@headlessui/react'
+import { FadeIn, StaggerContainer, StaggerItem } from './animations/MotionComponents'
 
 const navigation = [
   { name: 'الرئيسية', href: '/' },
   { name: 'الفيوتشر والحسابات الممولة', href: '/FuturesAndFundedAccounts' },
-  { name: 'المؤشرات الفنية', href: '/Indicator' },
+  { name: 'استراتيجتنا بالتداول', href: '/Indicator' },
   { name: 'الدورات التدريبية', href: '/Coursies' },
   { name: 'الدعم', href: '/Support' },
   { name: 'سياسة الخصوصية', href: '/PrivacyPolicy' },
@@ -50,47 +51,52 @@ export default function Header() {
         }`}
     >
       <div className="page-shell flex items-center justify-between py-4">
-        <Link href="/" className="flex items-center gap-3">
-          <Image
-            src="/img/logo.webp"
-            alt="شعار الموقع"
-            width={54}
-            height={54}
-            loading="lazy"
-            className="rounded-full border border-white/10"
-          />
-          <span className="text-2xl font-extrabold text-orange-400">
-            <span className="text-white">3</span>zzo
-          </span>
-        </Link>
+        <FadeIn direction="down" delay={0.1}>
+          <Link href="/" className="flex items-center gap-3">
+            <Image
+              src="/img/logo.webp"
+              alt="شعار الموقع"
+              width={54}
+              height={54}
+              loading="lazy"
+              className="rounded-full border border-white/10"
+            />
+            <span className="text-2xl font-extrabold text-orange-400">
+              <span className="text-white">3</span>zzo
+            </span>
+          </Link>
+        </FadeIn>
 
-        <nav className="hidden items-center gap-2 lg:flex">
+        <StaggerContainer className="hidden items-center gap-2 lg:flex" delay={0.2} staggerChildren={0.05}>
           {navigation.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              prefetch={false}
-              className="relative rounded-full px-4 py-2 text-sm font-semibold text-gray-200 transition-all duration-300 hover:text-white group overflow-hidden"
-            >
-              <span className="relative z-10">{item.name}</span>
-              <span className="absolute inset-0 bg-white/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100 rounded-full" />
-              <span className="absolute bottom-0 left-1/2 h-0.5 w-0 -translate-x-1/2 bg-orange-400 transition-all duration-300 group-hover:w-1/2" />
-            </Link>
+            <StaggerItem key={item.href}>
+              <Link
+                href={item.href}
+                prefetch={false}
+                className="relative rounded-full px-4 py-2 text-sm font-semibold text-gray-200 transition-all duration-300 hover:text-white group overflow-hidden block"
+              >
+                <span className="relative z-10">{item.name}</span>
+                <span className="absolute inset-0 bg-white/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100 rounded-full" />
+                <span className="absolute bottom-0 left-1/2 h-0.5 w-0 -translate-x-1/2 bg-orange-400 transition-all duration-300 group-hover:w-1/2" />
+              </Link>
+            </StaggerItem>
           ))}
-        </nav>
+        </StaggerContainer>
 
-        <button
-          type="button"
-          onClick={() => setMobileMenuOpen(true)}
-          className="inline-flex items-center justify-center rounded-full border border-orange-300/30 p-2 text-orange-200 transition-all duration-300 hover:border-orange-200 hover:text-orange-100 lg:hidden"
-          aria-label="فتح القائمة"
-        >
-          <svg className="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <line x1="3" y1="6" x2="21" y2="6" strokeLinecap="round" />
-            <line x1="3" y1="12" x2="21" y2="12" strokeLinecap="round" />
-            <line x1="3" y1="18" x2="21" y2="18" strokeLinecap="round" />
-          </svg>
-        </button>
+        <FadeIn direction="down" delay={0.1} className="lg:hidden">
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(true)}
+            className="inline-flex items-center justify-center rounded-full border border-orange-300/30 p-2 text-orange-200 transition-all duration-300 hover:border-orange-200 hover:text-orange-100"
+            aria-label="فتح القائمة"
+          >
+            <svg className="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <line x1="3" y1="6" x2="21" y2="6" strokeLinecap="round" />
+              <line x1="3" y1="12" x2="21" y2="12" strokeLinecap="round" />
+              <line x1="3" y1="18" x2="21" y2="18" strokeLinecap="round" />
+            </svg>
+          </button>
+        </FadeIn>
       </div>
 
       <Transition.Root show={mobileMenuOpen} as={Fragment}>

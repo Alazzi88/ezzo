@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import { motion, useInView, Variant } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 
 type FadeInProps = {
     children: React.ReactNode;
@@ -25,9 +25,9 @@ export const FadeIn = ({
     const ref = useRef(null);
     const isInView = useInView(ref, { once, margin: "-50px" });
 
-    const getVariants = (): { hidden: Variant; visible: Variant } => {
+    const getVariants = () => {
         const distance = 40;
-        const variants: { hidden: Variant; visible: Variant } = {
+        const variants = {
             hidden: { opacity: 0, x: 0, y: 0 },
             visible: { opacity: 1, x: 0, y: 0 },
         };

@@ -8,6 +8,7 @@ import Script from "next/script";
 import { Providers } from "@/app/providers";
 import dynamic from "next/dynamic";
 import ScriptLoader from "@/components/ScriptLoader";
+import LoadingScreen from "@/components/LoadingScreen";
 
 // Lazy load Footer (below the fold)
 const Footer = dynamic(() => import("@/components/Footer"), { ssr: true });
@@ -23,33 +24,52 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ar" dir="rtl" className={almarai.variable}>
       <head>
-        <title>Ezzo – مؤشر تداول متكامل وإشارات فنية متقدمة</title>
+        <title>Ezzo | مؤشر تداول احترافي - إشارات فنية متقدمة للفيوتشر والحسابات الممولة</title>
         <meta
           name="description"
-          content="اكتشف مؤشر Ezzo للتداول: إشارات فنية متقدمة، مؤشرات سكالبينج، تداول الفيوتشر (SPX500)، بوت تداول آلي، وتنبيهات TradingView فورية مع حلول متخصصة للحسابات الممولة."
+          content="مؤشر Ezzo للتداول - أفضل مؤشر تداول لحظي للفيوتشر والحسابات الممولة. احصل على إشارات فنية دقيقة، تحليل SPX500، تنبيهات TradingView، ودورات تعليمية احترافية. ابدأ رحلتك في عالم التداول مع Ezzo."
         />
         <meta
           name="keywords"
-          content="مؤشر Ezzo, مؤشر للتداول, مؤشر تداول, تحليل فني, مؤشرات سكالبينج, تداول الفيوتشر, Futures Trading, SPX500, بوت تداول آلي, Trading Bot, تنبيهات TradingView, لوحة تحكم للتداول, محتوى تعليمي للتداول, الحسابات الممولة"
+          content="مؤشر تداول, مؤشر Ezzo, تداول الفيوتشر, Futures Trading, مؤشر فني, تحليل فني, إشارات تداول, SPX500, الحسابات الممولة, Funded Accounts, سكالبينج, Scalping, TradingView, بوت تداول, Trading Bot, دورة تداول, تعلم التداول, Ezzo Trading, مؤشر لحظي, تداول العملات, فوركس, Forex, أفضل مؤشر تداول, مؤشر تداول مجاني, استراتيجية تداول, تداول احترافي"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="author" content="Ezzo Trading" />
+        <link rel="canonical" href="https://3zzo.com" />
 
         {/* Open Graph Meta Tags */}
-        <meta property="og:title" content="Ezzo - اكتشف التحليل الفني للتداول" />
+        <meta property="og:title" content="Ezzo | مؤشر تداول احترافي - إشارات فنية للفيوتشر" />
         <meta
           property="og:description"
-          content="دليل شامل لأفضل المؤشرات وأدوات التحليل الفني للمتداولين."
+          content="أفضل مؤشر تداول لحظي للفيوتشر والحسابات الممولة. إشارات دقيقة، تحليل فني متقدم، ودورات تعليمية."
         />
         <meta property="og:url" content="https://3zzo.com" />
         <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Ezzo Trading" />
+        <meta property="og:locale" content="ar_SA" />
+        <meta property="og:image" content="https://3zzo.com/img/logo.webp" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Ezzo | مؤشر تداول احترافي" />
+        <meta name="twitter:description" content="أفضل مؤشر تداول لحظي للفيوتشر والحسابات الممولة" />
+        <meta name="twitter:image" content="https://3zzo.com/img/logo.webp" />
 
         <link rel="icon" href="/favicon.ico" />
+        <link rel="preload" as="image" href="/img/trading1.webp" />
+        <link rel="preconnect" href="https://s3.tradingview.com" />
+        <link rel="preconnect" href="https://www.tradingview-widget.com" />
+        <link rel="dns-prefetch" href="https://s3.tradingview.com" />
+        <link rel="dns-prefetch" href="https://www.tradingview-widget.com" />
 
         {/* Structured Data (JSON-LD) */}
         <Script
           id="structured-data"
           type="application/ld+json"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
             {
@@ -69,7 +89,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Script
           id="structured-data-course"
           type="application/ld+json"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
             {
@@ -96,7 +116,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Script
           id="structured-data-indicator"
           type="application/ld+json"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
             {
@@ -126,6 +146,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
 
       <body className="font-sans antialiased">
+        {/* Loading Screen Animation */}
+        <LoadingScreen />
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe

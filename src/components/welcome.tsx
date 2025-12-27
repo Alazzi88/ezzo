@@ -22,9 +22,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ img, title, description, link
   const isExternal = link ? /^https?:\/\//.test(link) : false;
 
   return (
-    <div className="gradient-card group h-full p-7 text-center relative overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_40px_90px_-35px_rgba(249,115,22,0.65)]">
+    <div className="gradient-card group h-full p-7 text-center relative overflow-hidden">
 
-      <div className="relative z-10 mx-auto flex h-48 w-full max-w-xs items-center justify-center overflow-hidden rounded-3xl border border-white/10 bg-black/70 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.8)] group-hover:border-orange-400/30 transition-all duration-500">
+      <div className="relative z-10 mx-auto flex h-48 w-full max-w-xs items-center justify-center overflow-hidden rounded-3xl border border-white/10 bg-black/70 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.8)] group-hover:border-orange-400/30 transition-colors duration-300">
         <Image
           src={img}
           alt={title}
@@ -32,7 +32,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ img, title, description, link
           height={220}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 320px"
           loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
       </div>
       <h3 className="relative z-10 mt-6 text-2xl font-bold text-orange-300 group-hover:text-orange-200 transition-colors duration-300">{title}</h3>
@@ -86,7 +86,7 @@ const AnimatedCounter: React.FC = () => {
   useEffect(() => {
     if (!hasAnimated) return;
 
-    const target = 700;
+    const target = 800;
     const duration = 2000;
     const intervalTime = duration / target;
     const timer = setInterval(() => {
@@ -103,13 +103,13 @@ const AnimatedCounter: React.FC = () => {
   }, [hasAnimated]);
 
   return (
-    <div ref={counterRef} className="gradient-card group flex h-full flex-col items-center justify-center gap-4 px-6 py-8 text-center relative overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_40px_90px_-35px_rgba(249,115,22,0.65)]">
+    <div ref={counterRef} className="gradient-card group flex h-full flex-col items-center justify-center gap-4 px-6 py-8 text-center relative overflow-hidden">
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-shimmer" />
       <p className="text-2xl font-semibold text-orange-200 relative z-10">أكثر من</p>
       <p className="text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-orange-400 to-rose-500 relative z-10 drop-shadow-[0_0_15px_rgba(251,191,36,0.5)]">
         {count}+
       </p>
-      <p className="text-lg font-medium text-gray-200 relative z-10">عميل يثق في أدوات Ezzo الاحترافية</p>
+      <p className="text-lg font-medium text-gray-200 relative z-10">عميل يثق في أدوات <span className="ezzo-text">Ezzo</span> الاحترافية</p>
     </div>
   );
 };
@@ -170,7 +170,7 @@ const StatCard: React.FC<StatItem> = ({ value, suffix = '', label, description }
   }, [hasAnimated, value]);
 
   return (
-    <div ref={cardRef} className="gradient-card group h-full px-6 py-8 text-center relative overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_40px_90px_-35px_rgba(249,115,22,0.65)]">
+    <div ref={cardRef} className="gradient-card group h-full px-6 py-8 text-center relative overflow-hidden">
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-shimmer" />
       <p className="text-4xl font-extrabold text-orange-300 relative z-10 group-hover:text-orange-200 transition-colors duration-300 drop-shadow-[0_0_10px_rgba(251,146,60,0.4)]">
         {displayValue}
@@ -194,7 +194,7 @@ const stats: StatItem[] = [
 const products: ProductCardProps[] = [
   {
     img: '/img/ezzoind.webp',
-    title: 'مؤشر Ezzo اللحظي',
+    title: 'مؤشر <span className="ezzo-text">Ezzo</span> اللحظي',
     description: 'احصل على نقاط دخول وخروج محسوبة مع تنبيهات لحظية لأسواق الفيوتشر والحسابات الممولة.',
     link: '/Indicator',
     linkText: 'استكشف المؤشر',
@@ -215,7 +215,7 @@ type ShowcaseImage = {
 
 const SHOWCASE_IMAGES: ShowcaseImage[] = [
   { src: '/img/trading1.webp', title: 'ابدأ ببناء استراتيجيتك بثقة' },
-  { src: '/img/trading2.webp', title: 'مؤشر Ezzo اللحظي' },
+  { src: '/img/trading2.webp', title: 'مؤشر <span className="ezzo-text">Ezzo</span> اللحظي' },
   { src: '/img/trading3.webp', title: 'توازن بين التحليل والالتزام بالخطة' },
 ];
 
@@ -236,7 +236,7 @@ const Welcome: React.FC<WelcomeProps> = ({ heroImageSlot }) => {
   //  
   return (
     <div className="relative isolate pb-10">
-      <div className="pointer-events-none absolute inset-0 -z-10">
+      <div className="pointer-events-none absolute inset-0 -z-10 hidden sm:block">
         <div className="absolute -top-40 right-[20%] h-96 w-96 rounded-full bg-orange-500/25 blur-[160px]" />
         <div className="absolute bottom-[-30%] left-[10%] h-[420px] w-[420px] rounded-full bg-rose-500/20 blur-[180px]" />
       </div>
@@ -249,7 +249,7 @@ const Welcome: React.FC<WelcomeProps> = ({ heroImageSlot }) => {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-full border border-orange-400/30 bg-orange-500/15 px-4 py-1 transition-all duration-300 hover:-translate-y-0.5 hover:bg-orange-500/25"
           >
-            قناة تيليجرام ezzo_trading ↗
+            قناة تيليجرام <span className="ezzo-text">Ezzo</span>_trading ↗
           </Link>
           <Link
             href="https://www.snapchat.com/add/ezzo.com"
@@ -257,31 +257,36 @@ const Welcome: React.FC<WelcomeProps> = ({ heroImageSlot }) => {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-full border border-yellow-300/30 bg-yellow-400/10 px-4 py-1 text-yellow-100 transition-all duration-300 hover:-translate-y-0.5 hover:bg-yellow-400/20"
           >
-            سناب شات Ezzo ↗
+            سناب شات <span className="ezzo-text">Ezzo</span> ↗
           </Link>
         </div>
-        <h1 className="mt-6 text-3xl font-extrabold text-white sm:text-4xl lg:text-5xl">
-          تداول الفيوتشر والحسابات الممولة بذكاء مدعوم بالبيانات
-        </h1>
-        <p className="section-subheading mx-auto max-w-3xl">
-          منصة Ezzo تقدّم لك مزيجاً مثالياً من المؤشرات اللحظية والمحتوى التعليمي المتخصص.
-        </p>
+        <div className="relative z-10 container mx-auto px-4 h-full flex flex-col justify-center items-center text-center">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 animate-fade-in-up">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-orange-500 to-red-500">
+              تداول بذكاء
+            </span>
+            <br />
+            <span className="text-gray-200">مع أدوات <span className="ezzo-text">Ezzo</span> الاحترافية</span>
+          </h1>
 
-        <div className="mt-8 flex flex-wrap justify-center gap-4">
-          <Link
-            href="#services"
-            prefetch={false}
-            className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-orange-500 via-orange-400 to-amber-300 px-8 py-3 text-sm font-semibold text-black shadow-[0_20px_40px_-18px_rgba(251,146,60,0.9)] transition-transform duration-300 hover:-translate-y-1"
-          >
-            تعرّف على خدماتنا
-          </Link>
-          <Link
-            href="/Support"
-            prefetch={false}
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-orange-400/40 px-7 py-3 text-sm font-semibold text-orange-200 transition-all duration-300 hover:-translate-y-1 hover:border-orange-300/80 hover:text-orange-100"
-          >
-            تواصل مع فريقنا
-          </Link>
+          <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto animate-fade-in-up delay-100">
+            نقدم لك أفضل المؤشرات الفنية وأدوات التحليل لمساعدتك في اتخاذ قرارات تداول مدروسة وتحقيق أرباح مستدامة في أسواق المال.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up delay-200">
+            <a
+              href="#products"
+              className="px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-600 text-white rounded-full font-bold text-lg hover:shadow-lg hover:shadow-orange-500/30 transition-all duration-300 transform hover:-translate-y-1"
+            >
+              استكشف منتجاتنا
+            </a>
+            <a
+              href="#contact"
+              className="px-8 py-4 bg-white/10 backdrop-blur-md text-white rounded-full font-bold text-lg border border-white/20 hover:bg-white/20 transition-all duration-300"
+            >
+              تواصل معنا
+            </a>
+          </div>
         </div>
       </section>
 
@@ -290,7 +295,7 @@ const Welcome: React.FC<WelcomeProps> = ({ heroImageSlot }) => {
       </section>
 
       <section className="page-shell mt-14">
-        <div className="relative h-72 overflow-hidden rounded-3xl border border-white/10 bg-black/60 shadow-[0_30px_80px_-45px_rgba(251,146,60,0.75)] sm:h-[420px]">
+        <div className="relative aspect-video w-full overflow-hidden rounded-3xl border border-white/10 bg-black/60 shadow-[0_30px_80px_-45px_rgba(251,146,60,0.75)] sm:aspect-[21/9]">
           {/* Render Server Component for LCP (first image) */}
           {showcaseIndex === 0 && heroImageSlot ? (
             heroImageSlot
@@ -328,7 +333,7 @@ const Welcome: React.FC<WelcomeProps> = ({ heroImageSlot }) => {
       <section id="services" className="page-shell mt-20">
         <div className="glass-panel px-4 py-8 sm:px-8 sm:py-12">
           <div className="text-center">
-            <h2 className="section-heading">خدمات Ezzo الرئيسية</h2>
+            <h2 className="section-heading">خدمات <span className="ezzo-text">Ezzo</span> الرئيسية</h2>
             <p className="section-subheading mx-auto max-w-3xl">
               اكتشف مؤشراتنا اللحظية ومساراتنا التعليمية المصممة لتقوية قراراتك وتطوير تداولك بخطوات واضحة.
             </p>
@@ -361,7 +366,7 @@ const Welcome: React.FC<WelcomeProps> = ({ heroImageSlot }) => {
                 ابدأ رحلتك في عالم الفيوتشر والحسابات الممولة
               </h2>
               <p className="text-sm leading-7 text-gray-300 sm:text-base">
-                انضم إلى محترفي Ezzo، واستفد من الأدوات، التدريب، والدعم المخصص.
+                انضم إلى محترفي <span className="ezzo-text">Ezzo</span>، واستفد من الأدوات، التدريب، والدعم المخصص.
               </p>
               <div className="flex flex-wrap justify-end gap-4">
                 <Link

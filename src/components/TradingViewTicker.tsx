@@ -4,40 +4,48 @@ import { memo, useEffect, useRef } from 'react';
 
 const TradingViewTicker = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const scriptLoaded = useRef(false);
+  const scriptLoaded = useRef(false); // Keep this ref to prevent multiple script loads if observer triggers multiple times before disconnect
 
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container || scriptLoaded.current) return;
+    const currentContainer = containerRef.current;
+    if (!currentContainer) return;
 
-    // Create the widget div that TradingView expects
-    const widgetDiv = document.createElement('div');
-    widgetDiv.className = 'tradingview-widget-container__widget';
-    container.innerHTML = '';
-    container.appendChild(widgetDiv);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !scriptLoaded.current) {
+          // Create the widget div that TradingView expects
+          const widgetDiv = document.createElement('div');
+          widgetDiv.className = 'tradingview-widget-container__widget';
+          currentContainer.innerHTML = ''; // Clear existing content
+          currentContainer.appendChild(widgetDiv); // Append the widget div
 
-    const widgetConfig = {
-      symbols: [
-        { proName: 'FOREXCOM:SPXUSD', title: 'S&P 500' },
-        { proName: 'FOREXCOM:NSXUSD', title: 'NASDAQ 100' },
-        { proName: 'CAPITALCOM:US30', title: 'Dow Jones' },
-        { proName: 'OANDA:XAUUSD', title: 'Gold' },
-        { proName: 'BITSTAMP:BTCUSD', title: 'Bitcoin' },
-      ],
-      colorTheme: 'dark',
-      locale: 'ar_AE',
-      isTransparent: true,
-      displayMode: 'adaptive',
-      showSymbolLogo: true,
-    };
+          const script = document.createElement('script');
+          script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
+          script.async = true;
+          script.innerHTML = JSON.stringify({
+            symbols: [
+              { proName: 'FOREXCOM:SPXUSD', title: 'S&P 500' },
+              { proName: 'FOREXCOM:NSXUSD', title: 'US 100' },
+              { proName: 'FX_IDC:EURUSD', title: 'EUR/USD' },
+              { proName: 'BITSTAMP:BTCUSD', title: 'Bitcoin' },
+              { proName: 'BITSTAMP:ETHUSD', title: 'Ethereum' },
+            ],
+            showSymbolLogo: true,
+            colorTheme: 'dark',
+            isTransparent: true,
+            displayMode: 'adaptive',
+            locale: 'ar_AE',
+          });
 
-    const script = document.createElement('script');
-    script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
-    script.type = 'text/javascript';
-    script.async = true;
-    script.innerHTML = JSON.stringify(widgetConfig);
-    container.appendChild(script);
-    scriptLoaded.current = true;
+          currentContainer.appendChild(script);
+          scriptLoaded.current = true; // Mark script as loaded
+          observer.disconnect(); // Disconnect observer after loading the script
+        }
+      },
+      { rootMargin: '200px' } // Load when 200px from viewport
+    );
+
+    observer.observe(currentContainer);
 
     return () => {
       // Don't clean up on unmount to prevent the error

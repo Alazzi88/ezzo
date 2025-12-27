@@ -1,11 +1,11 @@
 import Link from 'next/link';
-import { FaInstagram, FaTiktok, FaSnapchatGhost, FaTelegramPlane } from 'react-icons/fa';
+import { InstagramIcon, TikTokIcon, SnapchatIcon, TelegramIcon } from './SocialIcons';
 
 const socialLinks = [
-  { icon: <FaInstagram size={22} />, url: 'https://www.instagram.com/3zzoezzo/', color: 'from-pink-500/80 via-orange-400/80 to-amber-400/80' },
-  { icon: <FaTiktok size={22} />, url: 'https://www.tiktok.com/@3zzo.com', color: 'from-gray-900/80 via-slate-800/80 to-gray-700/80' },
-  { icon: <FaSnapchatGhost size={22} />, url: 'https://www.snapchat.com/add/ezzo.com', color: 'from-yellow-400/80 via-amber-300/80 to-yellow-200/80' },
-  { icon: <FaTelegramPlane size={22} />, url: 'https://t.me/ezzo3zzo3', color: 'from-sky-500/80 via-blue-500/80 to-cyan-400/80' },
+  { icon: <InstagramIcon size={22} />, url: 'https://www.instagram.com/3zzoezzo/', color: 'from-pink-500/80 via-orange-400/80 to-amber-400/80' },
+  { icon: <TikTokIcon size={22} />, url: 'https://www.tiktok.com/@3zzo.com', color: 'from-gray-900/80 via-slate-800/80 to-gray-700/80' },
+  { icon: <SnapchatIcon size={22} />, url: 'https://www.snapchat.com/add/ezzo.com', color: 'from-yellow-400/80 via-amber-300/80 to-yellow-200/80' },
+  { icon: <TelegramIcon size={22} />, url: 'https://t.me/ezzo3zzo3', color: 'from-sky-500/80 via-blue-500/80 to-cyan-400/80' },
 ];
 
 const navigationLinks = [
@@ -18,7 +18,7 @@ const navigationLinks = [
 
 const resourceLinks = [
   { label: 'الدورات التدريبية', href: '/Coursies' },
-  { label: 'مؤشر Ezzo', href: '/Indicator' },
+  { label: 'مؤشر <span className="ezzo-text">Ezzo</span>', href: '/Indicator' },
 ];
 
 const contactDetails = [
@@ -37,7 +37,7 @@ const Footer = () => {
             <div className="space-y-5">
               <div>
                 <p className="text-2xl font-extrabold text-orange-400">
-                  Ezzo
+                  <span className="ezzo-text">Ezzo</span>
                 </p>
                 <p className="mt-2 text-sm leading-6 text-gray-300">
                   حلول تداول احترافية تربط بين الأدوات التقنية المتقدمة والخبرة العملية في الأسواق المالية، لنمنحك رؤية أوضح واتخاذ قرار أسرع.
@@ -109,7 +109,7 @@ const Footer = () => {
           <div className="card-divider my-8" />
 
           <div className="flex flex-col gap-4 text-xs text-gray-400 sm:flex-row sm:items-center sm:justify-between">
-            <p>© 2024 Ezzo. جميع الحقوق محفوظة.</p>
+            <p>© 2026 <span className="ezzo-text">Ezzo</span>. جميع الحقوق محفوظة.</p>
             <p>صُمم بعناية لدعم المتداولين الطموحين في أسواق الفيوتشر والحسابات الممولة.</p>
           </div>
         </div>

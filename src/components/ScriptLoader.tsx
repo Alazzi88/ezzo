@@ -12,10 +12,8 @@ export default function ScriptLoader() {
             setLoadGTM(true);
         };
 
-        // Load GTM after 3.5 seconds automatically (delayed to prioritize LCP/TTI)
-        const gtmTimer = setTimeout(() => {
-            setLoadGTM(true);
-        }, 3500);
+        // REMOVED: Auto-timer to prevent main thread blocking during initial load
+        // Scripts will ONLY load on user interaction (scroll, click, etc.)
 
         // Or load on user interaction
         window.addEventListener('scroll', handleInteraction, { once: true });
@@ -24,7 +22,6 @@ export default function ScriptLoader() {
         window.addEventListener('click', handleInteraction, { once: true });
 
         return () => {
-            clearTimeout(gtmTimer);
             window.removeEventListener('scroll', handleInteraction);
             window.removeEventListener('mousemove', handleInteraction);
             window.removeEventListener('touchstart', handleInteraction);
@@ -49,7 +46,7 @@ export default function ScriptLoader() {
                     {/* Google Tag Manager */}
                     <Script
                         id="google-tag-manager"
-                        strategy="afterInteractive"
+                        strategy="lazyOnload"
                         dangerouslySetInnerHTML={{
                             __html: `
             (function(w,d,s,l,i){
@@ -67,11 +64,11 @@ export default function ScriptLoader() {
                     {/* Google Ads Tag (gtag.js) */}
                     <Script
                         src="https://www.googletagmanager.com/gtag/js?id=AW-10851552359"
-                        strategy="afterInteractive"
+                        strategy="lazyOnload"
                     />
                     <Script
                         id="gtag-init"
-                        strategy="afterInteractive"
+                        strategy="lazyOnload"
                         dangerouslySetInnerHTML={{
                             __html: `
             window.dataLayer = window.dataLayer || [];
@@ -90,7 +87,7 @@ export default function ScriptLoader() {
                     <meta name="google-adsense-account" content="ca-pub-9870463298829321" />
                     <Script
                         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9870463298829321"
-                        strategy="afterInteractive"
+                        strategy="lazyOnload"
                         crossOrigin="anonymous"
                     />
                 </>

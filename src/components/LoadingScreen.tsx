@@ -8,21 +8,43 @@ const LoadingScreen: React.FC = () => {
     const [isExiting, setIsExiting] = useState(false);
 
     useEffect(() => {
-        const handleLoad = () => {
-            setIsExiting(true);
-            setTimeout(() => {
-                setIsLoading(false);
-            }, 600); // This timeout is for the exit animation, so we keep it.
-        };
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const isLowPowerDevice = navigator.hardwareConcurrency > 0 && navigator.hardwareConcurrency <= 4;
 
-        if (document.readyState === 'complete') {
-            handleLoad();
-        } else {
-            window.addEventListener('load', handleLoad);
+        if (prefersReducedMotion || isLowPowerDevice) {
+            setIsLoading(false);
+            return;
         }
 
+        let isMounted = true;
+        let didStartExit = false;
+        let exitTimer: number | undefined;
+        let fallbackTimer: number | undefined;
+
+        const startExit = () => {
+            if (!isMounted || didStartExit) return;
+            didStartExit = true;
+            setIsExiting(true);
+            exitTimer = window.setTimeout(() => {
+                if (isMounted) {
+                    setIsLoading(false);
+                }
+            }, 350);
+        };
+
+        if (document.readyState === 'interactive' || document.readyState === 'complete') {
+            startExit();
+        } else {
+            window.addEventListener('DOMContentLoaded', startExit, { once: true });
+        }
+
+        fallbackTimer = window.setTimeout(startExit, 1200);
+
         return () => {
-            window.removeEventListener('load', handleLoad);
+            isMounted = false;
+            window.removeEventListener('DOMContentLoaded', startExit);
+            if (exitTimer) window.clearTimeout(exitTimer);
+            if (fallbackTimer) window.clearTimeout(fallbackTimer);
         };
     }, []);
 

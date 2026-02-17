@@ -1,10 +1,9 @@
 'use client'
 
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Dialog, Transition } from '@headlessui/react'
-import { FadeIn, StaggerContainer, StaggerItem } from './animations/MotionComponents'
 
 const navigation = [
   { name: 'الرئيسية', href: '/' },
@@ -18,24 +17,30 @@ const navigation = [
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [showHeader, setShowHeader] = useState(true)
-  const [lastScrollY, setLastScrollY] = useState(0)
+  const lastScrollYRef = useRef(0)
+  const tickingRef = useRef(false)
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY
-      if (currentScrollY > lastScrollY && currentScrollY > 80) {
-        setShowHeader(false)
-      } else {
-        setShowHeader(true)
-      }
-      setLastScrollY(currentScrollY)
+      if (tickingRef.current) return
+      tickingRef.current = true
+
+      window.requestAnimationFrame(() => {
+        const currentScrollY = window.scrollY
+        const nextShowHeader = !(currentScrollY > lastScrollYRef.current && currentScrollY > 80)
+
+        setShowHeader((prev) => (prev === nextShowHeader ? prev : nextShowHeader))
+        lastScrollYRef.current = currentScrollY
+        tickingRef.current = false
+      })
     }
 
-    window.addEventListener('scroll', handleScroll)
+    lastScrollYRef.current = window.scrollY
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [lastScrollY])
+  }, [])
 
   useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? 'hidden' : ''
@@ -47,7 +52,7 @@ export default function Header() {
   return (
     <header
       dir="rtl"
-      className={`fixed inset-x-0 top-0 z-50 border-b border-white/5 backdrop-blur-xl transition-all duration-500 ${showHeader ? 'translate-y-0 bg-black/40 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)]' : '-translate-y-full bg-black/80 shadow-lg'
+      className={`fixed inset-x-0 top-0 z-50 border-b border-white/5 backdrop-blur-md transition-transform transition-colors transition-shadow duration-300 ${showHeader ? 'translate-y-0 bg-black/40 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)]' : '-translate-y-full bg-black/80 shadow-lg'
         }`}
     >
       <div className="page-shell flex items-center justify-between py-4">

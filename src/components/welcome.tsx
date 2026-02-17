@@ -9,7 +9,6 @@ import { FadeIn, HoverCard, ScaleIn, StaggerContainer, StaggerItem } from './ani
 // Lazy load heavy components
 const Advertisement = dynamic(() => import('./Advertisement'), { ssr: false });
 const TradingViewTicker = dynamic(() => import('./TradingViewTicker'), { ssr: false });
-const TradingViewWidget = dynamic(() => import('./TradingViewWidget'), { ssr: false });
 
 type ProductCardProps = {
   img: string;
@@ -88,18 +87,23 @@ const AnimatedCounter: React.FC = () => {
 
     const target = 800;
     const duration = 2000;
-    const intervalTime = duration / target;
-    const timer = setInterval(() => {
-      setCount((prev) => {
-        if (prev < target) {
-          return prev + 1;
-        }
-        clearInterval(timer);
-        return prev;
-      });
-    }, Math.max(intervalTime, 1));
+    let frameId = 0;
+    let startTime: number | null = null;
 
-    return () => clearInterval(timer);
+    const animate = (timestamp: number) => {
+      if (startTime === null) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      const nextValue = Math.floor(progress * target);
+
+      setCount((prev) => (prev === nextValue ? prev : nextValue));
+
+      if (progress < 1) {
+        frameId = window.requestAnimationFrame(animate);
+      }
+    };
+
+    frameId = window.requestAnimationFrame(animate);
+    return () => window.cancelAnimationFrame(frameId);
   }, [hasAnimated]);
 
   return (
@@ -155,19 +159,24 @@ const StatCard: React.FC<StatItem> = ({ value, suffix = '', label, description }
     if (!hasAnimated) return;
 
     const duration = 1200;
-    const safeValue = Math.max(value, 1);
-    const intervalTime = Math.max(Math.floor(duration / safeValue), 16);
-    const timer = setInterval(() => {
-      setDisplayValue((prev) => {
-        if (prev < value) {
-          return prev + 1;
-        }
-        clearInterval(timer);
-        return value;
-      });
-    }, intervalTime);
+    const target = Math.max(value, 0);
+    let frameId = 0;
+    let startTime: number | null = null;
 
-    return () => clearInterval(timer);
+    const animate = (timestamp: number) => {
+      if (startTime === null) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      const nextValue = Math.floor(progress * target);
+
+      setDisplayValue((prev) => (prev === nextValue ? prev : nextValue));
+
+      if (progress < 1) {
+        frameId = window.requestAnimationFrame(animate);
+      }
+    };
+
+    frameId = window.requestAnimationFrame(animate);
+    return () => window.cancelAnimationFrame(frameId);
   }, [hasAnimated, value]);
 
   return (
@@ -219,11 +228,7 @@ const SHOWCASE_IMAGES: ShowcaseImage[] = [
   { src: '/img/trading3.webp', title: 'توازن بين التحليل والالتزام بالخطة' },
 ];
 
-type WelcomeProps = {
-  heroImageSlot?: React.ReactNode;
-};
-
-const Welcome: React.FC<WelcomeProps> = ({ heroImageSlot }) => {
+const Welcome: React.FC = () => {
   const [showcaseIndex, setShowcaseIndex] = useState(0);
 
   useEffect(() => {

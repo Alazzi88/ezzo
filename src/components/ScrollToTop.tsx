@@ -1,31 +1,39 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { WhatsAppIcon, ArrowUpIcon } from './SocialIcons';
 
 const ScrollToTop: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [scrollDirection, setScrollDirection] = useState<'up' | 'down'>('up');
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const lastScrollYRef = useRef(0);
+  const tickingRef = useRef(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
+      if (tickingRef.current) return;
+      tickingRef.current = true;
 
-      // تحديد اتجاه التمرير
-      setScrollDirection(currentScrollY > lastScrollY ? 'down' : 'up');
+      window.requestAnimationFrame(() => {
+        const currentScrollY = window.scrollY;
+        const nextDirection = currentScrollY > lastScrollYRef.current ? 'down' : 'up';
+        const nextIsVisible = currentScrollY > 300;
 
-      // إظهار الزر عند التمرير لمسافة معينة
-      setIsVisible(currentScrollY > 300);
+        setScrollDirection((prev) => (prev === nextDirection ? prev : nextDirection));
+        setIsVisible((prev) => (prev === nextIsVisible ? prev : nextIsVisible));
 
-      setLastScrollY(currentScrollY);
+        lastScrollYRef.current = currentScrollY;
+        tickingRef.current = false;
+      });
     };
 
-    window.addEventListener('scroll', handleScroll);
+    lastScrollYRef.current = window.scrollY;
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [lastScrollY]);
+  }, []);
 
   // التمرير إلى الأعلى عند النقر على الزر
   const scrollToTop = () => {

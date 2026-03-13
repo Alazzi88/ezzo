@@ -4,28 +4,17 @@ import { useState } from "react";
 import Image from "next/image";
 import FAQs from "@/components/FAQs";
 
-type Video = {
-  embedSrc: string;
-  title: string;
-  thumbnail: string;
+const STRATEGY_VIDEO = {
+  embedSrc: "https://player.vimeo.com/video/1173440649?badge=0&autopause=0&player_id=0&app_id=58479",
+  title: "شرح للاستراتيجية",
+  thumbnail: "/img/ezzoind.webp",
 };
 
-const sectionVideos: Record<"pro", Video> = {
-  pro: {
-    embedSrc:
-      "https://player.vimeo.com/video/1173440649?badge=0&autopause=0&player_id=0&app_id=58479",
-    title: "شرح للاستراتيجية",
-    thumbnail: "/img/ezzoind.webp",
-  },
-};
-
-type VideoCardProps = {
-  embedSrc: string;
-  title: string;
-  thumbnail: string;
-};
-
-const VideoCard: React.FC<VideoCardProps> = ({ embedSrc, title, thumbnail }) => {
+const VideoCard: React.FC<{ embedSrc: string; title: string; thumbnail: string }> = ({
+  embedSrc,
+  title,
+  thumbnail,
+}) => {
   const [play, setPlay] = useState(false);
 
   return (
@@ -89,7 +78,7 @@ const Indicator: React.FC = () => (
           استراتيجية ايزو البرو مبنية على مفاهيم ICT وتركز على رصد الفجوات السعرية، كتل الأوامر، وتحديد أهداف واضحة مع وقف خسارة محسوب لكل صفقة.
         </p>
         <div className="mt-8 grid gap-8 md:grid-cols-2 md:items-center">
-          <VideoCard {...sectionVideos.pro} />
+          <VideoCard {...STRATEGY_VIDEO} />
           <ul className="list-disc space-y-3 pr-5 text-sm leading-7 text-gray-200">
             <li>نقاط دخول مبنية على مناطق سيولة مؤكدة.</li>
             <li>تحديد أهداف ووقف خسارة ديناميكي.</li>

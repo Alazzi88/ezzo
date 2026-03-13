@@ -13,8 +13,8 @@ type Video = {
 const sectionVideos: Record<"pro", Video> = {
   pro: {
     embedSrc:
-      "https://player.vimeo.com/video/1146169599?context=Vimeo%5CController%5CApi%5CResources%5CVideoController.&h=ac10a1d18d&s=f315a039a934276c5187f4384bbcc6c6ec265a88_1765724774",
-    title: "شرح استراتيجية ايزو البرو",
+      "https://player.vimeo.com/video/1173440649?badge=0&autopause=0&player_id=0&app_id=58479",
+    title: "شرح للاستراتيجية",
     thumbnail: "/img/ezzoind.webp",
   },
 };

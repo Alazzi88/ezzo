@@ -40,7 +40,8 @@ const VideoCard: React.FC<VideoCardProps> = ({ embedSrc, title, thumbnail }) => 
               className="absolute inset-0 h-full w-full rounded-3xl"
               src={embedSrc}
               title={title}
-              allow="autoplay; fullscreen; picture-in-picture"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
               allowFullScreen
             />
           ) : (

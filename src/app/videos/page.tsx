@@ -6,7 +6,7 @@ import { useState } from 'react';
 type Video = { id: number; title: string; url: string; thumbnail: string };
 
 const videos: Video[] = [
-  { id: 1, title: 'الفيديو الأول', url: 'https://www.youtube.com/embed/dQw4w9WgXcQ', thumbnail: '/img/trading-analysis.webp' },
+  { id: 1, title: 'شرح للاستراتيجية', url: 'https://player.vimeo.com/video/1173440649?badge=0&autopause=0&player_id=0&app_id=58479', thumbnail: '/img/ezzoind.webp' },
   { id: 2, title: 'الفيديو الثاني', url: 'https://www.youtube.com/embed/3JZ_D3ELwOQ', thumbnail: '/img/indic.webp' },
   { id: 3, title: 'الفيديو الثالث', url: 'https://www.youtube.com/embed/tgbNymZ7vqY', thumbnail: '/img/trading3.webp' },
 ];
@@ -70,6 +70,8 @@ export default function VideosPage() {
                 className="absolute inset-0 h-full w-full rounded-2xl border border-white/10"
                 src={selectedVideo.url}
                 title={selectedVideo.title}
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
                 allowFullScreen
               />
             </div>

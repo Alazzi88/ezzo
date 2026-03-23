@@ -98,18 +98,18 @@ const PersonIcon = ({ size = 20 }: { size?: number }) => (
 
 function getLinks() {
   return [
-    { key: "website" as const,           url: "https://3zzo.com/",                                                                              icon: <WebsiteIcon size={20} />,  color: "#f97316", glowColor: "#f97316" },
-    { key: "optionBot" as const,         url: "https://t.me/ezzospxbot",                                                                       icon: <BotIcon size={20} />,      color: "#fbbf24", glowColor: "#fbbf24" },
-    { key: "indicator" as const,         url: "https://3zzo.com/Indicator",                                                                    icon: <ChartIcon size={20} />,    color: "#facc15", glowColor: "#facc15" },
-    { key: "store" as const,             url: "https://3zzo.aryaf.sa/",                                                                        icon: <StoreIcon size={20} />,    color: "#fb923c", glowColor: "#fb923c" },
-    { key: "telegramChannel" as const,   url: "https://t.me/ezzo_trading",                                                                     icon: <TelegramIcon size={20} />, color: "#38bdf8", glowColor: "#38bdf8" },
-    { key: "telegramDiscussions" as const, url: "https://t.me/ezzo_discussions",                                                               icon: <DiscussIcon size={20} />,  color: "#60a5fa", glowColor: "#60a5fa" },
-    { key: "telegramCourse" as const,    url: "https://t.me/ezzo_course",                                                                      icon: <CourseIcon size={20} />,   color: "#a78bfa", glowColor: "#a78bfa" },
-    { key: "whatsapp" as const,          url: "https://api.whatsapp.com/send/?phone=966503405496&text&type=phone_number&app_absent=0",         icon: <WhatsAppIcon size={20} />,  color: "#4ade80", glowColor: "#4ade80" },
-    { key: "tiktok" as const,            url: "https://www.tiktok.com/@3zzo.com",                                                              icon: <TikTokIcon size={20} />,   color: "#e2e8f0", glowColor: "#94a3b8" },
-    { key: "instagram" as const,         url: "https://www.instagram.com/3zzoezzo/",                                                           icon: <InstagramIcon size={20} />, color: "#f472b6", glowColor: "#f472b6" },
-    { key: "snapchat" as const,          url: "https://www.snapchat.com/@ezzo.com",                                                            icon: <SnapchatIcon size={20} />,  color: "#facc15", glowColor: "#facc15" },
-    { key: "personalTelegram" as const,  url: "https://t.me/ezzo3zzo3",                                                                        icon: <PersonIcon size={20} />,    color: "#f97316", glowColor: "#f97316" },
+    { key: "website" as const, url: "https://3zzo.com/", icon: <WebsiteIcon size={20} />, color: "#f97316", glowColor: "#f97316" },
+    { key: "optionBot" as const, url: "https://t.me/ezzospxbot", icon: <BotIcon size={20} />, color: "#fbbf24", glowColor: "#fbbf24" },
+    { key: "indicator" as const, url: "https://3zzo.com/Indicator", icon: <ChartIcon size={20} />, color: "#facc15", glowColor: "#facc15" },
+    { key: "store" as const, url: "https://3zzo.aryaf.sa/", icon: <StoreIcon size={20} />, color: "#fb923c", glowColor: "#fb923c" },
+    { key: "telegramChannel" as const, url: "https://t.me/ezzo_trading", icon: <TelegramIcon size={20} />, color: "#38bdf8", glowColor: "#38bdf8" },
+    { key: "telegramDiscussions" as const, url: "https://t.me/ezzo_discussions", icon: <DiscussIcon size={20} />, color: "#60a5fa", glowColor: "#60a5fa" },
+    { key: "telegramCourse" as const, url: "https://t.me/ezzo_course", icon: <CourseIcon size={20} />, color: "#a78bfa", glowColor: "#a78bfa" },
+    { key: "whatsapp" as const, url: "https://api.whatsapp.com/send/?phone=966503405496&text&type=phone_number&app_absent=0", icon: <WhatsAppIcon size={20} />, color: "#4ade80", glowColor: "#4ade80" },
+    { key: "tiktok" as const, url: "https://www.tiktok.com/@3zzo.com", icon: <TikTokIcon size={20} />, color: "#e2e8f0", glowColor: "#94a3b8" },
+    { key: "instagram" as const, url: "https://www.instagram.com/3zzoezzo/", icon: <InstagramIcon size={20} />, color: "#f472b6", glowColor: "#f472b6" },
+    { key: "snapchat" as const, url: "https://www.snapchat.com/@ezzo.com", icon: <SnapchatIcon size={20} />, color: "#facc15", glowColor: "#facc15" },
+    { key: "personalTelegram" as const, url: "https://t.me/ezzo3zzo3", icon: <PersonIcon size={20} />, color: "#f97316", glowColor: "#f97316" },
   ] as const;
 }
 

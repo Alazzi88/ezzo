@@ -80,7 +80,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <div className="absolute bottom-[-10%] right-1/3 h-80 w-80 rounded-full bg-orange-400/15 blur-[80px] sm:blur-[160px]" />
               <div className="absolute inset-0 grid-overlay opacity-40" />
             </div>
-
+            {/*  */}
             <Providers>
               <Header />
               <main className="relative z-10 flex-grow pt-24 sm:pt-28 pb-24">

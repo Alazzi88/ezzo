@@ -93,15 +93,12 @@ export default function CourseList() {
 
               <div className="flex flex-col items-end gap-3 text-right">
                 <Link
-                  href="https://t.me/ezzo_trading"
+                  href="https://t.me/ezzo_course"
                   target="_blank"
                   className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-orange-500 via-orange-400 to-amber-300 px-7 py-3 text-sm font-semibold text-black shadow-[0_20px_40px_-20px_rgba(251,146,60,0.9)] transition-transform duration-300 hover:-translate-y-1"
                 >
-                  انضم للقناة العامة
+                  انضم لقناة الدورة
                 </Link>
-                <p className="text-xs leading-6 text-gray-200">
-                  ستجد رابط الدورة في القناة العامة <span className="font-semibold text-orange-200">@ezzo_trading</span> (الرابط مثبت).
-                </p>
               </div>
             </div>
           </div>

@@ -1,0 +1,61 @@
+{
+  "brand": "EZZO",
+  "subtitle": "أدوات تداول • بوتات ذكية • تحليلات الأسواق",
+  "description": "أدوات تداول متقدمة وبوتات تعمل بالذكاء الاصطناعي لمساعدة المتداولين على اتخاذ قرارات أفضل.",
+  "pageNote": "هذه الصفحة تحتوي على جميع روابط خدمات وقنوات EZZO الرسمية فقط",
+  "links": {
+    "website": {
+      "title": "الموقع الرسمي",
+      "description": "اكتشف مجموعة أدوات EZZO الكاملة للتداول"
+    },
+    "optionBot": {
+      "title": "بوت الأوبشن الأمريكي",
+      "description": "بوت ذكاء اصطناعي لإشارات تداول الأوبشن الأمريكي"
+    },
+    "indicator": {
+      "title": "شرح الاستراتيجية",
+      "description": "شرح مفصل لاستراتيجية التداول على TradingView"
+    },
+    "store": {
+      "title": "متجر EZZO",
+      "description": "أدوات وموارد تداول احترافية"
+    },
+    "telegramChannel": {
+      "title": "القناة العامة تلجرام",
+      "description": "تحديثات التداول وإشارات السوق"
+    },
+    "telegramDiscussions": {
+      "title": "قروب المناقشات",
+      "description": "انضم لمجتمع المتداولين وشارك في النقاشات"
+    },
+    "telegramCourse": {
+      "title": "دورة التحليل الفني والفيوتشر",
+      "description": "قروب الدورة التعليمية للتحليل الفني"
+    },
+    "whatsapp": {
+      "title": "واتساب",
+      "description": "تواصل مباشر عبر واتساب"
+    },
+    "personalTelegram": {
+      "title": "حسابي الخاص تلجرام",
+      "description": "تواصل مباشر مع EZZO"
+    },
+    "snapchat": {
+      "title": "سناب شات",
+      "description": "تابع EZZO على سناب شات"
+    },
+    "instagram": {
+      "title": "انستقرام",
+      "description": "تحليلات وتحديثات تداول مرئية"
+    },
+    "tiktok": {
+      "title": "تيك توك",
+      "description": "نصائح وتحليلات تداول سريعة"
+    }
+  },
+  "footer": "© 2025 EZZO. جميع الحقوق محفوظة.",
+  "copyLink": "نسخ الرابط",
+  "copied": "تم النسخ!",
+  "share": "مشاركة",
+  "switchLang": "EN"
+}

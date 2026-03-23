@@ -30,7 +30,6 @@ function NewsCardLarge({ article }: { article: Article }) {
       rel="noopener noreferrer"
       className="group relative flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-black/60 transition-all duration-300 hover:border-orange-500/30 hover:shadow-[0_25px_60px_-20px_rgba(249,115,22,0.25)] hover:-translate-y-1"
     >
-      {/* Image */}
       <div className="relative h-52 w-full overflow-hidden bg-white/5">
         {article.urlToImage ? (
           <Image
@@ -47,7 +46,6 @@ function NewsCardLarge({ article }: { article: Article }) {
           </div>
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-        {/* Source badge */}
         <div className="absolute top-3 right-3">
           <span className="rounded-full border border-orange-500/30 bg-black/70 px-2.5 py-1 text-[10px] font-semibold text-orange-300 backdrop-blur-sm">
             {article.source.name}
@@ -55,7 +53,6 @@ function NewsCardLarge({ article }: { article: Article }) {
         </div>
       </div>
 
-      {/* Content */}
       <div className="flex flex-1 flex-col gap-2 p-5">
         <h3 className="line-clamp-2 text-sm font-bold leading-snug text-white group-hover:text-orange-200 transition-colors duration-300">
           {article.title}
@@ -84,7 +81,6 @@ function NewsCardSmall({ article }: { article: Article }) {
       rel="noopener noreferrer"
       className="group flex items-start gap-3 rounded-2xl border border-white/5 bg-white/3 p-3.5 transition-all duration-300 hover:border-orange-500/20 hover:bg-white/5"
     >
-      {/* Thumbnail */}
       <div className="relative h-14 w-14 flex-shrink-0 overflow-hidden rounded-xl bg-white/5">
         {article.urlToImage ? (
           <Image
@@ -100,7 +96,6 @@ function NewsCardSmall({ article }: { article: Article }) {
         )}
       </div>
 
-      {/* Text */}
       <div className="flex-1 min-w-0">
         <p className="line-clamp-2 text-xs font-semibold leading-snug text-gray-200 group-hover:text-white transition-colors">
           {article.title}
@@ -117,7 +112,7 @@ function NewsCardSmall({ article }: { article: Article }) {
 
 function SkeletonCard({ large }: { large?: boolean }) {
   return (
-    <div className={`animate-pulse rounded-3xl border border-white/5 bg-white/3 overflow-hidden ${large ? '' : ''}`}>
+    <div className="animate-pulse rounded-3xl border border-white/5 bg-white/3 overflow-hidden">
       {large && <div className="h-52 w-full bg-white/5" />}
       <div className={`${large ? 'p-5' : 'p-3.5 flex gap-3'}`}>
         {!large && <div className="h-14 w-14 rounded-xl bg-white/5 flex-shrink-0" />}
@@ -156,7 +151,6 @@ export default function NewsSection() {
     <section id="news" className="page-shell mt-20">
       <FadeIn direction="up">
         <div className="glass-panel px-4 py-8 sm:px-8 sm:py-12">
-          {/* Section Header */}
           <div className="mb-8 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <h2 className="section-heading flex items-center gap-3">
@@ -182,7 +176,6 @@ export default function NewsSection() {
             </a>
           </div>
 
-          {/* Loading Skeleton */}
           {loading && (
             <div className="space-y-4">
               <div className="grid gap-4 sm:grid-cols-2">
@@ -195,7 +188,6 @@ export default function NewsSection() {
             </div>
           )}
 
-          {/* Error */}
           {!loading && error && (
             <div className="flex flex-col items-center gap-3 py-12 text-center">
               <span className="text-4xl opacity-40">📡</span>
@@ -203,7 +195,6 @@ export default function NewsSection() {
             </div>
           )}
 
-          {/* No articles */}
           {!loading && !error && articles.length === 0 && (
             <div className="flex flex-col items-center gap-3 py-12 text-center">
               <span className="text-4xl opacity-40">📰</span>
@@ -211,10 +202,8 @@ export default function NewsSection() {
             </div>
           )}
 
-          {/* Content */}
           {!loading && !error && articles.length > 0 && (
             <div className="space-y-5">
-              {/* Featured – 2 large cards */}
               {featured.length > 0 && (
                 <div className="grid gap-4 sm:grid-cols-2">
                   {featured.map((article, i) => (
@@ -225,11 +214,9 @@ export default function NewsSection() {
                 </div>
               )}
 
-              {/* Divider */}
               {rest.length > 0 && (
                 <>
                   <div className="card-divider" />
-                  {/* Rest – small cards grid */}
                   <StaggerContainer className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3" staggerChildren={0.05}>
                     {rest.map((article) => (
                       <StaggerItem key={article.url}>

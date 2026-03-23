@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import FAQs from '@/components/FAQs';
 import { VideoCard } from './VideoCard';
 
@@ -59,6 +60,17 @@ const Indicator: React.FC = () => (
             <li>تحديد أهداف ووقف خسارة ديناميكي.</li>
             <li>تنبيهات فورية عبر الايميل او التطبيق.</li>
           </ul>
+        </div>
+        <div className="mt-10 text-center">
+          <p className="mb-4 text-sm text-gray-400">اشترك الآن للحصول على الاستراتيجية</p>
+          <Link
+            href="https://3zzo.aryaf.sa/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-orange-500 via-orange-400 to-amber-300 px-8 py-3.5 text-base font-bold text-black shadow-[0_15px_40px_-15px_rgba(249,115,22,0.7)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_-15px_rgba(249,115,22,0.8)]"
+          >
+            اشترك من المتجر
+          </Link>
         </div>
       </div>
     </section>

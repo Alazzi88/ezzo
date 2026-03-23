@@ -218,7 +218,7 @@ const products: ProductCardProps[] = [
     linkText: 'تفاصيل الدورة',
   },
   {
-    img: '/img/trading1.webp',
+    img: '/img/bot.webp',
     title: 'بوت خيارات EZZO SPX BOT',
     description: 'بوت متخصص في عقود خيارات SPX — يرسل إشارات CALL وPUT مع سعر الدخول وهدف الربح مباشرةً.',
     link: '/Options',

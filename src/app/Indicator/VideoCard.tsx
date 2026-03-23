@@ -28,7 +28,7 @@ export const VideoCard: React.FC<{ embedSrc: string; title: string; thumbnail: s
             />
           ) : (
             <>
-              <Image src={thumbnail} alt={title} fill className="rounded-3xl object-cover" />
+              <Image src={thumbnail} alt={title} fill loading="lazy" className="rounded-3xl object-cover" />
               <div className="absolute inset-0 flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-16 w-16 text-orange-300">
                   <path fill="currentColor" d="M8 5v14l11-7z" />

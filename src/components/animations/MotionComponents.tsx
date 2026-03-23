@@ -17,50 +17,25 @@ export const FadeIn = ({
     children,
     direction = 'up',
     delay = 0,
-    duration = 0.5,
+    duration = 0.45,
     className = '',
     fullWidth = false,
     once = true,
 }: FadeInProps) => {
     const ref = useRef(null);
-    const isInView = useInView(ref, { once, margin: "-50px" });
+    const isInView = useInView(ref, { once, margin: '-30px' });
 
-    const getVariants = () => {
-        const distance = 40;
-        const variants = {
-            hidden: { opacity: 0, x: 0, y: 0 },
-            visible: { opacity: 1, x: 0, y: 0 },
-        };
-
-        switch (direction) {
-            case 'up':
-                variants.hidden.y = distance;
-                break;
-            case 'down':
-                variants.hidden.y = -distance;
-                break;
-            case 'left':
-                variants.hidden.x = distance;
-                break;
-            case 'right':
-                variants.hidden.x = -distance;
-                break;
-        }
-
-        return variants;
-    };
-
-    const variants = getVariants();
+    const distance = 24;
+    const axis = direction === 'up' || direction === 'down' ? 'y' : 'x';
+    const sign = direction === 'up' || direction === 'left' ? 1 : -1;
 
     return (
         <m.div
             ref={ref}
-            initial="hidden"
-            animate={isInView ? 'visible' : 'hidden'}
-            variants={variants}
+            initial={{ opacity: 0, [axis]: distance * sign }}
+            animate={isInView ? { opacity: 1, [axis]: 0 } : { opacity: 0, [axis]: distance * sign }}
             transition={{ duration, delay, ease: 'easeOut' }}
             className={`${fullWidth ? 'w-full' : ''} ${className}`}
-            style={{ willChange: 'transform, opacity' }}
         >
             {children}
         </m.div>
@@ -78,21 +53,20 @@ type ScaleInProps = {
 export const ScaleIn = ({
     children,
     delay = 0,
-    duration = 0.5,
+    duration = 0.45,
     className = '',
     once = true,
 }: ScaleInProps) => {
     const ref = useRef(null);
-    const isInView = useInView(ref, { once, margin: "-50px" });
+    const isInView = useInView(ref, { once, margin: '-30px' });
 
     return (
         <m.div
             ref={ref}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.92 }}
             transition={{ duration, delay, ease: 'easeOut' }}
             className={className}
-            style={{ willChange: 'transform, opacity' }}
         >
             {children}
         </m.div>
@@ -111,11 +85,11 @@ export const StaggerContainer = ({
     children,
     className = '',
     delay = 0,
-    staggerChildren = 0.1,
+    staggerChildren = 0.08,
     once = true,
 }: StaggerContainerProps) => {
     const ref = useRef(null);
-    const isInView = useInView(ref, { once, margin: "-50px" });
+    const isInView = useInView(ref, { once, margin: '-30px' });
 
     return (
         <m.div
@@ -126,10 +100,7 @@ export const StaggerContainer = ({
                 hidden: { opacity: 0 },
                 visible: {
                     opacity: 1,
-                    transition: {
-                        delayChildren: delay,
-                        staggerChildren,
-                    },
+                    transition: { delayChildren: delay, staggerChildren },
                 },
             }}
             className={className}
@@ -148,12 +119,11 @@ export const StaggerItem = ({ children, className = '' }: StaggerItemProps) => {
     return (
         <m.div
             variants={{
-                hidden: { opacity: 0, y: 20 },
+                hidden: { opacity: 0, y: 16 },
                 visible: { opacity: 1, y: 0 },
             }}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
             className={className}
-            style={{ willChange: 'transform, opacity' }}
         >
             {children}
         </m.div>
@@ -168,10 +138,9 @@ type HoverCardProps = {
 export const HoverCard = ({ children, className = '' }: HoverCardProps) => {
     return (
         <m.div
-            whileHover={{ y: -5 }}
-            transition={{ duration: 0.3 }}
+            whileHover={{ y: -4 }}
+            transition={{ duration: 0.25 }}
             className={className}
-            style={{ willChange: 'transform' }}
         >
             {children}
         </m.div>

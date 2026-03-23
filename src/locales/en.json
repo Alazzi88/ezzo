@@ -1,0 +1,61 @@
+{
+  "brand": "EZZO",
+  "subtitle": "Trading Tools • AI Bots • Market Insights",
+  "description": "Advanced trading tools, AI-powered bots, and market insights designed for serious traders.",
+  "pageNote": "This page contains all official EZZO service links & channels",
+  "links": {
+    "website": {
+      "title": "Official Website",
+      "description": "Explore EZZO's full suite of trading tools"
+    },
+    "optionBot": {
+      "title": "American Options Bot",
+      "description": "AI-powered bot for US options trading signals"
+    },
+    "indicator": {
+      "title": "Strategy Indicator",
+      "description": "Advanced TradingView strategy breakdown"
+    },
+    "store": {
+      "title": "EZZO Store",
+      "description": "Premium trading tools & resources"
+    },
+    "telegramChannel": {
+      "title": "Telegram Channel",
+      "description": "General trading updates & market signals"
+    },
+    "telegramDiscussions": {
+      "title": "Discussions Group",
+      "description": "Join the trader community discussions"
+    },
+    "telegramCourse": {
+      "title": "Technical Analysis Course",
+      "description": "Futures & technical analysis learning group"
+    },
+    "whatsapp": {
+      "title": "WhatsApp",
+      "description": "Chat directly on WhatsApp"
+    },
+    "personalTelegram": {
+      "title": "Personal Telegram",
+      "description": "Direct contact with EZZO"
+    },
+    "snapchat": {
+      "title": "Snapchat",
+      "description": "Follow EZZO on Snapchat"
+    },
+    "instagram": {
+      "title": "Instagram",
+      "description": "Visual trading insights & updates"
+    },
+    "tiktok": {
+      "title": "TikTok",
+      "description": "Short-form trading tips & analysis"
+    }
+  },
+  "footer": "© 2025 EZZO. All rights reserved.",
+  "copyLink": "Copy Link",
+  "copied": "Copied!",
+  "share": "Share",
+  "switchLang": "AR"
+}

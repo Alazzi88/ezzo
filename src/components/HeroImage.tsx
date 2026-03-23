@@ -9,8 +9,6 @@ export default function HeroImage() {
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
                 priority
-                loading="eager"
-                fetchPriority="high"
                 className="object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/40" />

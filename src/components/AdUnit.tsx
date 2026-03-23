@@ -12,12 +12,12 @@ const AdUnit: React.FC<AdUnitProps> = ({ slotId, format = 'auto', responsive = t
   const adRef = useRef<HTMLModElement>(null);
 
   useEffect(() => {
-    if (window) {
-      try {
-        (window.adsbygoogle = window.adsbygoogle || []).push({});
-      } catch (e) {
-        console.error('AdSense error:', e);
+    try {
+      if (typeof window !== 'undefined' && window.adsbygoogle) {
+        (window.adsbygoogle as unknown[]).push({});
       }
+    } catch {
+      // AdSense not ready yet — silently ignore
     }
   }, []);
 

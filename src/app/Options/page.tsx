@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { FadeIn, ScaleIn, StaggerContainer, StaggerItem, HoverCard } from '@/components/animations/MotionComponents';
 
 export const metadata: Metadata = {
@@ -205,11 +206,13 @@ export default function OptionsPage() {
             <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
               {/* Bot visual */}
               <div className="flex flex-col items-center gap-4">
-                <div className="relative flex h-36 w-36 items-center justify-center rounded-full bg-gradient-to-br from-orange-500 via-amber-400 to-yellow-300 shadow-[0_0_80px_-10px_rgba(249,115,22,0.7)]">
-                  <span className="text-6xl font-black text-black">E</span>
-                  <div className="absolute -bottom-2 -right-2 flex h-10 w-10 items-center justify-center rounded-full bg-green-400 shadow-lg text-sm font-black text-black">
-                    BOT
-                  </div>
+                <div className="relative w-full max-w-xs aspect-video overflow-hidden rounded-2xl border border-orange-500/30 shadow-[0_0_60px_-10px_rgba(249,115,22,0.5)]">
+                  <Image
+                    src="/img/bot.webp"
+                    alt="EZZO SPX BOT"
+                    fill
+                    className="object-cover"
+                  />
                 </div>
                 <p className="text-center text-xl font-black text-white">EZZO SPX BOT</p>
                 <div className="flex items-center gap-1.5 rounded-full border border-green-500/30 bg-green-500/10 px-3 py-1 text-xs font-semibold text-green-300">

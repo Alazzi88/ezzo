@@ -1,12 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { motion } from "framer-motion";
 import ProfileHeader from "@/components/ProfileHeader";
 import LinkCard from "@/components/LinkCard";
 import WorldGlobe from "@/components/WorldGlobe";
-
-import Image from "next/image";
 import arTranslations from "@/locales/ar.json";
 
 // ─── SVG Icons ────────────────────────────────────────────────────────────────
@@ -88,194 +86,168 @@ const WhatsAppIcon = ({ size = 20 }: { size?: number }) => (
 );
 
 const PersonIcon = ({ size = 20 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
     <circle cx="12" cy="7" r="4" />
   </svg>
 );
 
-// ─── Link definitions ─────────────────────────────────────────────────────────
+const ToolsHeaderIcon = () => (
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+  </svg>
+);
 
-function getLinks() {
-  return [
-    { key: "website" as const, url: "https://3zzo.com/", icon: <WebsiteIcon size={20} />, color: "#f97316", glowColor: "#f97316" },
-    { key: "optionBot" as const, url: "https://t.me/ezzospxbot", icon: <BotIcon size={20} />, color: "#fbbf24", glowColor: "#fbbf24" },
-    { key: "indicator" as const, url: "https://3zzo.com/Indicator", icon: <ChartIcon size={20} />, color: "#facc15", glowColor: "#facc15" },
-    { key: "store" as const, url: "https://3zzo.aryaf.sa/", icon: <StoreIcon size={20} />, color: "#fb923c", glowColor: "#fb923c" },
-    { key: "telegramChannel" as const, url: "https://t.me/ezzo_trading", icon: <TelegramIcon size={20} />, color: "#38bdf8", glowColor: "#38bdf8" },
-    { key: "telegramDiscussions" as const, url: "https://t.me/ezzo_discussions", icon: <DiscussIcon size={20} />, color: "#60a5fa", glowColor: "#60a5fa" },
-    { key: "telegramCourse" as const, url: "https://t.me/ezzo_course", icon: <CourseIcon size={20} />, color: "#a78bfa", glowColor: "#a78bfa" },
-    { key: "whatsapp" as const, url: "https://api.whatsapp.com/send/?phone=966503405496&text&type=phone_number&app_absent=0", icon: <WhatsAppIcon size={20} />, color: "#4ade80", glowColor: "#4ade80" },
-    { key: "tiktok" as const, url: "https://www.tiktok.com/@3zzo.com", icon: <TikTokIcon size={20} />, color: "#e2e8f0", glowColor: "#94a3b8" },
-    { key: "instagram" as const, url: "https://www.instagram.com/3zzoezzo/", icon: <InstagramIcon size={20} />, color: "#f472b6", glowColor: "#f472b6" },
-    { key: "snapchat" as const, url: "https://www.snapchat.com/@ezzo.com", icon: <SnapchatIcon size={20} />, color: "#facc15", glowColor: "#facc15" },
-    { key: "personalTelegram" as const, url: "https://t.me/ezzo3zzo3", icon: <PersonIcon size={20} />, color: "#f97316", glowColor: "#f97316" },
-  ] as const;
-}
+const CommunityHeaderIcon = () => (
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+    <circle cx="9" cy="7" r="4" />
+    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+  </svg>
+);
 
-// ─── Loading screen (matches main site style) ─────────────────────────────────
+// ─── Section Header ──────────────────────────────────────────────────────────
 
-function LinksLoadingScreen({ exiting }: { exiting: boolean }) {
-  return (
-    <motion.div
-      initial={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.35, ease: "easeInOut" }}
-      className={`loading-screen ${exiting ? 'loading-screen-exit' : ''}`}
-      aria-hidden="true"
-    >
-      <div className="loading-logo-wrapper">
-        <div className="loading-ring loading-ring-outer">
-          <svg viewBox="0 0 200 200" className="loading-ring-svg">
-            <defs>
-              <linearGradient id="lrg1" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#f97316" stopOpacity="0" />
-                <stop offset="50%" stopColor="#fbbf24" stopOpacity="1" />
-                <stop offset="100%" stopColor="#f97316" stopOpacity="0" />
-              </linearGradient>
-            </defs>
-            <circle cx="100" cy="100" r="90" fill="none" stroke="url(#lrg1)" strokeWidth="2" strokeLinecap="round" strokeDasharray="150 400" />
-          </svg>
-        </div>
-        <div className="loading-ring loading-ring-inner">
-          <svg viewBox="0 0 200 200" className="loading-ring-svg">
-            <defs>
-              <linearGradient id="lrg2" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#fb923c" stopOpacity="0" />
-                <stop offset="50%" stopColor="#f97316" stopOpacity="0.8" />
-                <stop offset="100%" stopColor="#fb923c" stopOpacity="0" />
-              </linearGradient>
-            </defs>
-            <circle cx="100" cy="100" r="70" fill="none" stroke="url(#lrg2)" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="100 350" />
-          </svg>
-        </div>
-        <div className="loading-logo-glow" />
-        <div className="loading-logo-container">
-          <div className="loading-logo-circle">
-            <Image src="/img/logo.webp" alt="" width={80} height={80} priority className="loading-logo" />
-          </div>
-        </div>
-      </div>
-      <div className="loading-text-container" dir="ltr">
-        <span className="loading-domain">
-          <span className="loading-number">3zzo</span>
-          <span className="loading-rest">.com</span>
-        </span>
-      </div>
-      <div className="loading-bar-container">
-        <div className="loading-bar" />
-      </div>
-    </motion.div>
-  );
-}
+const SectionHeader = ({ title, icon }: { title: string; icon: React.ReactNode }) => (
+  <div className="flex items-center gap-2 mt-7 mb-3.5 px-1.5" dir="rtl">
+    <span style={{ color: '#d4845a', filter: 'drop-shadow(0 0 6px rgba(212,132,90,0.4))' }}>
+      {icon}
+    </span>
+    <h2 className="text-[13px] font-black tracking-wider uppercase" style={{ color: 'rgba(240,235,228,0.6)' }}>{title}</h2>
+    <div className="flex-1 h-px ml-2" style={{ background: 'linear-gradient(to left, rgba(212,132,90,0.2), rgba(212,132,90,0.03), transparent)' }} />
+  </div>
+);
 
-// ─── Action bar ───────────────────────────────────────────────────────────────
+// ─── Action Bar ───────────────────────────────────────────────────────────────
 
 function ActionBar({ t }: { t: typeof arTranslations }) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(window.location.href);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2200);
+    if (typeof window !== "undefined") {
+      navigator.clipboard.writeText(window.location.href);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2200);
+    }
   };
 
   const handleShare = async () => {
     if (typeof navigator !== "undefined" && navigator.share) {
-      await navigator.share({ title: "EZZO", url: window.location.href });
+      try {
+        await navigator.share({ title: "EZZO | روابطنا الرسمية", url: window.location.href });
+      } catch (err) {
+        handleCopy();
+      }
     } else {
       handleCopy();
     }
   };
 
-  const btnBase =
-    "flex items-center justify-center px-6 py-2.5 rounded-xl border text-sm font-semibold transition-all duration-300 min-w-[120px]";
-
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 1.1, duration: 0.5 }}
-      className="flex items-center gap-3 justify-center"
+      initial={{ opacity: 0, y: 35, scale: 0.88 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ delay: 0.75, type: "spring", stiffness: 140, damping: 15 }}
+      className="fixed bottom-6 inset-x-4 mx-auto max-w-[340px] z-40 flex items-center justify-between p-1.5 rounded-2xl border"
+      style={{
+        background: "rgba(13, 11, 9, 0.82)",
+        borderColor: "rgba(212, 132, 90, 0.2)",
+        backdropFilter: "blur(20px)",
+        WebkitBackdropFilter: "blur(20px)",
+        boxShadow: "0 22px 45px rgba(0,0,0,0.7), 0 0 25px rgba(212,132,90,0.07)",
+      }}
     >
-      <motion.button
+      <button
         onClick={handleCopy}
-        whileHover={{ scale: 1.04 }}
-        whileTap={{ scale: 0.96 }}
-        className={`${btnBase}`}
+        className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs font-black transition-all duration-300 active:scale-95"
         style={{
-          borderColor: copied ? "rgba(74,222,128,0.4)" : "rgba(255,255,255,0.1)",
-          background: copied ? "rgba(74,222,128,0.08)" : "rgba(255,255,255,0.04)",
-          color: copied ? "#4ade80" : "rgba(255,255,255,0.6)",
+          color: copied ? "#4ade80" : "rgba(255,255,255,0.75)",
+          background: copied ? "rgba(74,222,128,0.08)" : "transparent",
         }}
       >
-        <AnimatePresence mode="wait">
-          <motion.span
-            key={copied ? "c" : "n"}
-            initial={{ opacity: 0, y: -5 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 5 }}
-            transition={{ duration: 0.18 }}
-          >
-            {copied ? t.copied : t.copyLink}
-          </motion.span>
-        </AnimatePresence>
-      </motion.button>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          {copied ? (
+            <polyline points="20 6 9 17 4 12" />
+          ) : (
+            <>
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+            </>
+          )}
+        </svg>
+        <span>{copied ? t.copied : t.copyLink}</span>
+      </button>
 
-      <motion.button
+      <div className="w-px h-6 bg-white/10" />
+
+      <button
         onClick={handleShare}
-        whileHover={{ scale: 1.04 }}
-        whileTap={{ scale: 0.96 }}
-        className={`${btnBase}`}
-        style={{
-          borderColor: "rgba(249,115,22,0.25)",
-          background: "rgba(249,115,22,0.06)",
-          color: "rgba(251,191,36,0.75)",
-        }}
+        className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs font-black text-amber-400 transition-all duration-300 active:scale-95 hover:text-amber-300"
       >
-        {t.share}
-      </motion.button>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="18" cy="5" r="3" />
+          <circle cx="6" cy="12" r="3" />
+          <circle cx="18" cy="19" r="3" />
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+        </svg>
+        <span>{t.share}</span>
+      </button>
     </motion.div>
   );
 }
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
+// ─── Main Page ────────────────────────────────────────────────────────────────
 
 export default function LinksPage() {
-  const [loading, setLoading] = useState(true);
-  const [exiting, setExiting] = useState(false);
-
-  useEffect(() => {
-    const exitTimer = setTimeout(() => setExiting(true), 900);
-    const hideTimer = setTimeout(() => setLoading(false), 1250);
-    return () => {
-      clearTimeout(exitTimer);
-      clearTimeout(hideTimer);
-    };
-  }, []);
-
   const t = arTranslations;
-  const links = getLinks();
+
+  const primaryServices = [
+    { key: "website" as const, url: "https://3zzo.com/", icon: <WebsiteIcon size={20} />, color: "#f97316", glowColor: "#f97316" },
+    { key: "optionBot" as const, url: "https://t.me/ezzospxbot", icon: <BotIcon size={20} />, color: "#fbbf24", glowColor: "#fbbf24", badge: "رائج", badgeColor: "#fbbf24" },
+    { key: "store" as const, url: "https://3zzo.aryaf.sa/", icon: <StoreIcon size={20} />, color: "#fb923c", glowColor: "#fb923c" },
+    { key: "telegramCourse" as const, url: "https://t.me/ezzo_course", icon: <CourseIcon size={20} />, color: "#a78bfa", glowColor: "#a78bfa", badge: "مميز", badgeColor: "#a78bfa" },
+    { key: "indicator" as const, url: "https://3zzo.com/Indicator", icon: <ChartIcon size={20} />, color: "#facc15", glowColor: "#facc15" },
+  ] as const;
+
+  const communities = [
+    { key: "telegramChannel" as const, url: "https://t.me/ezzo_trading", icon: <TelegramIcon size={20} />, color: "#38bdf8", glowColor: "#38bdf8" },
+    { key: "telegramDiscussions" as const, url: "https://t.me/ezzo_discussions", icon: <DiscussIcon size={20} />, color: "#60a5fa", glowColor: "#60a5fa" },
+  ] as const;
+
+  const socialCircles = [
+    { key: "whatsapp" as const, url: "https://api.whatsapp.com/send/?phone=966503405496&text&type=phone_number&app_absent=0", icon: <WhatsAppIcon size={22} />, color: "#4ade80", label: "واتساب" },
+    { key: "personalTelegram" as const, url: "https://t.me/ezzo3zzo3", icon: <PersonIcon size={22} />, color: "#38bdf8", label: "تواصل خاص" },
+    { key: "tiktok" as const, url: "https://www.tiktok.com/@3zzo.com", icon: <TikTokIcon size={22} />, color: "#e2e8f0", label: "تيك توك" },
+    { key: "instagram" as const, url: "https://www.instagram.com/3zzoezzo/", icon: <InstagramIcon size={22} />, color: "#f472b6", label: "انستغرام" },
+    { key: "snapchat" as const, url: "https://www.snapchat.com/@ezzo.com", icon: <SnapchatIcon size={22} />, color: "#facc15", label: "سناب شات" },
+  ] as const;
 
   return (
     <>
-      <AnimatePresence>
-        {loading && <LinksLoadingScreen exiting={exiting} />}
-      </AnimatePresence>
+      {/* Background drifting stars */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <div className="absolute top-1/4 left-[15%] w-1 h-1 rounded-full blur-[0.5px] animate-pulse" style={{ background: 'rgba(201,168,76,0.25)', animationDuration: '4s' }} />
+        <div className="absolute top-1/3 right-[20%] w-1.5 h-1.5 rounded-full blur-[1px] animate-pulse" style={{ background: 'rgba(212,132,90,0.18)', animationDuration: '6s' }} />
+        <div className="absolute top-2/3 left-[25%] w-2 h-2 rounded-full blur-[2px] animate-pulse" style={{ background: 'rgba(201,168,76,0.12)', animationDuration: '8s' }} />
+        <div className="absolute top-[80%] right-[15%] w-1 h-1 rounded-full blur-[0.5px] animate-pulse" style={{ background: 'rgba(212,132,90,0.22)', animationDuration: '5s' }} />
+        <div className="absolute top-24 right-12 w-2.5 h-2.5 rounded-full blur-[3px] animate-ping" style={{ background: 'rgba(212,132,90,0.08)', animationDuration: '12s' }} />
+        <div className="absolute bottom-[20%] left-12 w-1.5 h-1.5 rounded-full blur-[1.5px] animate-pulse" style={{ background: 'rgba(201,168,76,0.2)', animationDuration: '7s' }} />
+      </div>
 
       {/* Globe */}
       <WorldGlobe />
 
       {/* ── Background layers ──────────────────────────────────── */}
-
       {/* Radial ambient glow */}
       <div
         className="fixed inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 70% 45% at 50% 0%, rgba(249,115,22,0.1) 0%, transparent 60%), " +
-            "radial-gradient(ellipse 50% 35% at 90% 90%, rgba(251,191,36,0.06) 0%, transparent 50%), " +
-            "radial-gradient(ellipse 40% 30% at 10% 70%, rgba(249,115,22,0.05) 0%, transparent 50%)",
+            "radial-gradient(ellipse 65% 45% at 50% 0%, rgba(212,132,90,0.09) 0%, transparent 60%), " +
+            "radial-gradient(ellipse 50% 35% at 90% 90%, rgba(201,168,76,0.05) 0%, transparent 50%), " +
+            "radial-gradient(ellipse 40% 30% at 10% 70%, rgba(212,132,90,0.04) 0%, transparent 50%)",
         }}
       />
 
@@ -284,19 +256,19 @@ export default function LinksPage() {
         className="fixed inset-0 pointer-events-none"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(249,115,22,0.025) 1px, transparent 1px), " +
-            "linear-gradient(90deg, rgba(249,115,22,0.025) 1px, transparent 1px)",
-          backgroundSize: "55px 55px",
+            "linear-gradient(rgba(212,132,90,0.018) 1px, transparent 1px), " +
+            "linear-gradient(90deg, rgba(212,132,90,0.018) 1px, transparent 1px)",
+          backgroundSize: "60px 60px",
         }}
       />
 
       {/* Content */}
       <main
-        className="relative min-h-screen flex flex-col items-center px-4 py-12 pb-20"
+        className="relative min-h-screen flex flex-col items-center px-4 pt-10 pb-36"
         style={{ zIndex: 10 }}
         dir="rtl"
       >
-        <div className="w-full max-w-[420px] flex flex-col gap-5">
+        <div className="w-full max-w-[420px] flex flex-col gap-6">
 
           <ProfileHeader
             brand={t.brand}
@@ -304,55 +276,113 @@ export default function LinksPage() {
             description={t.description}
             pageNote={t.pageNote}
             dir="rtl"
-          />
+          >
+            {/* Quick social circles in children */}
+            <div className="flex items-center justify-center gap-3.5 my-3 flex-wrap">
+              {socialCircles.map((social) => {
+                const linkData = t.links[social.key];
+                return (
+                  <motion.a
+                    key={social.key}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.12, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="relative flex items-center justify-center w-12 h-12 rounded-2xl border transition-all duration-300"
+                    style={{
+                      background: "rgba(255, 255, 255, 0.025)",
+                      borderColor: "rgba(255, 255, 255, 0.08)",
+                      color: "rgba(255, 255, 255, 0.65)",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = `${social.color}60`;
+                      e.currentTarget.style.color = social.color;
+                      e.currentTarget.style.boxShadow = `0 0 22px ${social.color}25, inset 0 0 8px ${social.color}15`;
+                      e.currentTarget.style.background = `${social.color}08`;
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.08)";
+                      e.currentTarget.style.color = "rgba(255, 255, 255, 0.65)";
+                      e.currentTarget.style.boxShadow = "none";
+                      e.currentTarget.style.background = "rgba(255, 255, 255, 0.025)";
+                    }}
+                    title={linkData?.title || social.label}
+                  >
+                    {social.icon}
+                  </motion.a>
+                );
+              })}
+            </div>
+          </ProfileHeader>
 
-          {/* Link cards */}
-          <div className="flex flex-col gap-2.5">
-            {links.map((link, index) => {
-              const linkData = t.links[link.key];
-              return (
-                <LinkCard
-                  key={link.key}
-                  title={linkData.title}
-                  description={linkData.description}
-                  url={link.url}
-                  icon={link.icon}
-                  color={link.color}
-                  glowColor={link.glowColor}
-                  index={index}
-                  dir="rtl"
-                />
-              );
-            })}
+          {/* Section 1: Main services */}
+          <div>
+            <SectionHeader title="أدوات التداول والخدمات الرسمية" icon={<ToolsHeaderIcon />} />
+            <div className="flex flex-col gap-3">
+              {primaryServices.map((link, index) => {
+                const linkData = t.links[link.key];
+                return (
+                  <LinkCard
+                    key={link.key}
+                    title={linkData.title}
+                    description={linkData.description}
+                    url={link.url}
+                    icon={link.icon}
+                    color={link.color}
+                    glowColor={link.glowColor}
+                    index={index}
+                    dir="rtl"
+                    badge={"badge" in link ? link.badge : undefined}
+                    badgeColor={"badgeColor" in link ? link.badgeColor : undefined}
+                  />
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Section 2: Communities */}
+          <div>
+            <SectionHeader title="مجتمعات وقنوات تلجرام" icon={<CommunityHeaderIcon />} />
+            <div className="flex flex-col gap-3">
+              {communities.map((link, index) => {
+                const linkData = t.links[link.key];
+                return (
+                  <LinkCard
+                    key={link.key}
+                    title={linkData.title}
+                    description={linkData.description}
+                    url={link.url}
+                    icon={link.icon}
+                    color={link.color}
+                    glowColor={link.glowColor}
+                    index={index + primaryServices.length}
+                    dir="rtl"
+                  />
+                );
+              })}
+            </div>
           </div>
 
           {/* Divider */}
           <div
-            className="w-full h-px"
+            className="w-full h-px mt-4"
             style={{
               background:
-                "linear-gradient(90deg, transparent, rgba(249,115,22,0.2), rgba(251,191,36,0.35), rgba(249,115,22,0.2), transparent)",
+                "linear-gradient(90deg, transparent, rgba(212,132,90,0.14), rgba(201,168,76,0.22), rgba(212,132,90,0.14), transparent)",
             }}
           />
+
+          {/* Copyright text at the end of scrollable content */}
+          <p className="text-center text-[11px] text-white/30 font-medium tracking-wide mt-2">
+            © 2026 EZZO. جميع الحقوق محفوظة. صُمم لدعم المتداولين.
+          </p>
 
         </div>
       </main>
 
-      {/* Fixed copyright bar */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.4, duration: 0.6 }}
-        className="fixed bottom-0 inset-x-0 z-30 flex items-center justify-center py-3 px-4"
-        style={{
-          background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 70%, transparent 100%)",
-          backdropFilter: "blur(4px)",
-        }}
-      >
-        <p className="text-center text-xs" style={{ color: "rgba(255,255,255,0.35)" }}>
-          © 2025 EZZO. جميع الحقوق محفوظة.
-        </p>
-      </motion.div>
+      {/* Floating Action Bar */}
+      <ActionBar t={t} />
     </>
   );
 }

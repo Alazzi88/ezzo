@@ -1,6 +1,9 @@
+'use client';
+
 import Link from 'next/link';
 import { InstagramIcon, TikTokIcon, SnapchatIcon, TelegramIcon } from './SocialIcons';
 import { FadeIn, StaggerContainer } from './animations/MotionComponents';
+import { usePathname } from 'next/navigation';
 
 const socialLinks = [
   { icon: <InstagramIcon size={22} />, url: 'https://www.instagram.com/3zzoezzo/', color: 'from-pink-500/80 via-orange-400/80 to-amber-400/80' },
@@ -31,29 +34,35 @@ const contactDetails = [
 ];
 
 const Footer = () => {
+  const pathname = usePathname();
+  if (pathname === '/links' || pathname === '/link') return null;
+
   return (
-    <footer className="relative z-10 mt-24 px-4 sm:px-6 lg:px-10">
+    <footer className="relative z-10 mt-32 px-4 sm:px-6 lg:px-10">
       <div className="page-shell">
-        <div className="glass-panel overflow-hidden px-6 py-10 sm:px-10">
-          <StaggerContainer className="grid gap-10 lg:grid-cols-[1.3fr_1fr_1fr_1.2fr]" staggerChildren={0.1}>
-            <FadeIn direction="up" className="space-y-5">
+        <div className="glass-panel overflow-hidden px-6 py-14 sm:px-12 sm:py-20">
+          <StaggerContainer className="grid gap-10 lg:grid-cols-[1.3fr_1fr_1fr_1.2fr]" staggerChildren={0.08}>
+            <FadeIn direction="up" className="space-y-6">
               <div>
-                <p className="text-2xl font-extrabold text-orange-400">
+                <p className="text-3xl font-extrabold">
                   <span className="ezzo-text">Ezzo</span>
                 </p>
-                <p className="mt-2 text-sm leading-6 text-gray-300">
+                <p className="mt-4 text-sm text-gray-400 font-medium" style={{ lineHeight: 1.9 }}>
                   حلول تداول احترافية تربط بين الأدوات التقنية المتقدمة والخبرة العملية في الأسواق المالية، لنمنحك رؤية أوضح واتخاذ قرار أسرع.
                 </p>
               </div>
 
               <div className="flex flex-wrap gap-3">
-                {socialLinks.map(({ icon, url, color }, index) => (
+                {socialLinks.map(({ icon, url }, index) => (
                   <a
                     key={index}
                     href={url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br ${color} text-white shadow-lg transition-all duration-300 hover:-translate-y-1.5 hover:scale-110 hover:shadow-[0_10px_20px_-5px_rgba(251,146,60,0.4)] active:scale-95`}
+                    className="flex h-11 w-11 items-center justify-center rounded-2xl transition-all duration-300 hover:-translate-y-1 active:scale-95"
+                    style={{ border: '1px solid rgba(212,132,90,0.08)', background: 'rgba(212,132,90,0.025)', color: '#9a8a7e' }}
+                    onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.color = '#d4845a'; el.style.borderColor = 'rgba(212,132,90,0.28)'; el.style.background = 'rgba(212,132,90,0.06)'; }}
+                    onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.color = '#9a8a7e'; el.style.borderColor = 'rgba(212,132,90,0.08)'; el.style.background = 'rgba(212,132,90,0.025)'; }}
                   >
                     {icon}
                   </a>
@@ -62,11 +71,14 @@ const Footer = () => {
             </FadeIn>
 
             <FadeIn direction="up" className="delay-100">
-              <p className="mb-4 text-lg font-semibold text-orange-300">روابط سريعة</p>
-              <ul className="space-y-3 text-sm text-gray-300">
+              <p className="mb-5 text-lg font-bold" style={{ color: '#d4845a' }}>روابط سريعة</p>
+              <ul className="space-y-3.5 text-sm font-medium" style={{ color: '#9a8a7e' }}>
                 {navigationLinks.map(({ label, href }) => (
                   <li key={href}>
-                    <Link href={href} className="transition-all duration-300 hover:text-orange-300 hover:translate-x-1 inline-block">
+                    <Link href={href} className="transition-all duration-300 hover:-translate-x-1.5 inline-block" style={{ color: 'inherit' }}
+                      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = '#d4845a' }}
+                      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = '#9a8a7e' }}
+                    >
                       {label}
                     </Link>
                   </li>
@@ -75,11 +87,14 @@ const Footer = () => {
             </FadeIn>
 
             <FadeIn direction="up" className="delay-200">
-              <p className="mb-4 text-lg font-semibold text-orange-300">خدماتنا</p>
-              <ul className="space-y-3 text-sm text-gray-300">
+              <p className="mb-5 text-lg font-bold" style={{ color: '#d4845a' }}>خدماتنا</p>
+              <ul className="space-y-3.5 text-sm font-medium" style={{ color: '#9a8a7e' }}>
                 {resourceLinks.map(({ label, href }) => (
                   <li key={href}>
-                    <Link href={href} className="transition-all duration-300 hover:text-orange-300 hover:translate-x-1 inline-block">
+                    <Link href={href} className="transition-all duration-300 hover:-translate-x-1.5 inline-block" style={{ color: 'inherit' }}
+                      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = '#d4845a' }}
+                      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = '#9a8a7e' }}
+                    >
                       {label}
                     </Link>
                   </li>
@@ -87,20 +102,23 @@ const Footer = () => {
               </ul>
             </FadeIn>
 
-            <FadeIn direction="up" className="space-y-4 delay-300">
-              <p className="text-lg font-semibold text-orange-300">تواصل معنا</p>
-              <ul className="space-y-3 text-sm text-gray-300">
+            <FadeIn direction="up" className="space-y-5 delay-300">
+              <p className="text-lg font-bold" style={{ color: '#d4845a' }}>تواصل معنا</p>
+              <ul className="space-y-4 text-sm font-medium" style={{ color: '#9a8a7e' }}>
                 {contactDetails.map(({ label, value, href }) => (
                   <li key={label} className="leading-6">
-                    <span className="block text-xs font-semibold uppercase tracking-wide text-orange-400/80">
+                    <span className="block text-[11px] font-bold uppercase tracking-wider mb-0.5" style={{ color: 'rgba(212,132,90,0.75)' }}>
                       {label}
                     </span>
                     {href ? (
-                      <a href={href} className="transition-colors hover:text-orange-300">
+                      <a href={href} className="transition-colors text-[14px]" style={{ color: 'inherit' }}
+                        onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = '#d4845a' }}
+                        onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = '#9a8a7e' }}
+                      >
                         {value}
                       </a>
                     ) : (
-                      <span>{value}</span>
+                      <span className="text-[14px]" style={{ color: '#b8a89a' }}>{value}</span>
                     )}
                   </li>
                 ))}
@@ -108,11 +126,13 @@ const Footer = () => {
             </FadeIn>
           </StaggerContainer>
 
-          <div className="card-divider my-8" />
+          <div className="card-divider my-10" />
 
-          <FadeIn direction="up" delay={0.4} className="flex flex-col gap-4 text-xs text-gray-400 sm:flex-row sm:items-center sm:justify-between">
-            <p>© 2026 <span className="ezzo-text">Ezzo</span>. جميع الحقوق محفوظة.</p>
-            <p>صُمم بعناية لدعم المتداولين الطموحين في أسواق الفيوتشر والحسابات الممولة.</p>
+          <FadeIn direction="up" delay={0.4}>
+            <div className="flex flex-col gap-4 text-xs sm:flex-row sm:items-center sm:justify-between font-medium" style={{ color: '#6a5a52' }}>
+              <p>© 2026 <span className="ezzo-text">Ezzo</span>. جميع الحقوق محفوظة.</p>
+              <p>صُمم بعناية لدعم المتداولين الطموحين في أسواق الفيوتشر والحسابات الممولة.</p>
+            </div>
           </FadeIn>
         </div>
       </div>

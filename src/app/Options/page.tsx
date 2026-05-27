@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import Image from 'next/image';
 import { FadeIn, ScaleIn, StaggerContainer, StaggerItem, HoverCard } from '@/components/animations/MotionComponents';
 
 export const metadata: Metadata = {
@@ -44,34 +43,40 @@ function FeatureCard({ icon, title, desc }: { icon: string; title: string; desc:
 
 function OptionTypeCard({
   type,
-  color,
+  isCall,
   arrow,
   title,
   desc,
   when,
 }: {
   type: string;
-  color: string;
+  isCall: boolean;
   arrow: string;
   title: string;
   desc: string;
   when: string;
 }) {
+  const accentColor = isCall ? 'text-emerald-400 border-emerald-500/20 bg-emerald-500/[0.02]' : 'text-rose-400 border-rose-500/20 bg-rose-500/[0.02]';
+  const glowShadow = isCall ? 'hover:shadow-[0_15px_40px_rgba(16,185,129,0.1)]' : 'hover:shadow-[0_15px_40px_rgba(244,63,94,0.1)]';
+  const badgeColor = isCall ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-rose-500/10 text-rose-400 border-rose-500/20';
+
   return (
-    <div className={`relative overflow-hidden rounded-2xl border p-6 ${color}`}>
+    <div className={`relative overflow-hidden rounded-2xl border p-6 transition-all duration-300 hover:-translate-y-1 ${accentColor} ${glowShadow}`}>
+      <div className="absolute inset-0 -z-10 bg-radial-gradient opacity-[0.03]" />
+      
       <div className="mb-4 flex items-center gap-3">
-        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-current/10 text-2xl font-black">
+        <div className={`flex h-12 w-12 items-center justify-center rounded-xl font-black text-2xl border ${badgeColor}`}>
           {arrow}
         </div>
         <div>
-          <span className="text-xl font-black">{type}</span>
-          <p className="text-sm font-semibold opacity-80">{title}</p>
+          <span className="text-xl font-black tracking-wide text-white">{type}</span>
+          <p className="text-sm font-semibold opacity-90">{title}</p>
         </div>
       </div>
-      <p className="text-sm leading-7 opacity-70">{desc}</p>
-      <div className="mt-4 rounded-xl bg-black/20 px-3 py-2">
-        <p className="text-[11px] font-semibold uppercase tracking-wider opacity-50">متى يُستخدم</p>
-        <p className="mt-0.5 text-xs opacity-80">{when}</p>
+      <p className="text-sm leading-7 text-gray-300">{desc}</p>
+      <div className="mt-5 rounded-xl bg-white/[0.02] border border-white/[0.04] p-3">
+        <p className="text-[10px] font-bold uppercase tracking-wider text-gray-500">متى يُستخدم</p>
+        <p className="mt-1 text-xs text-gray-300 font-semibold">{when}</p>
       </div>
     </div>
   );
@@ -81,7 +86,7 @@ function OptionTypeCard({
 
 function FaqItem({ q, a }: { q: string; a: string }) {
   return (
-    <div className="rounded-2xl border border-white/5 bg-white/3 px-5 py-4">
+    <div className="rounded-2xl border border-white/5 bg-white/3 px-5 py-4 transition-all duration-300 hover:border-orange-500/10 hover:bg-white/[0.04]">
       <p className="font-semibold text-orange-300">{q}</p>
       <p className="mt-2 text-sm leading-7 text-gray-400">{a}</p>
     </div>
@@ -160,7 +165,7 @@ export default function OptionsPage() {
             <div className="grid gap-4 sm:grid-cols-2">
               <OptionTypeCard
                 type="CALL"
-                color="border-green-500/20 bg-green-500/5 text-green-300"
+                isCall={true}
                 arrow="▲"
                 title="خيار الشراء"
                 desc="يمنحك حق شراء الأصل بسعر تنفيذ محدد. تربح عندما يرتفع السعر فوق سعر التنفيذ قبل الانتهاء."
@@ -168,7 +173,7 @@ export default function OptionsPage() {
               />
               <OptionTypeCard
                 type="PUT"
-                color="border-red-500/20 bg-red-500/5 text-red-300"
+                isCall={false}
                 arrow="▼"
                 title="خيار البيع"
                 desc="يمنحك حق بيع الأصل بسعر تنفيذ محدد. تربح عندما ينخفض السعر تحت سعر التنفيذ قبل الانتهاء."
@@ -204,20 +209,78 @@ export default function OptionsPage() {
         <FadeIn direction="up" delay={0.2}>
           <div className="glass-panel mb-10 overflow-hidden px-6 py-8 sm:px-10">
             <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
-              {/* Bot visual */}
-              <div className="flex flex-col items-center gap-4">
-                <div className="relative w-full max-w-xs aspect-video overflow-hidden rounded-2xl border border-orange-500/30 shadow-[0_0_60px_-10px_rgba(249,115,22,0.5)]">
-                  <Image
-                    src="/img/bot.webp"
-                    alt="EZZO SPX BOT"
-                    fill
-                    className="object-cover"
-                  />
+              {/* Bot visual (Simulated live Feed UI) */}
+              <div className="flex flex-col items-stretch w-full max-w-md mx-auto">
+                <div className="gradient-card overflow-hidden shadow-[0_20px_50px_rgba(249,115,22,0.15)] border-white/[0.08] hover:shadow-[0_20px_50px_rgba(249,115,22,0.25)] transition-all duration-300">
+                  {/* macOS style Window Title Bar */}
+                  <div className="flex items-center justify-between px-5 py-3 border-b border-white/[0.06] bg-white/[0.02]">
+                    <div className="flex gap-2">
+                      <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f56] opacity-80" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-[#ffbd2e] opacity-80" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-[#27c93f] opacity-80" />
+                    </div>
+                    <span className="text-[11px] font-mono text-gray-400">Telegram Live Alert Feed</span>
+                    <div className="w-10" />
+                  </div>
+                  
+                  {/* Terminal / Chat window content */}
+                  <div className="p-5 font-mono text-xs space-y-4 bg-black/60 min-h-[220px]">
+                    <div className="flex items-start gap-3">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-orange-500 to-amber-400 text-black text-xs font-black shadow-[0_0_10px_rgba(249,115,22,0.4)] flex-shrink-0">
+                        EZ
+                      </div>
+                      <div className="flex-1 space-y-2">
+                        <div className="flex items-center gap-2">
+                          <span className="font-bold text-orange-300">EZZO SPX BOT</span>
+                          <span className="rounded bg-orange-500/10 border border-orange-500/20 px-1 py-0.5 text-[9px] text-orange-400">BOT</span>
+                          <span className="text-[9px] text-gray-500">10:42 AM</span>
+                        </div>
+                        
+                        <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.03] p-4 text-[13px] text-emerald-400 space-y-2 leading-relaxed text-right" dir="rtl">
+                          <div className="flex justify-between items-center border-b border-emerald-500/10 pb-1.5 font-bold">
+                            <span>🚨 إشارة شراء جديدة (NEW SIGNAL)</span>
+                            <span className="text-xs bg-emerald-500/15 px-2 py-0.5 rounded-full">CALL</span>
+                          </div>
+                          <div className="grid grid-cols-2 gap-y-1.5 gap-x-4 pt-1 font-sans text-gray-300">
+                            <div>الأصل: <span className="font-mono font-bold text-white">SPX (S&P 500)</span></div>
+                            <div>سعر التنفيذ: <span className="font-mono font-bold text-white">5250</span></div>
+                            <div>سعر الدخول: <span className="font-mono font-bold text-white">$3.20</span></div>
+                            <div>التاريخ: <span className="font-mono font-bold text-white">اليوم (0DTE)</span></div>
+                          </div>
+                          <div className="pt-2 border-t border-emerald-500/10 flex justify-between font-sans text-xs">
+                            <span className="text-gray-400">الهدف الأول: <strong className="text-emerald-400">$4.50</strong></span>
+                            <span className="text-gray-400">وقف الخسارة: <strong className="text-red-400">$1.80</strong></span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-3">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-orange-500 to-amber-400 text-black text-xs font-black shadow-[0_0_10px_rgba(249,115,22,0.4)] flex-shrink-0">
+                        EZ
+                      </div>
+                      <div className="flex-1 space-y-2">
+                        <div className="flex items-center gap-2">
+                          <span className="font-bold text-orange-300">EZZO SPX BOT</span>
+                          <span className="rounded bg-orange-500/10 border border-orange-500/20 px-1 py-0.5 text-[9px] text-orange-400">BOT</span>
+                          <span className="text-[9px] text-gray-500">10:48 AM</span>
+                        </div>
+                        
+                        <div className="rounded-xl border border-white/[0.06] bg-white/[0.01] p-3 text-[12px] text-gray-300 space-y-1 text-right" dir="rtl">
+                          <p className="font-sans">📈 تحديث الصفقة:</p>
+                          <p className="font-sans text-emerald-400 font-bold">✓ تم تحقيق الهدف الأول بسعر $4.50 (+40.6%) 🎯</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <p className="text-center text-xl font-black text-white">EZZO SPX BOT</p>
-                <div className="flex items-center gap-1.5 rounded-full border border-green-500/30 bg-green-500/10 px-3 py-1 text-xs font-semibold text-green-300">
-                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-green-400" />
-                  البوت نشط
+                
+                <div className="mt-4 flex items-center justify-between px-2">
+                  <div className="flex items-center gap-1.5 rounded-full border border-green-500/30 bg-green-500/10 px-3 py-1 text-xs font-semibold text-green-300">
+                    <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-green-400" />
+                    البوت نشط ويعمل على مدار الساعة
+                  </div>
+                  <span className="text-[11px] text-gray-500">معدل الدقة: +85%</span>
                 </div>
               </div>
 

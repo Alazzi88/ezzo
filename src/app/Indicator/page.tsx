@@ -48,40 +48,49 @@ const Indicator: React.FC = () => (
     </section>
 
     <section className="page-shell mt-16 space-y-16">
-      <div className="glass-panel px-6 py-10 sm:px-10">
-        <h2 className="text-2xl font-bold text-orange-300 text-center">استراتيجية ايزو البرو</h2>
-        <p className="mt-4 text-center text-sm leading-7 text-gray-300">
+      <div className="glass-panel px-6 py-12 sm:px-10 sm:py-16">
+        <h2 className="text-3xl font-black text-white text-center">استراتيجية ايزو البرو</h2>
+        <p className="mt-4 text-center text-sm leading-7 text-gray-400 font-medium max-w-2xl mx-auto">
           استراتيجية ايزو البرو مبنية على مفاهيم ICT وتركز على رصد الفجوات السعرية، كتل الأوامر، وتحديد أهداف واضحة مع وقف خسارة محسوب لكل صفقة.
         </p>
-        <div className="mt-8 grid gap-8 md:grid-cols-2 md:items-center">
+        <div className="mt-10 grid gap-10 md:grid-cols-2 md:items-center">
           <VideoCard {...STRATEGY_VIDEO} />
-          <ul className="list-disc space-y-3 pr-5 text-sm leading-7 text-gray-200">
-            <li>نقاط دخول مبنية على مناطق سيولة مؤكدة.</li>
-            <li>تحديد أهداف ووقف خسارة ديناميكي.</li>
-            <li>تنبيهات فورية عبر الايميل او التطبيق.</li>
+          <ul className="space-y-4 pr-2 text-sm leading-7 text-gray-300 font-medium">
+            <li className="flex items-center gap-3">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-orange-500/15 text-orange-400 font-bold text-xs flex-shrink-0">✓</span>
+              <span>نقاط دخول مبنية على مناطق سيولة مؤكدة (Liquidity Sweeps).</span>
+            </li>
+            <li className="flex items-center gap-3">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-orange-500/15 text-orange-400 font-bold text-xs flex-shrink-0">✓</span>
+              <span>تحديد أهداف ووقف خسارة ديناميكي متناسب مع حركة السوق.</span>
+            </li>
+            <li className="flex items-center gap-3">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-orange-500/15 text-orange-400 font-bold text-xs flex-shrink-0">✓</span>
+              <span>تنبيهات فورية لحظية عبر البريد الإلكتروني أو الجوال.</span>
+            </li>
           </ul>
         </div>
-        <div className="mt-10 text-center">
-          <p className="mb-4 text-sm text-gray-400">اشترك الآن للحصول على الاستراتيجية</p>
+        <div className="mt-12 text-center">
+          <p className="mb-4 text-xs font-bold uppercase tracking-wider text-gray-500">اشترك الآن للحصول على الاستراتيجية</p>
           <Link
             href="https://3zzo.aryaf.sa/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-orange-500 via-orange-400 to-amber-300 px-8 py-3.5 text-base font-bold text-black shadow-[0_15px_40px_-15px_rgba(249,115,22,0.7)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_-15px_rgba(249,115,22,0.8)]"
+            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-orange-500 via-orange-400 to-amber-300 px-10 py-4 text-base font-bold text-black shadow-[0_15px_40px_-15px_rgba(249,115,22,0.6)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_-15px_rgba(249,115,22,0.8)] active:scale-98"
           >
-            اشترك من المتجر
+            اشترك من المتجر الرسمي ↗
           </Link>
         </div>
       </div>
     </section>
 
     <section className="page-shell mt-20">
-      <div className="glass-panel px-6 py-10 sm:px-10 text-center">
-        <h2 className="text-2xl font-bold text-orange-300">أسئلة شائعة</h2>
-        <p className="mt-3 text-sm leading-7 text-gray-300">
+      <div className="glass-panel px-6 py-12 sm:px-10 sm:py-16 text-center">
+        <h2 className="text-3xl font-black text-white">الأسئلة الشائعة</h2>
+        <p className="mt-3 text-sm leading-7 text-gray-400 font-medium max-w-xl mx-auto">
           إجابات سريعة على أكثر الاستفسارات تكراراً حول استراتيجياتنا، أنظمة التنبيه، وخطط الاشتراك.
         </p>
-        <div className="mt-8 text-right">
+        <div className="mt-10 text-right">
           <FAQs />
         </div>
       </div>

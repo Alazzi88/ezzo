@@ -48,11 +48,6 @@ const StoreIcon = ({ size = 20 }: { size?: number }) => (
   </svg>
 );
 
-const DiscussIcon = ({ size = 20 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-  </svg>
-);
 
 const CourseIcon = ({ size = 20 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -213,7 +208,6 @@ export default function LinksPage() {
 
   const communities = [
     { key: "telegramChannel" as const, url: "https://t.me/ezzo_trading", icon: <TelegramIcon size={20} />, color: "#38bdf8", glowColor: "#38bdf8" },
-    { key: "telegramDiscussions" as const, url: "https://t.me/ezzo_discussions", icon: <DiscussIcon size={20} />, color: "#60a5fa", glowColor: "#60a5fa" },
   ] as const;
 
   const socialCircles = [

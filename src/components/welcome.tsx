@@ -283,10 +283,6 @@ const Welcome: React.FC = () => {
 
           {/* Trust badges row */}
           <StaggerItem className="mb-5 flex flex-wrap justify-center gap-3">
-            <div className="premium-badge">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full" style={{ background: '#c9a84c' }} />
-              النسخة الاحترافية 2026
-            </div>
             <Link
               href="https://t.me/ezzo_trading"
               target="_blank"

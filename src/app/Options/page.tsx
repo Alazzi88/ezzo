@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { FadeIn, ScaleIn, StaggerContainer, StaggerItem, HoverCard } from '@/components/animations/MotionComponents';
+import OptionsCalculator from './Calculator';
 
 export const metadata: Metadata = {
   title: 'EZZO SPX BOT | إشارات عقود خيارات SPX على تيليجرام',
@@ -142,6 +143,12 @@ export default function OptionsPage() {
                 انضم للبوت على تيليجرام
               </a>
               <a
+                href="#calculator"
+                className="inline-flex items-center rounded-full border border-white/15 px-7 py-3.5 font-semibold text-gray-200 transition-all duration-300 hover:border-orange-400/40 hover:text-white"
+              >
+                حاسبة العقود 🧮
+              </a>
+              <a
                 href="#learn"
                 className="inline-flex items-center rounded-full border border-white/15 px-7 py-3.5 font-semibold text-gray-200 transition-all duration-300 hover:border-orange-400/40 hover:text-white"
               >
@@ -150,6 +157,21 @@ export default function OptionsPage() {
             </div>
           </div>
         </FadeIn>
+
+        {/* ── Options Calculator ────────────────────────────── */}
+        <div id="calculator">
+        <FadeIn direction="up" delay={0.05}>
+          <div className="glass-panel mb-10 px-6 py-8 sm:px-10">
+            <div className="mb-6 text-center">
+              <h2 className="section-heading">حاسبة عقود الخيارات</h2>
+              <p className="section-subheading mx-auto max-w-3xl">
+                أدخل الدلتا والثيتا يدويًا، وحدد سعرك المستهدف والوقت — وشوف القيمة المتوقعة للعقد فورًا.
+              </p>
+            </div>
+            <OptionsCalculator />
+          </div>
+        </FadeIn>
+        </div>
 
         {/* ── What is Options ───────────────────────────────── */}
         <div id="learn">

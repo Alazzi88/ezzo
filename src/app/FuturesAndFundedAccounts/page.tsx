@@ -5,11 +5,12 @@ import { CompanyCard } from './CompanyCard';
 import type { Company } from './CompanyCard';
 
 export const metadata: Metadata = {
-  title: 'الفيوتشر والحسابات الممولة | Topstep, AquaFuture, Earn2Trade, FundedNext, E8 Markets',
+  title: 'الفيوتشر والحسابات الممولة | مقارنة 15 شركة تمويل عالمية',
   description:
-    'اجتز اختبار التقييم واحصل على رأس مال يصل إلى 400K$ مع نسبة أرباح تصل لـ 90%. مقارنة شاملة لأفضل شركات الحسابات الممولة: Topstep, AquaFuture, Earn2Trade, FundedNext, E8 Markets.',
+    'اجتز اختبار التقييم واحصل على رأس مال يصل إلى 1.5M$ مع نسبة أرباح تصل لـ 90%. مقارنة شاملة لـ 15 شركة حسابات ممولة: Topstep, AquaFuture, Earn2Trade, FundedNext, E8 Markets, Alpha Futures, Tradeify, My Funded Futures, Blue Guardian, Futures Elite, Funded Futures Family, The Trading Pit, Hola Prime, TradeDay, FunderPro.',
   keywords: [
     'حسابات ممولة', 'فيوتشر', 'Topstep', 'AquaFuture', 'Earn2Trade', 'FundedNext', 'E8 Markets',
+    'Alpha Futures', 'Tradeify', 'My Funded Futures', 'Blue Guardian', 'Futures Elite',
     'prop firm', 'اختبار حسابات ممولة', 'تداول فيوتشر ممول', 'funded trading account',
     'futures prop firm', 'best prop firm Arabic', 'حساب ممول فيوتشر',
     'اجتياز اختبار prop firm', 'نسبة أرباح 90%',
@@ -27,6 +28,19 @@ const BOT_LINK = 'https://t.me/ezzo3zzo3';
 
 const companies: Company[] = [
   {
+    name: 'Alpha Futures',
+    logo: '/img/alphafutures.svg',
+    url: 'https://alpha-futures.com/',
+    keyStats: ['ربح يصل حتى 90%', 'قفل الخسارة عند نهاية اليوم', 'مرحلة تقييم واحدة'],
+    plans: [
+      { name: 'Zero 25K', price: '$79/شهر', profit: 'هدف $1,500' },
+      { name: 'Zero 50K', price: '$119/شهر', profit: 'هدف $3,000' },
+      { name: 'Zero 100K', price: '$239/شهر', profit: 'هدف $6,000' },
+    ],
+    summary:
+      'شركة بريطانية بمسار تقييم من خطوة واحدة (Zero) باشتراك شهري، وحد خسارة متحرك يتوقف عند الرصيد الابتدائي بمجرد الوصول إليه بالربح. يتوفر أيضاً مسار تمويل مباشر دون اختبار.',
+  },
+  {
     name: 'Topstep',
     logo: '/img/topstep.webp',
     url: 'https://www.topstep.com/',
@@ -40,6 +54,19 @@ const companies: Company[] = [
       'تقييم Trading Combine® بمرحلة واحدة مع حد خسارة متحرك. التداول في 5 أيام كحد أدنى قبل الترقية.',
   },
   {
+    name: 'Tradeify',
+    logo: '/img/tradeify.svg',
+    url: 'https://tradeify.co/',
+    keyStats: ['ربح حتى 90/10', 'حد خسارة نهاية اليوم', '3 مسارات: تقييم أو تمويل فوري'],
+    plans: [
+      { name: 'Select 25K', price: '$109 (مرة واحدة)', profit: 'هدف $1,500' },
+      { name: 'Select 50K', price: '$165 (مرة واحدة)', profit: 'هدف $3,000' },
+      { name: 'Select 100K', price: '$265 (مرة واحدة)', profit: 'هدف $6,000' },
+    ],
+    summary:
+      'شركة أمريكية تقدّم مسار Select بدفعة واحدة وحد خسارة يُحسب نهاية اليوم، إلى جانب مسار Growth السريع وخيار Lightning للتمويل الفوري دون اجتياز اختبار.',
+  },
+  {
     name: 'AquaFuture',
     logo: '/img/aqua.webp',
     url: 'https://www.aquafuture.com/',
@@ -50,6 +77,19 @@ const companies: Company[] = [
     ],
     summary:
       'مسارات تمويل مرنة للمبتدئين والمحترفين. حسابات Beginner تشترط 5 أيام تداول، بينما Advanced بلا حد أدنى للأيام.',
+  },
+  {
+    name: 'My Funded Futures',
+    logo: '/img/myfundedfutures.svg',
+    url: 'https://myfundedfutures.com/',
+    keyStats: ['ربح حتى 90/10 على خطط Rapid', 'مرحلة تقييم واحدة', 'اشتراك شهري بدون رسوم تفعيل'],
+    plans: [
+      { name: '25K', price: '$77/شهر', profit: 'هدف $1,500' },
+      { name: '50K', price: '$157/شهر', profit: 'هدف $3,000' },
+      { name: '100K', price: '$267/شهر', profit: 'هدف $6,000' },
+    ],
+    summary:
+      'شركة أمريكية بتقييم من خطوة واحدة وعدة خطط (Core, Rapid, Flex, Pro) تختلف في نوع حد الخسارة وشرط الاتساق بين الأيام.',
   },
   {
     name: 'Earn2Trade',
@@ -65,6 +105,19 @@ const companies: Company[] = [
       'مسار وظيفي واضح من 25K وصولاً لـ 400K. يشترط 10 أيام تداول والالتزام بسلّم العقود.',
   },
   {
+    name: 'Blue Guardian Futures',
+    logo: '/img/blueguardian.svg',
+    url: 'https://www.blueguardian.com/futures',
+    keyStats: ['100% من أول $15,000 ثم 90%', 'حد خسارة نهاية اليوم', '4 مسارات تقييم بينها تمويل فوري'],
+    plans: [
+      { name: 'Standard', price: 'راجع الموقع لكل حجم', profit: 'حسب حجم الحساب المختار' },
+      { name: 'Pro', price: 'راجع الموقع لكل حجم', profit: 'بدون حد خسارة يومي' },
+      { name: 'Instant Funding', price: 'راجع الموقع لكل حجم', profit: 'بدون اختبار تقييم' },
+    ],
+    summary:
+      'شركة مقرها الإمارات بحسابات من $5K وحتى $400K وتمويل إجمالي يصل لـ $450K. تمنح المتداول كامل الربح على أول $15,000 قبل احتساب النسبة المعتادة.',
+  },
+  {
     name: 'FundedNext',
     logo: '/img/fundednext.webp',
     url: 'https://fundednext.com/',
@@ -78,6 +131,19 @@ const companies: Company[] = [
       'تحدي Rapid Challenge يمكن اجتيازه في يوم واحد. لا يوجد حد خسارة يومي — فقط حد إجمالي.',
   },
   {
+    name: 'Futures Elite',
+    logo: '/img/futureselite.svg',
+    url: 'https://futureselite.com/',
+    keyStats: ['ربح حتى 90%', 'مسارا Elite وPrime', 'حسابات قابلة للدمج حتى $1.5M'],
+    plans: [
+      { name: 'Prime 50K', price: '$99 (مرة واحدة)', profit: 'هدف $3,000' },
+      { name: 'Prime 100K', price: '$189 (مرة واحدة)', profit: 'هدف $6,000' },
+      { name: 'Prime 150K', price: '$279 (مرة واحدة)', profit: 'هدف $9,000' },
+    ],
+    summary:
+      'شركة إيطالية توفر مسار Prime بحد خسارة متحرك بلا شرط اتساق، ومسار Elite بحد خسارة نهاية اليوم مع تمويل يُفعَّل تلقائياً فور اجتياز التقييم.',
+  },
+  {
     name: 'E8 Markets',
     logo: '/img/e8.webp',
     url: 'https://e8markets.com/',
@@ -89,6 +155,70 @@ const companies: Company[] = [
     ],
     summary:
       'تقييم E8 Signature بمرحلة واحدة. سحوبات أسبوعية بعد الترقية. لا يُسمح بالاحتفاظ الليلي أو خلال عطلة نهاية الأسبوع.',
+  },
+  {
+    name: 'Funded Futures Family',
+    logo: '/img/fundedfuturesfamily.svg',
+    url: 'https://www.fundedfuturesfamily.com/',
+    keyStats: ['100% من أول $10,000 ثم 90%', 'تقييم بمرحلة واحدة', 'حسابات حتى $150K'],
+    plans: [
+      { name: 'Premier Plus (Trailing)', price: 'من $89/شهر', profit: 'يبدأ من $1,500' },
+      { name: 'Velocity (Trailing)', price: 'من $79/شهر', profit: 'يبدأ من $2,500' },
+      { name: 'S2F (نهاية اليوم)', price: 'من $329 (مرة واحدة)', profit: '7 أيام تداول كحد أدنى' },
+    ],
+    summary:
+      'شركة أمريكية بعدة عائلات خطط (Prime, Premier Plus, Velocity, S2F) تتفاوت بين حد خسارة نهاية اليوم والحد المتحرك، مع منح المتداول كامل أول $10,000 من أرباحه.',
+  },
+  {
+    name: 'The Trading Pit Futures',
+    logo: '/img/thetradingpit.svg',
+    url: 'https://www.thetradingpit.com/futures',
+    keyStats: ['نسبة الأرباح 80%', 'تقييم Futures Prime بمرحلة واحدة', 'إيقاف يومي بدل الإغلاق الفوري'],
+    plans: [
+      { name: '50K', price: '$99 (مرة واحدة)', profit: 'هدف $3,000' },
+      { name: '100K', price: '$189 (مرة واحدة)', profit: 'هدف $6,000' },
+      { name: '150K', price: '$289 (مرة واحدة)', profit: 'هدف $9,000' },
+    ],
+    summary:
+      'شركة مقرها ليختنشتاين، مدة التقييم 30 يوماً، وتشترط 3 أيام تداول رابحة على الأقل ونسبة اتساق 40%. عند خرق حد "الإيقاف اليومي" يُغلق التداول مؤقتاً بدل إنهاء الحساب.',
+  },
+  {
+    name: 'Hola Prime Futures',
+    logo: '/img/holaprime.svg',
+    url: 'https://holaprime.com/futures/',
+    keyStats: ['نسبة الأرباح 90%', 'سحب أسبوعي كل 7 أيام', 'تقييم بمرحلة واحدة أو تمويل مباشر'],
+    plans: [
+      { name: '1-Step Prime', price: 'يبدأ من $99', profit: 'هدف 6% من الرصيد' },
+      { name: 'Direct Account', price: 'يبدأ من $348', profit: 'بدون اختبار تقييم' },
+    ],
+    summary:
+      'شركة مقرها هونغ كونغ بحد خسارة متحرك يتراوح بين 3% و4% حسب حجم الحساب، وسقف تمويل إجمالي يصل إلى $800K بين حسابات الفوركس والفيوتشر معاً.',
+  },
+  {
+    name: 'TradeDay',
+    logo: '/img/tradeday.svg',
+    url: 'https://www.tradeday.com/',
+    keyStats: ['ربح حتى 90% في المرحلة الممولة', 'حد خسارة متحرك (يومي أو نهاية اليوم)', 'دفعات مبكرة من اليوم الأول'],
+    plans: [
+      { name: '50K Intraday', price: '$125/شهر', profit: 'هدف $3,000' },
+      { name: '100K Intraday', price: '$230/شهر', profit: 'هدف $6,000' },
+      { name: '150K Intraday', price: '$350/شهر', profit: 'هدف $9,000' },
+    ],
+    summary:
+      'شركة أمريكية تتيح للمتداول اختيار طريقة احتساب حد الخسارة (خلال اليوم أو نهاية اليوم)، مع مسار Quick Pay الذي يسمح بسحب الأرباح من اليوم الأول.',
+  },
+  {
+    name: 'FunderPro Futures',
+    logo: '/img/funderpro.svg',
+    url: 'https://funderpro.com/futures',
+    keyStats: ['ربح تصاعدي حتى 80%', 'حد خسارة يومي 2% وإجمالي 4%', 'مهلة تقييم 30 يوماً'],
+    plans: [
+      { name: '50K', price: '$79/شهر', profit: 'هدف $3,000 (6%)' },
+      { name: '100K', price: '$149/شهر', profit: 'هدف $6,000 (6%)' },
+      { name: '150K', price: '$219/شهر', profit: 'هدف $9,000 (6%)' },
+    ],
+    summary:
+      'شركة مقرها مالطا بتقييم من مرحلة واحدة ونسبة ربح تتصاعد مع كل عملية سحب (60% ثم 70% ثم 80%)، وحد أقصى 5 حسابات نشطة في آن واحد.',
   },
 ];
 
@@ -128,15 +258,15 @@ export default function FuturesAndFundedAccountsPage() {
 
             <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-gray-400 sm:text-lg">
               اجتز اختبار التقييم واحصل على رأس مال يصل إلى{' '}
-              <span className="font-bold text-orange-300">400K$</span>{' '}
+              <span className="font-bold text-orange-300">1.5M$</span>{' '}
               مع نسبة أرباح تصل لـ 90%.
             </p>
 
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               {[
                 { value: '80–90%', label: 'نسبة الأرباح' },
-                { value: '5', label: 'شركات موثوقة' },
-                { value: '400K$', label: 'أقصى تمويل' },
+                { value: '15', label: 'شركة موثوقة' },
+                { value: '1.5M$', label: 'أقصى تمويل' },
               ].map((stat) => (
                 <div
                   key={stat.label}

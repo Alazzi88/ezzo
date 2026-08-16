@@ -11,7 +11,6 @@ const navigation = [
   { name: 'الفيوتشر والحسابات الممولة', href: '/FuturesAndFundedAccounts' },
   { name: 'استراتيجتنا بالتداول', href: '/Indicator' },
   { name: 'بوت الخيارات', href: '/Options', highlight: true },
-  { name: 'الدورات التدريبية', href: '/Coursies' },
   { name: 'روابطنا', href: '/links' },
   { name: 'الدعم', href: '/Support' },
   { name: 'سياسة الخصوصية', href: '/PrivacyPolicy' },

@@ -21,7 +21,6 @@ const navigationLinks = [
 ];
 
 const resourceLinks = [
-  { label: 'الدورات التدريبية', href: '/Coursies' },
   { label: 'استراتيجية ايزو', href: '/Indicator' },
   { label: 'بوت الخيارات', href: '/Options' },
 ];

@@ -49,13 +49,6 @@ const StoreIcon = ({ size = 20 }: { size?: number }) => (
 );
 
 
-const CourseIcon = ({ size = 20 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
-    <path d="M6 12v5c3 3 9 3 12 0v-5" />
-  </svg>
-);
-
 const SnapchatIcon = ({ size = 20 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
     <path d="M12.166 3c-.57 0-2.541.14-3.682 1.978-.382.614-.321 1.67-.286 2.456l.01.21c-.336.09-.74.046-1.098-.069-.088-.029-.17-.043-.245-.043-.28 0-.46.153-.514.43-.064.33.13.57.396.693.054.026.688.283 1.52.316-.28.49-.716 1.144-1.505 1.79-.197.161-.298.38-.264.594.024.154.116.295.26.39.362.236.917.36 1.648.369-.099.25-.137.521-.113.786.042.458.285.851.68 1.107.413.267.98.401 1.683.401.614 0 1.134-.104 1.543-.309.32.205.84.309 1.543.309.703 0 1.27-.134 1.683-.401.395-.256.638-.649.68-1.107.024-.265-.014-.537-.113-.786.73-.009 1.286-.133 1.648-.37.144-.094.236-.235.26-.389.034-.215-.067-.433-.264-.594-.789-.646-1.225-1.3-1.505-1.79.832-.033 1.466-.29 1.52-.316.266-.123.46-.363.396-.693-.054-.277-.234-.43-.514-.43-.075 0-.157.014-.245.043-.358.115-.762.158-1.099.07l.011-.211c.035-.786.096-1.842-.286-2.456C14.707 3.14 12.737 3 12.166 3z" />
@@ -202,7 +195,6 @@ export default function LinksPage() {
     { key: "website" as const, url: "https://3zzo.com/", icon: <WebsiteIcon size={20} />, color: "#f97316", glowColor: "#f97316" },
     { key: "optionBot" as const, url: "https://t.me/ezzospxbot", icon: <BotIcon size={20} />, color: "#fbbf24", glowColor: "#fbbf24", badge: "رائج", badgeColor: "#fbbf24" },
     { key: "store" as const, url: "https://3zzo.aryaf.sa/", icon: <StoreIcon size={20} />, color: "#fb923c", glowColor: "#fb923c" },
-    { key: "telegramCourse" as const, url: "https://t.me/ezzo_course", icon: <CourseIcon size={20} />, color: "#a78bfa", glowColor: "#a78bfa", badge: "مميز", badgeColor: "#a78bfa" },
     { key: "indicator" as const, url: "https://3zzo.com/Indicator", icon: <ChartIcon size={20} />, color: "#facc15", glowColor: "#facc15" },
   ] as const;
 

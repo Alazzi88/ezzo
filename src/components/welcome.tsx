@@ -234,13 +234,6 @@ const products: ProductCardProps[] = [
     linkText: 'استكشف الاستراتيجية',
   },
   {
-    img: '/img/trading-analysis.webp',
-    title: 'دورة التحليل الفني للفيوتشر',
-    description: 'منهج تدريبي متكامل يبدأ من الأساسيات وينتهي بخطط تنفيذ متقدمة تدعمك في كل جلسة تداول.',
-    link: '/Coursies',
-    linkText: 'تفاصيل الدورة',
-  },
-  {
     img: '/img/bot.webp',
     title: 'بوت خيارات EZZO SPX BOT',
     description: 'بوت متخصص في عقود خيارات SPX — يرسل إشارات CALL وPUT مع سعر الدخول وهدف الربح مباشرةً.',
@@ -409,7 +402,7 @@ const Welcome: React.FC = () => {
               استراتيجيات لحظية ومسارات تعليمية مصممة لتقوية قراراتك وتطوير تداولك بخطوات واضحة.
             </p>
           </div>
-          <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-7 md:grid-cols-2">
             {products.map((product, idx) => (
               <ScaleIn key={product.title} delay={idx * 0.1}>
                 <ProductCard {...product} />

@@ -28,11 +28,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <title>Ezzo | استراتيجية ايزو احترافية - إشارات فنية متقدمة للفيوتشر والحسابات الممولة</title>
         <meta
           name="description"
-          content="استراتيجية ايزو للتداول - أفضل استراتيجية ايزو لحظية للفيوتشر والحسابات الممولة. احصل على إشارات فنية دقيقة، تحليل SPX500، تنبيهات TradingView، ودورات تعليمية احترافية."
+          content="استراتيجية ايزو للتداول - أفضل استراتيجية ايزو لحظية للفيوتشر والحسابات الممولة. احصل على إشارات فنية دقيقة، تحليل SPX500، تنبيهات TradingView."
         />
         <meta
           name="keywords"
-          content="استراتيجية تداول, استراتيجية ايزو, تداول الفيوتشر, Futures Trading, مؤشر فني, تحليل فني, إشارات تداول, SPX500, الحسابات الممولة, Funded Accounts, TradingView, بوت تداول, Trading Bot, دورة تداول, Ezzo Trading"
+          content="استراتيجية تداول, استراتيجية ايزو, تداول الفيوتشر, Futures Trading, مؤشر فني, تحليل فني, إشارات تداول, SPX500, الحسابات الممولة, Funded Accounts, TradingView, بوت تداول, Trading Bot, Ezzo Trading"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -41,7 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         {/* Open Graph */}
         <meta property="og:title" content="Ezzo | استراتيجية ايزو احترافية - إشارات فنية للفيوتشر" />
-        <meta property="og:description" content="أفضل استراتيجية ايزو لحظية للفيوتشر والحسابات الممولة. إشارات دقيقة، تحليل فني متقدم، ودورات تعليمية." />
+        <meta property="og:description" content="أفضل استراتيجية ايزو لحظية للفيوتشر والحسابات الممولة. إشارات دقيقة، تحليل فني متقدم." />
         <meta property="og:url" content="https://3zzo.com" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Ezzo Trading" />

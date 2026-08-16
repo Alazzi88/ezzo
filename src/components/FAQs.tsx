@@ -2,6 +2,8 @@
 "use client"
 
 import React, { useState } from "react";
+import { AnimatePresence, m } from "framer-motion";
+import { StaggerContainer, StaggerItem } from "./animations/MotionComponents";
 
 interface FAQItem {
   question: string;
@@ -78,44 +80,56 @@ const FAQs: React.FC = () => {
         الأسئلة المتكررة
       </h2>
 
-      {faqData.map((faq, index) => (
-        <div key={index} className="border-b border-gray-700 py-4">
-          {/* رأس السؤال */}
-          <button
-            onClick={() => toggleFAQ(index)}
-            className="faq-question flex justify-between items-center w-full text-left focus:outline-none"
-          >
-            <h3 className="text-lg font-medium text-gray-200 hover:text-orange-400 transition-colors duration-300">
-              {faq.question}
-            </h3>
-            {/* أيقونة السهم مع الدوران */}
-            <svg
-              className={`w-5 h-5 text-orange-500 transform transition-transform duration-700 ${openIndex === index ? "rotate-180" : "rotate-0"
-                }`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
-          </button>
+      <StaggerContainer staggerChildren={0.06}>
+        {faqData.map((faq, index) => (
+          <StaggerItem key={index}>
+            <div className="border-b border-gray-700 py-4">
+              {/* رأس السؤال */}
+              <button
+                onClick={() => toggleFAQ(index)}
+                className="faq-question flex justify-between items-center w-full text-left focus:outline-none"
+              >
+                <h3 className="text-lg font-medium text-gray-200 hover:text-orange-400 transition-colors duration-300">
+                  {faq.question}
+                </h3>
+                {/* أيقونة السهم مع الدوران */}
+                <m.svg
+                  className="w-5 h-5 text-orange-500 flex-shrink-0"
+                  animate={{ rotate: openIndex === index ? 180 : 0 }}
+                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </m.svg>
+              </button>
 
-          {/* نص الإجابة مع أنيميشن التوسّع والانكماش */}
-          <div
-            className={`overflow-hidden transition-[max-height] duration-700 ease-in-out ${openIndex === index ? "max-h-96" : "max-h-0"
-              }`}
-          >
-            <p className="mt-3 text-gray-400 leading-relaxed">
-              {faq.answer}
-            </p>
-          </div>
-        </div>
-      ))}
+              {/* نص الإجابة مع أنيميشن التوسّع والانكماش */}
+              <AnimatePresence initial={false}>
+                {openIndex === index && (
+                  <m.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                    className="overflow-hidden"
+                  >
+                    <p className="mt-3 text-gray-400 leading-relaxed">
+                      {faq.answer}
+                    </p>
+                  </m.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </StaggerItem>
+        ))}
+      </StaggerContainer>
     </div>
   );
 };

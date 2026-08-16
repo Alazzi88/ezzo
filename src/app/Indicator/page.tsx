@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import FAQs from '@/components/FAQs';
 import { VideoCard } from './VideoCard';
+import { FadeIn, StaggerContainer, StaggerItem } from '@/components/animations/MotionComponents';
 
 export const metadata: Metadata = {
   title: 'استراتيجية ايزو البرو | مؤشر تداول فني متقدم للفيوتشر والحسابات الممولة',
@@ -36,39 +37,41 @@ const Indicator: React.FC = () => (
     </div>
 
     <section className="page-shell text-center">
-      <span className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-4 py-1 text-xs font-semibold uppercase tracking-[4px] text-orange-100">
-        استراتيجيات Ezzo الاحترافية
-      </span>
-      <h1 className="mt-6 text-3xl font-extrabold text-white sm:text-4xl">
-        تعرف على كيفية عمل استراتيجياتنا
-      </h1>
-      <p className="section-subheading mx-auto max-w-3xl">
-        أدوات تحليلية متقدمة تعتمد على منهجية ICT وتكملها تنبيهات لحظية وخطط تنفيذ دقيقة لأسواق الفيوتشر وناسداك.
-      </p>
+      <FadeIn direction="up">
+        <span className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-4 py-1 text-xs font-semibold uppercase tracking-[4px] text-orange-100">
+          استراتيجيات Ezzo الاحترافية
+        </span>
+        <h1 className="mt-6 text-3xl font-extrabold text-white sm:text-4xl">
+          تعرف على كيفية عمل استراتيجياتنا
+        </h1>
+        <p className="section-subheading mx-auto max-w-3xl">
+          أدوات تحليلية متقدمة تعتمد على منهجية ICT وتكملها تنبيهات لحظية وخطط تنفيذ دقيقة لأسواق الفيوتشر وناسداك.
+        </p>
+      </FadeIn>
     </section>
 
     <section className="page-shell mt-16 space-y-16">
-      <div className="glass-panel px-6 py-12 sm:px-10 sm:py-16">
+      <FadeIn direction="up" className="glass-panel px-6 py-12 sm:px-10 sm:py-16">
         <h2 className="text-3xl font-black text-white text-center">استراتيجية ايزو البرو</h2>
         <p className="mt-4 text-center text-sm leading-7 text-gray-400 font-medium max-w-2xl mx-auto">
           استراتيجية ايزو البرو مبنية على مفاهيم ICT وتركز على رصد الفجوات السعرية، كتل الأوامر، وتحديد أهداف واضحة مع وقف خسارة محسوب لكل صفقة.
         </p>
         <div className="mt-10 grid gap-10 md:grid-cols-2 md:items-center">
           <VideoCard {...STRATEGY_VIDEO} />
-          <ul className="space-y-4 pr-2 text-sm leading-7 text-gray-300 font-medium">
-            <li className="flex items-center gap-3">
+          <StaggerContainer className="space-y-4 pr-2 text-sm leading-7 text-gray-300 font-medium" staggerChildren={0.1}>
+            <StaggerItem className="flex items-center gap-3">
               <span className="flex h-6 w-6 items-center justify-center rounded-full bg-orange-500/15 text-orange-400 font-bold text-xs flex-shrink-0">✓</span>
               <span>نقاط دخول مبنية على مناطق سيولة مؤكدة (Liquidity Sweeps).</span>
-            </li>
-            <li className="flex items-center gap-3">
+            </StaggerItem>
+            <StaggerItem className="flex items-center gap-3">
               <span className="flex h-6 w-6 items-center justify-center rounded-full bg-orange-500/15 text-orange-400 font-bold text-xs flex-shrink-0">✓</span>
               <span>تحديد أهداف ووقف خسارة ديناميكي متناسب مع حركة السوق.</span>
-            </li>
-            <li className="flex items-center gap-3">
+            </StaggerItem>
+            <StaggerItem className="flex items-center gap-3">
               <span className="flex h-6 w-6 items-center justify-center rounded-full bg-orange-500/15 text-orange-400 font-bold text-xs flex-shrink-0">✓</span>
               <span>تنبيهات فورية لحظية عبر البريد الإلكتروني أو الجوال.</span>
-            </li>
-          </ul>
+            </StaggerItem>
+          </StaggerContainer>
         </div>
         <div className="mt-12 text-center">
           <p className="mb-4 text-xs font-bold uppercase tracking-wider text-gray-500">اشترك الآن للحصول على الاستراتيجية</p>
@@ -81,11 +84,11 @@ const Indicator: React.FC = () => (
             اشترك من المتجر الرسمي ↗
           </Link>
         </div>
-      </div>
+      </FadeIn>
     </section>
 
     <section className="page-shell mt-20">
-      <div className="glass-panel px-6 py-12 sm:px-10 sm:py-16 text-center">
+      <FadeIn direction="up" className="glass-panel px-6 py-12 sm:px-10 sm:py-16 text-center">
         <h2 className="text-3xl font-black text-white">الأسئلة الشائعة</h2>
         <p className="mt-3 text-sm leading-7 text-gray-400 font-medium max-w-xl mx-auto">
           إجابات سريعة على أكثر الاستفسارات تكراراً حول استراتيجياتنا، أنظمة التنبيه، وخطط الاشتراك.
@@ -93,7 +96,7 @@ const Indicator: React.FC = () => (
         <div className="mt-10 text-right">
           <FAQs />
         </div>
-      </div>
+      </FadeIn>
     </section>
   </div>
 );

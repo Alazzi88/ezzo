@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { FadeIn, ScaleIn, StaggerContainer, StaggerItem } from '@/components/animations/MotionComponents';
 
 const sections = [
   {
@@ -37,18 +38,20 @@ const PrivacyPolicy = () => {
       </div>
 
       <section className="page-shell text-center">
-        <span className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-4 py-1 text-xs font-semibold uppercase tracking-[4px] text-orange-100">
-          سياسة الخصوصية
-        </span>
-        <h1 className="mt-6 text-3xl font-extrabold text-white sm:text-4xl">حماية بياناتك أولوية قصوى</h1>
-        <p className="section-subheading mx-auto max-w-3xl">
-          في Ezzo نحترم خصوصيتك ونلتزم بحماية بياناتك الشخصية وفق أفضل الممارسات والمعايير الأمنية.
-        </p>
+        <FadeIn direction="up">
+          <span className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-4 py-1 text-xs font-semibold uppercase tracking-[4px] text-orange-100">
+            سياسة الخصوصية
+          </span>
+          <h1 className="mt-6 text-3xl font-extrabold text-white sm:text-4xl">حماية بياناتك أولوية قصوى</h1>
+          <p className="section-subheading mx-auto max-w-3xl">
+            في Ezzo نحترم خصوصيتك ونلتزم بحماية بياناتك الشخصية وفق أفضل الممارسات والمعايير الأمنية.
+          </p>
+        </FadeIn>
       </section>
 
       <section className="page-shell mt-16">
         <div className="glass-panel overflow-hidden px-6 py-10 sm:px-10">
-          <div className="relative mb-10 h-48 overflow-hidden rounded-3xl border border-white/10 bg-black/60 sm:h-56">
+          <ScaleIn className="relative mb-10 h-48 overflow-hidden rounded-3xl border border-white/10 bg-black/60 sm:h-56">
             <Image
               src="/img/trust.webp"
               alt="التزام Ezzo بحماية البيانات"
@@ -60,18 +63,20 @@ const PrivacyPolicy = () => {
             <div className="absolute bottom-4 right-4 rounded-full bg-black/60 px-3 py-1 text-[11px] font-semibold text-orange-100 backdrop-blur">
               التزام بالخصوصية
             </div>
-          </div>
-          <div className="space-y-10 text-right">
+          </ScaleIn>
+          <StaggerContainer className="space-y-10 text-right" staggerChildren={0.08}>
             {sections.map(({ title, content }) => (
-              <div key={title}>
+              <StaggerItem key={title}>
                 <h2 className="text-2xl font-bold text-orange-300">{title}</h2>
                 <p className="mt-3 text-sm leading-7 text-gray-300">{content}</p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
-          <p className="mt-12 text-center text-xs text-gray-400">
-            لطرح أي استفسارات حول سياسة الخصوصية يمكنك التواصل عبر البريد: 3zzoezzo@gmail.com
-          </p>
+          </StaggerContainer>
+          <FadeIn direction="up" delay={0.2}>
+            <p className="mt-12 text-center text-xs text-gray-400">
+              لطرح أي استفسارات حول سياسة الخصوصية يمكنك التواصل عبر البريد: 3zzoezzo@gmail.com
+            </p>
+          </FadeIn>
         </div>
       </section>
     </div>

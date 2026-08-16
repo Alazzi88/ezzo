@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Dialog, Transition } from '@headlessui/react'
 import { usePathname } from 'next/navigation'
+import { m } from 'framer-motion'
 
 const navigation = [
   { name: 'الرئيسية', href: '/' },
@@ -18,7 +19,6 @@ const navigation = [
 
 export default function Header() {
   const pathname = usePathname()
-  if (pathname === '/links' || pathname === '/link') return null
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [showHeader, setShowHeader] = useState(true)
   const [isScrolled, setIsScrolled] = useState(false)
@@ -47,6 +47,8 @@ export default function Header() {
     document.body.style.overflow = mobileMenuOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
   }, [mobileMenuOpen])
+
+  if (pathname === '/links' || pathname === '/link') return null
 
   return (
     <header
@@ -80,34 +82,49 @@ export default function Header() {
 
         {/* Desktop nav */}
         <div className="hidden items-center gap-1.5 lg:flex">
-          {navigation.map((item) => (
-            <div key={item.href}>
-              {item.highlight ? (
-                <Link href={item.href} prefetch={false}
-                  className="relative flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-bold transition-all duration-300 hover:-translate-y-0.5 active:scale-95"
-                  style={{
-                    background: 'linear-gradient(135deg, #d4845a 0%, #c9a84c 100%)',
-                    color: '#0d0b09',
-                    boxShadow: '0 4px 15px -3px rgba(212,132,90,0.35)',
-                  }}
-                >
-                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#0d0b09]/60" />
-                  {item.name}
-                </Link>
-              ) : (
-                <Link href={item.href} prefetch={false}
-                  className="relative rounded-full px-3.5 py-1.5 text-sm font-semibold transition-all duration-300 group overflow-hidden block"
-                  style={{ color: '#b8a89a' }}
-                  onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = '#f0ebe4' }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = '#b8a89a' }}
-                >
-                  <span className="relative z-10">{item.name}</span>
-                  <span className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 rounded-full" style={{ background: 'rgba(212,132,90,0.06)' }} />
-                  <span className="absolute bottom-0 left-1/2 h-0.5 w-0 -translate-x-1/2 rounded-full transition-all duration-300 group-hover:w-4" style={{ background: '#d4845a' }} />
-                </Link>
-              )}
-            </div>
-          ))}
+          {navigation.map((item) => {
+            const isActive = pathname === item.href
+            return (
+              <div key={item.href}>
+                {item.highlight ? (
+                  <Link href={item.href} prefetch={false}
+                    className="relative flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-bold transition-all duration-300 hover:-translate-y-0.5 active:scale-95"
+                    style={{
+                      background: 'linear-gradient(135deg, #d4845a 0%, #c9a84c 100%)',
+                      color: '#0d0b09',
+                      boxShadow: '0 4px 15px -3px rgba(212,132,90,0.35)',
+                    }}
+                  >
+                    <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#0d0b09]/60" />
+                    {item.name}
+                  </Link>
+                ) : (
+                  <Link href={item.href} prefetch={false}
+                    className="relative rounded-full px-3.5 py-1.5 text-sm font-semibold transition-colors duration-300 group overflow-hidden block"
+                    style={{ color: isActive ? '#f0ebe4' : '#b8a89a' }}
+                    onMouseEnter={(e) => { if (!isActive) (e.currentTarget as HTMLElement).style.color = '#f0ebe4' }}
+                    onMouseLeave={(e) => { if (!isActive) (e.currentTarget as HTMLElement).style.color = '#b8a89a' }}
+                  >
+                    {isActive && (
+                      <m.span
+                        layoutId="nav-active-pill"
+                        className="absolute inset-0 rounded-full"
+                        style={{ background: 'rgba(212,132,90,0.1)', border: '1px solid rgba(212,132,90,0.2)' }}
+                        transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                      />
+                    )}
+                    <span className="relative z-10">{item.name}</span>
+                    {!isActive && (
+                      <>
+                        <span className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 rounded-full" style={{ background: 'rgba(212,132,90,0.06)' }} />
+                        <span className="absolute bottom-0 left-1/2 h-0.5 w-0 -translate-x-1/2 rounded-full transition-all duration-300 group-hover:w-4" style={{ background: '#d4845a' }} />
+                      </>
+                    )}
+                  </Link>
+                )}
+              </div>
+            )
+          })}
         </div>
 
         {/* Mobile: hamburger */}
@@ -152,26 +169,50 @@ export default function Header() {
                   </svg>
                 </button>
               </div>
-              <div className="mt-6 space-y-2.5">
-                {navigation.map((item) => (
-                  <Link key={item.href} href={item.href} prefetch={false}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block rounded-2xl px-4 py-3 text-sm font-semibold transition-all duration-300"
-                    style={item.highlight ? {
-                      background: 'linear-gradient(135deg, #d4845a 0%, #c9a84c 100%)',
-                      color: '#0d0b09',
-                      fontWeight: 700,
-                      boxShadow: '0 4px 15px rgba(212,132,90,0.25)',
-                    } : {
-                      border: '1px solid rgba(212,132,90,0.07)',
-                      background: 'rgba(212,132,90,0.02)',
-                      color: '#b8a89a',
-                    }}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </div>
+              <m.div
+                className="mt-6 space-y-2.5"
+                initial="hidden"
+                animate={mobileMenuOpen ? 'visible' : 'hidden'}
+                variants={{
+                  visible: { transition: { staggerChildren: 0.05, delayChildren: 0.1 } },
+                  hidden: {},
+                }}
+              >
+                {navigation.map((item) => {
+                  const isActive = pathname === item.href
+                  return (
+                    <m.div
+                      key={item.href}
+                      variants={{
+                        hidden: { opacity: 0, x: 24 },
+                        visible: { opacity: 1, x: 0 },
+                      }}
+                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                      <Link href={item.href} prefetch={false}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block rounded-2xl px-4 py-3 text-sm font-semibold transition-all duration-300"
+                        style={item.highlight ? {
+                          background: 'linear-gradient(135deg, #d4845a 0%, #c9a84c 100%)',
+                          color: '#0d0b09',
+                          fontWeight: 700,
+                          boxShadow: '0 4px 15px rgba(212,132,90,0.25)',
+                        } : isActive ? {
+                          border: '1px solid rgba(212,132,90,0.22)',
+                          background: 'rgba(212,132,90,0.07)',
+                          color: '#f0ebe4',
+                        } : {
+                          border: '1px solid rgba(212,132,90,0.07)',
+                          background: 'rgba(212,132,90,0.02)',
+                          color: '#b8a89a',
+                        }}
+                      >
+                        {item.name}
+                      </Link>
+                    </m.div>
+                  )
+                })}
+              </m.div>
             </Dialog.Panel>
           </Transition.Child>
         </Dialog>

@@ -9,7 +9,8 @@ import dynamic from "next/dynamic";
 import ScriptLoader from "@/components/ScriptLoader";
 import LoadingScreen from "@/components/LoadingScreen";
 import CookieConsent from "@/components/CookieConsent";
-import { LazyMotion, domAnimation } from "framer-motion";
+import PageTransition from "@/components/animations/PageTransition";
+import { LazyMotion, domMax, MotionConfig } from "framer-motion";
 
 // Lazy load below-fold components
 const Footer = dynamic(() => import("@/components/Footer"), { ssr: false });
@@ -71,27 +72,29 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ScriptLoader />
         <LoadingScreen />
 
-        <LazyMotion features={domAnimation}>
-          <div className="relative flex min-h-screen flex-col overflow-hidden text-gray-100">
+        <LazyMotion features={domMax}>
+          <MotionConfig reducedMotion="user">
+            <div className="relative flex min-h-screen flex-col overflow-hidden text-gray-100">
 
-            {/* Background decorations (CSS only, zero JS cost) */}
-            <div className="pointer-events-none fixed inset-0 -z-10">
-              <div className="absolute -top-24 left-1/4 h-72 w-72 rounded-full bg-orange-500/20 blur-[80px] sm:blur-[140px]" />
-              <div className="absolute bottom-[-10%] right-1/3 h-80 w-80 rounded-full bg-orange-400/15 blur-[80px] sm:blur-[160px]" />
-              <div className="absolute inset-0 grid-overlay opacity-40" />
+              {/* Background decorations (CSS only, zero JS cost) */}
+              <div className="pointer-events-none fixed inset-0 -z-10">
+                <div className="absolute -top-24 left-1/4 h-72 w-72 rounded-full bg-orange-500/20 blur-[80px] sm:blur-[140px]" />
+                <div className="absolute bottom-[-10%] right-1/3 h-80 w-80 rounded-full bg-orange-400/15 blur-[80px] sm:blur-[160px]" />
+                <div className="absolute inset-0 grid-overlay opacity-40" />
+              </div>
+              {/*  */}
+              <Providers>
+                <Header />
+                <main className="relative z-10 flex-grow pt-24 sm:pt-28 pb-24">
+                  <PageTransition>{children}</PageTransition>
+                </main>
+                <Footer />
+              </Providers>
+
+              <ScrollToTop />
+              <CookieConsent />
             </div>
-            {/*  */}
-            <Providers>
-              <Header />
-              <main className="relative z-10 flex-grow pt-24 sm:pt-28 pb-24">
-                {children}
-              </main>
-              <Footer />
-            </Providers>
-
-            <ScrollToTop />
-            <CookieConsent />
-          </div>
+          </MotionConfig>
         </LazyMotion>
       </body>
     </html>

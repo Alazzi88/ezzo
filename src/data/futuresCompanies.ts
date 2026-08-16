@@ -5,15 +5,30 @@ import type { Company } from '@/app/FuturesAndFundedAccounts/CompanyCard';
  * Used by both the comparison grid (page.tsx) and the Recommendation
  * Wizard so the two never drift apart.
  *
- * Last verified: 14 يوليو 2026 — راجع مراكز المساعدة الرسمية للشركات.
+ * Last verified: 16 أغسطس 2026 — راجع مراكز المساعدة الرسمية للشركات.
  * تحديث مهم: FundedNext أوقفت حسابي Rapid وBolt القديمين اعتباراً من
  * 10 يوليو 2026 واستبدلتهما بتحدي "Rapid Pro & Daily" الجديد (خصم رسمي
  * ثابت 50% بكود Rapid50). تم تحديث خطط FundedNext أدناه على هذا الأساس.
+ *
+ * تحديثات 16 أغسطس 2026 (بعد مراجعة ميدانية لكل المواقع الرسمية):
+ * - FunderPro Futures: أعادت الشركة تصميم خططها بالكامل (Beginner/Mid-Level/
+ *   Professional باشتراك شهري)، ومدة التقييم صارت بلا حد زمني (Unlimited)
+ *   بدل 30 يوماً، ونسبة الربح المعروضة افتراضياً على خطة Beginner صارت 80%
+ *   ثابتة (والشركة تروّج لنسبة تصل حتى 90% على الخطط الأعلى). الحد الأقصى
+ *   المؤكد حالياً هو 750K$ (5 حسابات × 150K$) وليس 1M$.
+ * - The Trading Pit Futures: شرط أول سحب صار 5 أيام رابحة بحد أدنى 150$
+ *   لليوم (مو 200$ متل كان مسجّل).
+ * - E8 Markets: أعادت تسمية منتج الفيوتشر إلى "SimFi™" بنظام سلوكي جديد
+ *   (Behavioral Score / Tilt Factor) على دومين e8futures.com — يُنصح
+ *   بمراجعة كل الأرقام يدوياً قبل الاعتماد عليها بالكامل.
+ * - AquaFuture: دومين aquafutures.io صار يحوّل تلقائياً لـ aquafunded.com،
+ *   والعنوان التسويقي الرئيسي صار "احتفظ بـ100% من الربح" — يُنصح بالتأكد
+ *   من التفاصيل الكاملة قبل الاعتماد عليها.
  */
 export const futuresCompanies: Company[] = [
   {
     name: 'Alpha Futures',
-    monogram: { text: 'AF', from: '#7c3aed', to: '#a78bfa' },
+    logo: '/img/companies/alphafutures.png',
     url: 'https://alpha-futures.com/',
     country: 'المملكة المتحدة',
     countryFlag: '🇬🇧',
@@ -39,7 +54,7 @@ export const futuresCompanies: Company[] = [
   },
   {
     name: 'Topstep',
-    logo: '/img/topstep.webp',
+    logo: '/img/companies/topstep.png',
     url: 'https://www.topstep.com/',
     country: 'الولايات المتحدة',
     countryFlag: '🇺🇸',
@@ -69,7 +84,7 @@ export const futuresCompanies: Company[] = [
   },
   {
     name: 'Tradeify',
-    monogram: { text: 'TF', from: '#0284c7', to: '#38bdf8' },
+    logo: '/img/companies/tradeify.png',
     url: 'https://tradeify.co/',
     country: 'الولايات المتحدة',
     countryFlag: '🇺🇸',
@@ -96,13 +111,13 @@ export const futuresCompanies: Company[] = [
   },
   {
     name: 'AquaFuture',
-    logo: '/img/aqua.webp',
-    url: 'https://www.aquafutures.io/',
+    logo: '/img/companies/aquafutures.png',
+    url: 'https://www.aquafunded.com/futures',
     country: 'الإمارات',
     countryFlag: '🇦🇪',
     yearsInOperation: '3',
     maxAllocation: '$150K',
-    keyStats: ['ربح 100% أول $15K ثم 90%', 'بدون رسوم تفعيل', 'أربع خطط: Beginner/Standard/Pro/Instant'],
+    keyStats: ['⚠️ الدومين صار aquafunded.com (تحويل تلقائي)', 'العنوان التسويقي الحالي: "احتفظ بـ100% من الربح"', 'أربع خطط: Beginner/Standard/Pro/Instant'],
     rules: {
       profitSplit: 'Beginner: 100% أول $15K ثم 90% — Standard: 90% ثابت — Pro/Instant: حتى 100% أول $15K ثم 90%',
       drawdownType: 'نهاية اليوم لحسابات Beginner وStandard، ومتحرك لحظي لحسابات Pro وInstant Pro',
@@ -120,11 +135,11 @@ export const futuresCompanies: Company[] = [
       { name: 'Beginner 150K', price: '$185 (مرة واحدة)', profit: 'هدف $9,000', contracts: '9–10 عقود' },
     ],
     summary:
-      'مسارات تمويل مرنة عبر 4 خطط: Beginner وStandard (تقييم) وPro وInstant Pro (شبه فورية). حسابات Beginner تمنح 100% من أول $15,000 ربحاً، ولا توجد أي رسوم تفعيل عند الانتقال للتمويل.',
+      'مسارات تمويل مرنة عبر 4 خطط: Beginner وStandard (تقييم) وPro وInstant Pro (شبه فورية). حسابات Beginner تمنح 100% من أول $15,000 ربحاً، ولا توجد أي رسوم تفعيل عند الانتقال للتمويل. ⚠️ محدّث 16 أغسطس 2026: دومين aquafutures.io صار يحوّل تلقائياً إلى aquafunded.com/futures (يبدو أنها نفس الشركة تحت علامة AquaFunded)، والعنوان التسويقي الرئيسي الحالي هو "احتفظ بـ100% من الربح" بشكل عام — يُنصح بالتأكد من التفاصيل الكاملة (هل لسا فيه سقف $15K أم لا) قبل الاعتماد عليها بالكامل.',
   },
   {
     name: 'My Funded Futures',
-    monogram: { text: 'MFF', from: '#16a34a', to: '#4ade80' },
+    logo: '/img/companies/myfundedfutures.png',
     url: 'https://myfundedfutures.com/',
     country: 'الولايات المتحدة',
     countryFlag: '🇺🇸',
@@ -150,7 +165,7 @@ export const futuresCompanies: Company[] = [
   },
   {
     name: 'Earn2Trade',
-    logo: '/img/earn2trade.webp',
+    logo: '/img/companies/earn2trade.png',
     url: 'https://www.earn2trade.com/?a_pid=ezzo',
     country: 'الولايات المتحدة',
     countryFlag: '🇺🇸',
@@ -178,7 +193,7 @@ export const futuresCompanies: Company[] = [
   },
   {
     name: 'Blue Guardian Futures',
-    monogram: { text: 'BG', from: '#1d4ed8', to: '#60a5fa' },
+    logo: '/img/companies/blueguardian.png',
     url: 'https://www.blueguardian.com/futures',
     country: 'الإمارات',
     countryFlag: '🇦🇪',
@@ -205,7 +220,7 @@ export const futuresCompanies: Company[] = [
   },
   {
     name: 'FundedNext',
-    logo: '/img/fundednext.webp',
+    logo: '/img/companies/fundednext.png',
     url: 'https://fundednext.com/futures',
     country: 'الإمارات',
     countryFlag: '🇦🇪',
@@ -236,7 +251,7 @@ export const futuresCompanies: Company[] = [
   },
   {
     name: 'Futures Elite',
-    monogram: { text: 'FE', from: '#b45309', to: '#facc15' },
+    logo: '/img/companies/futureselite.png',
     url: 'https://futureselite.com/',
     country: 'إيطاليا',
     countryFlag: '🇮🇹',
@@ -262,13 +277,13 @@ export const futuresCompanies: Company[] = [
   },
   {
     name: 'E8 Markets',
-    logo: '/img/e8.webp',
-    url: 'https://e8markets.com/',
+    logo: '/img/companies/e8markets.png',
+    url: 'https://e8futures.com/',
     country: 'الولايات المتحدة',
     countryFlag: '🇺🇸',
     yearsInOperation: '4.5',
     maxAllocation: '$500K',
-    keyStats: ['نسبة الأرباح 80%', 'سحب أسبوعي', 'مرحلة واحدة'],
+    keyStats: ['⚠️ أعادت تسمية منتج الفيوتشر إلى SimFi™', 'نسبة الأرباح 80% (غير مؤكدة بعد إعادة التصميم)', 'مرحلة واحدة'],
     rules: {
       profitSplit: '80%',
       drawdownType: 'حد خسارة ديناميكي نهاية اليوم، يتحرك فقط عند إغلاق ربح فعلي ويُقفل نهائياً بعد الوصول لمقدار الحد',
@@ -285,11 +300,11 @@ export const futuresCompanies: Company[] = [
       { name: '150K', price: '$198 (مرة واحدة)', profit: 'هدف $9,000 (6%)', contracts: '12 عقد' },
     ],
     summary:
-      'تقييم E8 Signature بمرحلة واحدة. سحوبات أسبوعية بعد الترقية. لا يُسمح بالاحتفاظ الليلي أو خلال عطلة نهاية الأسبوع.',
+      '⚠️ محدّث 16 أغسطس 2026: أعادت E8 Markets تسمية وتصميم منتج الفيوتشر بالكامل إلى "SimFi™" — نظام سلوكي جديد يقيس الانضباط عبر "Behavioral Score" و"Tilt Factor" بدل الوصف التقليدي البسيط (تقييم E8 Signature بمرحلة واحدة). الأرقام أدناه (النسبة، السحب الأسبوعي) قد تكون تغيّرت مع النظام الجديد — يُنصح بمراجعة الموقع يدوياً على e8futures.com قبل الاعتماد الكامل عليها.',
   },
   {
     name: 'Funded Futures Family',
-    monogram: { text: 'FFF', from: '#be185d', to: '#f472b6' },
+    logo: '/img/companies/fundedfuturesfamily.png',
     url: 'https://www.fundedfuturesfamily.com/',
     country: 'الولايات المتحدة',
     countryFlag: '🇺🇸',
@@ -316,7 +331,7 @@ export const futuresCompanies: Company[] = [
   },
   {
     name: 'The Trading Pit Futures',
-    monogram: { text: 'TTP', from: '#c2410c', to: '#fb923c' },
+    logo: '/img/companies/thetradingpit.png',
     url: 'https://www.thetradingpit.com/futures',
     country: 'ليختنشتاين',
     countryFlag: '🇱🇮',
@@ -326,9 +341,9 @@ export const futuresCompanies: Company[] = [
     rules: {
       profitSplit: '80%',
       drawdownType: 'تريلينغ نهاية اليوم يتوقف عند وصوله لرأس المال الابتدائي، مع آلية Daily Pause توقف التداول مؤقتاً دون إغلاق الحساب',
-      consistencyRule: '5 أيام رابحة بـ200$+ لكل عملية سحب بدل نسبة اتساق تقليدية',
+      consistencyRule: '5 أيام رابحة بـ150$+ لليوم (⚠️ محدّث: كانت 200$ سابقاً) بدل نسبة اتساق تقليدية',
       minTradingDays: '3 أيام تداول رابحة كحد أدنى، ومدة التحدي 30 يوماً',
-      payoutTime: 'أول سحب بعد 5 أيام رابحة بـ200$+، بحد أقصى 5,000$ أو 50% من الأرباح المحققة أيهما أقل',
+      payoutTime: 'أول سحب بعد 5 أيام رابحة بـ150$+ لليوم (⚠️ محدّث: كانت 200$ سابقاً)، بحد أقصى 5,000$ أو 50% من الأرباح المحققة أيهما أقل',
       activationFee: '$129 (مرة واحدة، وتُعرض حالياً بعرض ترويجي بـ0$)',
       maxWithdrawal: '5,000$ أو 50% من الأرباح المحققة، أيهما أقل',
       nextStep: 'حساب Earning Phase ممول مباشرة، مع تدرّج عدد العقود تلقائياً كلما زادت الأرباح المتراكمة',
@@ -339,11 +354,11 @@ export const futuresCompanies: Company[] = [
       { name: '150K', price: '$289 (مرة واحدة)', profit: 'هدف $9,000', maxLoss: '$4,500', contracts: '15 عقد / 150 مصغر' },
     ],
     summary:
-      'شركة مقرها ليختنشتاين، مدة التقييم 30 يوماً، وتشترط 3 أيام تداول رابحة على الأقل. عند خرق حد "الإيقاف اليومي" يُغلق التداول مؤقتاً بدل إنهاء الحساب.',
+      'شركة مقرها ليختنشتاين، مدة التقييم 30 يوماً، وتشترط 3 أيام تداول رابحة على الأقل. عند خرق حد "الإيقاف اليومي" يُغلق التداول مؤقتاً بدل إنهاء الحساب. ⚠️ محدّث 16 أغسطس 2026: شرط أول سحب صار 5 أيام رابحة بحد أدنى 150$ لليوم (مو 200$ كما كان مسجلاً).',
   },
   {
     name: 'Hola Prime Futures',
-    monogram: { text: 'HP', from: '#0f766e', to: '#2dd4bf' },
+    logo: '/img/companies/holaprime.png',
     url: 'https://holaprime.com/futures/',
     country: 'هونغ كونغ',
     countryFlag: '🇭🇰',
@@ -369,7 +384,7 @@ export const futuresCompanies: Company[] = [
   },
   {
     name: 'TradeDay',
-    monogram: { text: 'TD', from: '#a21caf', to: '#e879f9' },
+    logo: '/img/companies/tradeday.png',
     url: 'https://www.tradeday.com/',
     country: 'الولايات المتحدة',
     countryFlag: '🇺🇸',
@@ -396,29 +411,29 @@ export const futuresCompanies: Company[] = [
   },
   {
     name: 'FunderPro Futures',
-    monogram: { text: 'FP', from: '#0e7490', to: '#22d3ee' },
+    logo: '/img/companies/funderpro.png',
     url: 'https://funderpro.com/futures',
     country: 'مالطا',
     countryFlag: '🇲🇹',
     yearsInOperation: '3.5',
-    maxAllocation: '$1M',
-    keyStats: ['ربح تصاعدي حتى 80%', 'حد خسارة يومي 2% وإجمالي 4%', 'مهلة تقييم 30 يوماً'],
+    maxAllocation: '$750K',
+    keyStats: ['ربح 80% ثابت (Beginner)، وحتى 90% معلن على الخطط الأعلى', 'حد خسارة يومي 2% وإجمالي 4%', 'بدون حد زمني للتقييم (Unlimited)'],
     rules: {
-      profitSplit: 'تصاعدي: 60% ثم 70% ثم 80%',
+      profitSplit: '⚠️ تحديث: 80% ثابتة على خطة Beginner حالياً (وليس تصاعدي 60% ثم 70% ثم 80%)، والشركة تُعلن عن نسبة تصل حتى 90% على خطتي Mid-Level وProfessional — يُنصح بالتأكد من الموقع لكل خطة',
       drawdownType: 'تريلينغ نهاية اليوم يتحول لثابت بعد الوصول لرأس المال الابتدائي، مع حد خسارة يومي 2% يوقف التداول مؤقتاً (Daily Pause)',
       consistencyRule: '45% كحد أقصى ليوم واحد، ويُلغى الشرط بعد أول 3 عمليات سحب ناجحة',
-      minTradingDays: '5 أيام رابحة بـ200$+ للسحب الأول، و15 يوم تداول لتفعيل السحب اليومي',
-      payoutTime: 'أول سحب بعد 5 أيام رابحة بـ200$+، ثم يتفعّل السحب اليومي بعد 15 يوم تداول',
-      activationFee: '$129 (مرة واحدة عند أول طلب سحب ناجح)',
+      minTradingDays: 'بدون حد زمني (Challenge Duration: Unlimited) — لا يوجد 30 يوماً كما كان سابقاً',
+      payoutTime: 'أول سحب بعد 5 أيام رابحة بـ200$+ فأكثر يومياً (يوم واحد قد لا يكون متتالياً)',
+      activationFee: '$129 (مرة واحدة عند أول طلب سحب ناجح) — مذكورة كذلك كرسوم تفعيل ضمن جدول خطة 100K',
       maxWithdrawal: 'الحد الأدنى للسحب $100 — لا يوجد سقف أقصى معلن رسمياً',
-      nextStep: 'حساب ممول مباشرة بعد الاجتياز، مع نسبة ربح تتصاعد تلقائياً مع كل سحب ناجح (60% ثم 70% ثم 80%)',
+      nextStep: 'حساب ممول مباشرة بعد الاجتياز؛ نسبة الربح 80% ثابتة على خطة Beginner، مع إعلان الشركة عن نسبة تصل حتى 90% على الخطط الأعلى',
     },
     plans: [
-      { name: '50K', price: '$79/شهر', profit: 'هدف $3,000 (6%)', maxLoss: '$2,000 (4%)', contracts: '5 عقود / 50 مصغر' },
-      { name: '100K', price: '$149/شهر', profit: 'هدف $6,000 (6%)', maxLoss: '$3,000 (3%)', contracts: '10 عقود / 100 مصغر' },
-      { name: '150K', price: '$219/شهر', profit: 'هدف $9,000 (6%)', maxLoss: '$4,500 (3%)', contracts: '15 عقد / 150 مصغر' },
+      { name: 'Beginner 50K', price: '$79/شهر', profit: 'هدف $3,000 (6%)', maxLoss: '$2,000 (4%)', contracts: '5 عقود / 50 مصغر' },
+      { name: 'Beginner 100K', price: '$149/شهر', profit: 'هدف $6,000 (6%)', maxLoss: '$3,000 (3%)', contracts: '10 عقود / 100 مصغر' },
+      { name: 'Beginner 150K', price: '$219/شهر', profit: 'هدف $9,000 (6%)', maxLoss: '$4,500 (3%)', contracts: '15 عقد / 150 مصغر' },
     ],
     summary:
-      'شركة مقرها مالطا بتقييم من مرحلة واحدة ونسبة ربح تتصاعد مع كل عملية سحب (60% ثم 70% ثم 80%)، وحد أقصى 5 حسابات نشطة في آن واحد.',
+      '⚠️ محدّث 16 أغسطس 2026: أعادت الشركة تصميم خططها بالكامل إلى ثلاث فئات باشتراك شهري (Beginner/Mid-Level/Professional)، ومدة التقييم صارت بلا حد زمني، ونسبة الربح 80% ثابتة على Beginner (وحتى 90% معلنة على الخطط الأعلى). الحد الأقصى المؤكد للتمويل حالياً هو 750K$ عبر حتى 5 حسابات نشطة، وليس 1M$ كما كان مسجلاً سابقاً.',
   },
 ];

@@ -59,14 +59,14 @@ function LogoBadge({ company, size }: { company: Company; size: number }) {
   if (company.logo) {
     return (
       <div
-        className="flex flex-shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-white p-2 shadow-inner"
+        className="flex flex-shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-white shadow-inner"
         style={{ width: size, height: size }}
       >
         <Image
           src={company.logo}
           alt={`شعار ${company.name}`}
-          width={size - 16}
-          height={size - 16}
+          width={size}
+          height={size}
           className="h-full w-full object-contain"
         />
       </div>

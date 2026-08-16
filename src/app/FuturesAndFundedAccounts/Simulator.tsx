@@ -35,7 +35,7 @@ interface SimCompany {
 const SIM_COMPANIES: SimCompany[] = [
   {
     name: 'Alpha Futures',
-    monogram: { text: 'AF', from: '#7c3aed', to: '#a78bfa' },
+    logo: '/img/companies/alphafutures.png',
     activationFee: 'رسوم صغيرة لتفعيل Qualified (0$ لحسابات Zero)',
     activationFeeValue: 0,
     profitSplitRule: 'نسبة أرباح تصل إلى 90% للمتداول و10% للشركة',
@@ -53,7 +53,7 @@ const SIM_COMPANIES: SimCompany[] = [
   },
   {
     name: 'Topstep',
-    logo: '/img/topstep.webp',
+    logo: '/img/companies/topstep.png',
     activationFee: '$149 رسوم تفعيل لمرة واحدة (Express Funded)',
     activationFeeValue: 149,
     profitSplitRule: '90% للمتداول و10% للشركة',
@@ -77,7 +77,7 @@ const SIM_COMPANIES: SimCompany[] = [
   },
   {
     name: 'Tradeify',
-    monogram: { text: 'TF', from: '#0284c7', to: '#38bdf8' },
+    logo: '/img/companies/tradeify.png',
     activationFee: 'لا توجد رسوم تفعيل (مجاني بالكامل)',
     activationFeeValue: 0,
     profitSplitRule: 'تصل إلى 90% للمتداول و10% للشركة',
@@ -98,7 +98,7 @@ const SIM_COMPANIES: SimCompany[] = [
   },
   {
     name: 'AquaFuture',
-    logo: '/img/aqua.webp',
+    logo: '/img/companies/aquafutures.png',
     activationFee: 'لا توجد رسوم تفعيل (0$ تفعيل)',
     activationFeeValue: 0,
     profitSplitRule: '100% من أول $15,000 أرباح ثم 90% للمتداول',
@@ -123,7 +123,7 @@ const SIM_COMPANIES: SimCompany[] = [
   },
   {
     name: 'My Funded Futures',
-    monogram: { text: 'MFF', from: '#16a34a', to: '#4ade80' },
+    logo: '/img/companies/myfundedfutures.png',
     activationFee: 'لا توجد رسوم تفعيل (0$)',
     activationFeeValue: 0,
     profitSplitRule: 'تصل إلى 90% على خطط Rapid و80% للخطط العادية',
@@ -141,7 +141,7 @@ const SIM_COMPANIES: SimCompany[] = [
   },
   {
     name: 'Earn2Trade',
-    logo: '/img/earn2trade.webp',
+    logo: '/img/companies/earn2trade.png',
     activationFee: '$139 تُخصم من أول سحب فقط لتفعيل بيانات البورصة، ومجانية للحسابات الحقيقية',
     activationFeeValue: 139,
     profitSplitRule: '80% للمتداول و20% للشركة ثابتاً',
@@ -159,7 +159,7 @@ const SIM_COMPANIES: SimCompany[] = [
   },
   {
     name: 'Blue Guardian Futures',
-    monogram: { text: 'BG', from: '#1d4ed8', to: '#60a5fa' },
+    logo: '/img/companies/blueguardian.png',
     activationFee: 'لا توجد رسوم تفعيل',
     activationFeeValue: 0,
     profitSplitRule: '100% من أول $15,000 أرباح ثم 90% للمتداول',
@@ -183,7 +183,7 @@ const SIM_COMPANIES: SimCompany[] = [
   },
   {
     name: 'FundedNext',
-    logo: '/img/fundednext.webp',
+    logo: '/img/companies/fundednext.png',
     activationFee: 'لا توجد رسوم تفعيل (0$ تفعيل)',
     activationFeeValue: 0,
     profitSplitRule: 'نسبة أرباح 80% وتصل حتى 95% في خطط Flex',
@@ -202,7 +202,7 @@ const SIM_COMPANIES: SimCompany[] = [
   },
   {
     name: 'Futures Elite',
-    monogram: { text: 'FE', from: '#b45309', to: '#facc15' },
+    logo: '/img/companies/futureselite.png',
     activationFee: 'لا توجد رسوم تفعيل (0$)',
     activationFeeValue: 0,
     profitSplitRule: 'تصل إلى 90% للمتداول و10% للشركة',
@@ -221,7 +221,7 @@ const SIM_COMPANIES: SimCompany[] = [
   },
   {
     name: 'E8 Markets',
-    logo: '/img/e8.webp',
+    logo: '/img/companies/e8markets.png',
     activationFee: 'تم إلغاء رسوم التفعيل (0$)',
     activationFeeValue: 0,
     profitSplitRule: '80% للمتداول و20% للشركة',
@@ -239,7 +239,7 @@ const SIM_COMPANIES: SimCompany[] = [
   },
   {
     name: 'Funded Futures Family',
-    monogram: { text: 'FFF', from: '#be185d', to: '#f472b6' },
+    logo: '/img/companies/fundedfuturesfamily.png',
     activationFee: 'لا توجد رسوم تفعيل إضافية',
     activationFeeValue: 0,
     profitSplitRule: '100% من أول $10,000 ربح ثم 90% للمتداول و10% للشركة',
@@ -264,7 +264,7 @@ const SIM_COMPANIES: SimCompany[] = [
   },
   {
     name: 'The Trading Pit Futures',
-    monogram: { text: 'TTP', from: '#c2410c', to: '#fb923c' },
+    logo: '/img/companies/thetradingpit.png',
     activationFee: '$129 لمرة واحدة (تتوفر عروض ترويجية مجانية بقيمة 0$)',
     activationFeeValue: 0,
     profitSplitRule: '80% للمتداول و20% للشركة',
@@ -282,7 +282,7 @@ const SIM_COMPANIES: SimCompany[] = [
   },
   {
     name: 'Hola Prime Futures',
-    monogram: { text: 'HP', from: '#0f766e', to: '#2dd4bf' },
+    logo: '/img/companies/holaprime.png',
     activationFee: '0$ رسوم تفعيل مع استرداد كامل لرسوم التحدي',
     activationFeeValue: 0,
     profitSplitRule: '90% للمتداول و10% للشركة مع استرداد رسوم التقييم',
@@ -300,7 +300,7 @@ const SIM_COMPANIES: SimCompany[] = [
   },
   {
     name: 'TradeDay',
-    monogram: { text: 'TD', from: '#a21caf', to: '#e879f9' },
+    logo: '/img/companies/tradeday.png',
     activationFee: '$139 رسوم تفعيل لمرة واحدة لكل حساب Funded Sim جديد',
     activationFeeValue: 139,
     profitSplitRule: '50% من أول $4,000 ثم 80% للمتداول، وتصل لـ 90% في الحساب الحي',
@@ -324,7 +324,7 @@ const SIM_COMPANIES: SimCompany[] = [
   },
   {
     name: 'FunderPro Futures',
-    monogram: { text: 'FP', from: '#0e7490', to: '#22d3ee' },
+    logo: '/img/companies/funderpro.png',
     activationFee: '$129 لمرة واحدة تُخصم من أول عملية سحب ناجحة',
     activationFeeValue: 129,
     profitSplitRule: 'تصاعدي يبدأ من 60% ثم 70% ثم 80% مع كل عملية سحب ناجحة',
@@ -517,7 +517,7 @@ export function Simulator() {
 
                   {/* Monogram or Logo */}
                   {comp.logo ? (
-                    <div className="flex-shrink-0 w-7 h-7 rounded-lg overflow-hidden bg-white p-0.5">
+                    <div className="flex-shrink-0 w-7 h-7 rounded-lg overflow-hidden bg-white">
                       <img src={comp.logo} alt={comp.name} className="w-full h-full object-contain" />
                     </div>
                   ) : (

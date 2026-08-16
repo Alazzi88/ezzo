@@ -81,7 +81,7 @@ function LogoMini({ company, size = 44 }: { company: Company; size?: number }) {
   if (company.logo) {
     return (
       <div
-        className="flex flex-shrink-0 items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-white p-1.5 shadow-inner"
+        className="flex flex-shrink-0 items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-white shadow-inner"
         style={{ width: size, height: size }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}

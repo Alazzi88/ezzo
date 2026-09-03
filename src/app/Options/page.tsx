@@ -255,9 +255,32 @@ export default function OptionsPage() {
                         <div className="flex items-center gap-2">
                           <span className="font-bold text-orange-300">EZZO SPX BOT</span>
                           <span className="rounded bg-orange-500/10 border border-orange-500/20 px-1 py-0.5 text-[9px] text-orange-400">BOT</span>
+                          <span className="text-[9px] text-gray-500">10:30 AM</span>
+                        </div>
+
+                        <div className="rounded-xl border border-amber-500/25 bg-amber-500/[0.04] p-4 text-[13px] text-amber-300 space-y-2 leading-relaxed text-right" dir="rtl">
+                          <div className="flex justify-between items-center border-b border-amber-500/15 pb-1.5 font-bold">
+                            <span>⏰ تنبيه تجهيز مسبق (GET READY)</span>
+                            <span className="text-xs bg-amber-500/15 px-2 py-0.5 rounded-full">قبل الفرصة</span>
+                          </div>
+                          <p className="font-sans text-gray-300">
+                            اقتراب فرصة محتملة على <span className="font-mono font-bold text-white">SPX</span> خلال <span className="font-mono font-bold text-white">~15 دقيقة</span>. جهّز المنصة ورأس المال وكن أمام الشاشة حتى لا تفوتك الصفقة.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-3">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-orange-500 to-amber-400 text-black text-xs font-black shadow-[0_0_10px_rgba(249,115,22,0.4)] flex-shrink-0">
+                        EZ
+                      </div>
+                      <div className="flex-1 space-y-2">
+                        <div className="flex items-center gap-2">
+                          <span className="font-bold text-orange-300">EZZO SPX BOT</span>
+                          <span className="rounded bg-orange-500/10 border border-orange-500/20 px-1 py-0.5 text-[9px] text-orange-400">BOT</span>
                           <span className="text-[9px] text-gray-500">10:42 AM</span>
                         </div>
-                        
+
                         <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.03] p-4 text-[13px] text-emerald-400 space-y-2 leading-relaxed text-right" dir="rtl">
                           <div className="flex justify-between items-center border-b border-emerald-500/10 pb-1.5 font-bold">
                             <span>🚨 إشارة شراء جديدة (NEW SIGNAL)</span>
@@ -319,9 +342,9 @@ export default function OptionsPage() {
                 </p>
                 <ul className="space-y-3 text-sm text-gray-300">
                   {[
+                    'تنبيه تجهيز مسبق قبل كل فرصة بوقتٍ كافٍ — لا تفوتك أي صفقة',
                     'إشارات CALL وPUT واضحة مع سعر الدخول',
                     'سعر التنفيذ وتاريخ الانتهاء لكل صفقة',
-                    'ملاحظات تحليلية تشرح سبب الإشارة',
                     'تحديثات فورية عند تغير حالة الصفقة',
                     'تاريخ موثّق لجميع الإشارات السابقة',
                   ].map((item) => (
@@ -345,6 +368,34 @@ export default function OptionsPage() {
                 </a>
               </div>
             </div>
+          </div>
+        </FadeIn>
+
+        {/* ── Pre-Session Prep Alert (Exclusive Feature) ───── */}
+        <FadeIn direction="up" delay={0.22}>
+          <div className="glass-panel mb-10 overflow-hidden px-6 py-8 sm:px-10">
+            <div className="mb-6 flex flex-col items-center text-center">
+              <span className="premium-badge border-orange-500/30 bg-orange-500/10 text-orange-300">
+                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-orange-400" />
+                ميزة حصرية
+              </span>
+              <h2 className="section-heading mt-4">تنبيه التجهيز المسبق</h2>
+              <p className="section-subheading mx-auto max-w-3xl">
+                قبل كل فرصة تداول يرسل لك <span className="font-bold text-orange-300">EZZO SPX BOT</span> إشعاراً تحضيرياً بوقتٍ كافٍ حتى تكون على أتمّ الاستعداد — تفتح المنصة، تراجع رأس المال، وتتابع الشاشة — فلا تفوتك الصفقة بسبب الانشغال أو التأخير في الدخول.
+              </p>
+            </div>
+
+            <StaggerContainer className="grid gap-4 sm:grid-cols-3" staggerChildren={0.06}>
+              {[
+                { icon: '⏰', title: 'تنبيه قبل الدخول', desc: 'إشعار تحضيري يصلك قبل الفرصة بوقتٍ كافٍ لتجهيز المنصة ورأس المال ومراجعة حجم الصفقة.' },
+                { icon: '🎯', title: 'جاهزية كاملة', desc: 'تدخل الصفقة لحظة صدور الإشارة دون تسرّع أو ارتباك، وبأقرب سعر تنفيذ للسعر المطلوب.' },
+                { icon: '🔔', title: 'لا تفوتك صفقة', desc: 'تنبيه مزدوج — تحضير ثم إشارة — يضمن حضورك لكل فرصة مهمة حتى لو كنت مشغولاً.' },
+              ].map((item) => (
+                <StaggerItem key={item.title}>
+                  <FeatureCard {...item} />
+                </StaggerItem>
+              ))}
+            </StaggerContainer>
           </div>
         </FadeIn>
 

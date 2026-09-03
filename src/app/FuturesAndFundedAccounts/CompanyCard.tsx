@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Tilt3D } from '@/components/animations/Tilt3D';
 
 type Plan = {
   name: string;
@@ -91,8 +92,9 @@ export function CompanyCard({ company }: { company: Company }) {
   const [open, setOpen] = useState(false);
 
   return (
+    <Tilt3D max={4} scale={1.008} disabled={open} className="h-full">
     <div
-      className={`group relative flex flex-col overflow-hidden rounded-[26px] border transition-all duration-300 ${
+      className={`group relative flex h-full flex-col overflow-hidden rounded-[26px] border transition-all duration-300 ${
         open
           ? 'border-orange-500/50 bg-gradient-to-b from-orange-500/[0.08] via-white/[0.02] to-transparent shadow-[0_0_0_1px_rgba(249,115,22,0.12),0_25px_60px_-30px_rgba(249,115,22,0.45)]'
           : 'border-white/8 bg-white/[0.025] hover:-translate-y-0.5 hover:border-orange-500/25 hover:bg-white/[0.04] hover:shadow-[0_20px_45px_-30px_rgba(249,115,22,0.35)]'
@@ -245,5 +247,6 @@ export function CompanyCard({ company }: { company: Company }) {
         </div>
       )}
     </div>
+    </Tilt3D>
   );
 }

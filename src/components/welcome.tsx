@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { FadeIn, HoverCard, ScaleIn, StaggerContainer, StaggerItem } from './animations/MotionComponents';
+import { Tilt3D } from './animations/Tilt3D';
 
 // Lazy load heavy components
 const Advertisement = dynamic(() => import('./Advertisement'), { ssr: false });
@@ -37,41 +38,43 @@ const ProductCard: React.FC<ProductCardProps> = ({ img, title, description, link
   const isExternal = link ? /^https?:\/\//.test(link) : false;
 
   return (
-    <HoverCard className="gradient-card group h-full p-7 text-center relative overflow-hidden flex flex-col justify-between">
-      {/* Specular overlay sheen reflection */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.01] to-white/[0.04] pointer-events-none" />
-      
-      <div>
-        <div className="relative z-10 mx-auto flex h-48 w-full max-w-xs items-center justify-center overflow-hidden rounded-2xl border border-white/[0.06] bg-black/70 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.8)] group-hover:border-orange-500/20 transition-all duration-500">
-          <Image
-            src={img}
-            alt={title}
-            width={320}
-            height={220}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 320px"
-            loading="lazy"
-            className="h-full w-full object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-105"
-          />
-        </div>
-        <h3 className="relative z-10 mt-6 text-xl font-bold transition-colors duration-300" style={{ color: '#f0ebe4' }}>{title}</h3>
-        <p className="relative z-10 mt-3 text-sm leading-7 font-medium" style={{ color: '#9a8a7e' }}>{description}</p>
-      </div>
+    <Tilt3D className="h-full" max={7}>
+      <HoverCard className="gradient-card group h-full p-7 text-center relative overflow-hidden flex flex-col justify-between">
+        {/* Specular overlay sheen reflection */}
+        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.01] to-white/[0.04] pointer-events-none" />
 
-      {link && linkText && (
-        <div className="relative z-10 mt-6">
-          <Link
-            href={link}
-            prefetch={false}
-            target={isExternal ? '_blank' : undefined}
-            rel={isExternal ? 'noopener noreferrer' : undefined}
-            className="inline-flex items-center justify-center rounded-full px-5 py-2.5 text-xs font-bold transition-all duration-300 hover:-translate-y-0.5 active:scale-95"
-            style={{ border: '1px solid rgba(212,132,90,0.22)', background: 'rgba(212,132,90,0.08)', color: '#d4845a' }}
-          >
-            {linkText}
-          </Link>
+        <div>
+          <div className="relative z-10 mx-auto flex h-48 w-full max-w-xs items-center justify-center overflow-hidden rounded-2xl border border-white/[0.06] bg-black/70 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.8)] group-hover:border-orange-500/20 transition-all duration-500">
+            <Image
+              src={img}
+              alt={title}
+              width={320}
+              height={220}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 320px"
+              loading="lazy"
+              className="h-full w-full object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-105"
+            />
+          </div>
+          <h3 className="relative z-10 mt-6 text-xl font-bold transition-colors duration-300" style={{ color: '#f0ebe4' }}>{title}</h3>
+          <p className="relative z-10 mt-3 text-sm leading-7 font-medium" style={{ color: '#9a8a7e' }}>{description}</p>
         </div>
-      )}
-    </HoverCard>
+
+        {link && linkText && (
+          <div className="relative z-10 mt-6">
+            <Link
+              href={link}
+              prefetch={false}
+              target={isExternal ? '_blank' : undefined}
+              rel={isExternal ? 'noopener noreferrer' : undefined}
+              className="inline-flex items-center justify-center rounded-full px-5 py-2.5 text-xs font-bold transition-all duration-300 hover:-translate-y-0.5 active:scale-95"
+              style={{ border: '1px solid rgba(212,132,90,0.22)', background: 'rgba(212,132,90,0.08)', color: '#d4845a' }}
+            >
+              {linkText}
+            </Link>
+          </div>
+        )}
+      </HoverCard>
+    </Tilt3D>
   );
 };
 
@@ -129,15 +132,17 @@ const AnimatedCounter: React.FC = () => {
   }, [hasAnimated]);
 
   return (
-    <HoverCard className="gradient-card group flex h-full flex-col items-center justify-center gap-3 px-6 py-10 text-center relative overflow-hidden">
-      <div ref={counterRef} className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-white/[0.01]" />
-      <p className="text-xl font-bold relative z-10" style={{ color: '#d4845a' }}>أكثر من</p>
-      <p className="text-6xl font-black bg-clip-text text-transparent relative z-10" style={{ backgroundImage: 'linear-gradient(135deg, #c9a84c, #d4845a, #e8956a)' }}>
-        {count}+
-      </p>
-      <p className="text-base font-semibold relative z-10" style={{ color: '#b8a89a' }}>عميل يثق في أدوات <span className="ezzo-text">Ezzo</span> الاحترافية</p>
-      <Sparkline />
-    </HoverCard>
+    <Tilt3D className="h-full" max={6}>
+      <HoverCard className="gradient-card group flex h-full flex-col items-center justify-center gap-3 px-6 py-10 text-center relative overflow-hidden">
+        <div ref={counterRef} className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-white/[0.01]" />
+        <p className="text-xl font-bold relative z-10" style={{ color: '#d4845a' }}>أكثر من</p>
+        <p className="text-6xl font-black bg-clip-text text-transparent relative z-10" style={{ backgroundImage: 'linear-gradient(135deg, #c9a84c, #d4845a, #e8956a)' }}>
+          {count}+
+        </p>
+        <p className="text-base font-semibold relative z-10" style={{ color: '#b8a89a' }}>عميل يثق في أدوات <span className="ezzo-text">Ezzo</span> الاحترافية</p>
+        <Sparkline />
+      </HoverCard>
+    </Tilt3D>
   );
 };
 
@@ -203,16 +208,18 @@ const StatCard: React.FC<StatItem> = ({ value, suffix = '', label, description }
   }, [hasAnimated, value]);
 
   return (
-    <HoverCard className="gradient-card group h-full px-6 py-10 text-center relative overflow-hidden">
-      <div ref={cardRef} className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-white/[0.01]" />
-      <p className="text-5xl font-black relative z-10 transition-colors duration-300" style={{ color: '#d4845a' }}>
-        {displayValue}
-        {suffix}
-      </p>
-      <p className="mt-3 text-lg font-bold relative z-10" style={{ color: '#f0ebe4' }}>{label}</p>
-      <p className="mt-3 text-sm leading-7 font-medium relative z-10" style={{ color: '#9a8a7e' }}>{description}</p>
-      <Sparkline />
-    </HoverCard>
+    <Tilt3D className="h-full" max={6}>
+      <HoverCard className="gradient-card group h-full px-6 py-10 text-center relative overflow-hidden">
+        <div ref={cardRef} className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-white/[0.01]" />
+        <p className="text-5xl font-black relative z-10 transition-colors duration-300" style={{ color: '#d4845a' }}>
+          {displayValue}
+          {suffix}
+        </p>
+        <p className="mt-3 text-lg font-bold relative z-10" style={{ color: '#f0ebe4' }}>{label}</p>
+        <p className="mt-3 text-sm leading-7 font-medium relative z-10" style={{ color: '#9a8a7e' }}>{description}</p>
+        <Sparkline />
+      </HoverCard>
+    </Tilt3D>
   );
 };
 
@@ -348,34 +355,36 @@ const Welcome: React.FC = () => {
 
       {/* Showcase App Mockup Window */}
       <FadeIn direction="up" delay={0.3} className="page-shell mt-20">
-        <div className="relative rounded-[2rem] backdrop-blur-xl overflow-hidden" style={{ border: '1px solid rgba(212,132,90,0.12)', background: 'rgba(17,13,10,0.88)', boxShadow: '0 40px 100px -40px rgba(212,132,90,0.3), 0 0 0 1px rgba(240,235,228,0.025)' }}>
-          {/* macOS window title bar */}
-          <div className="flex items-center justify-between px-5 py-3.5" style={{ borderBottom: '1px solid rgba(212,132,90,0.08)', background: 'rgba(240,235,228,0.015)' }}>
-            <div className="flex gap-2">
-              <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f56]" />
-              <span className="h-2.5 w-2.5 rounded-full bg-[#ffbd2e]" />
-              <span className="h-2.5 w-2.5 rounded-full bg-[#27c93f]" />
+        <Tilt3D max={3} scale={1.005}>
+          <div className="relative rounded-[2rem] backdrop-blur-xl overflow-hidden" style={{ border: '1px solid rgba(212,132,90,0.12)', background: 'rgba(17,13,10,0.88)', boxShadow: '0 40px 100px -40px rgba(212,132,90,0.3), 0 0 0 1px rgba(240,235,228,0.025)' }}>
+            {/* macOS window title bar */}
+            <div className="flex items-center justify-between px-5 py-3.5" style={{ borderBottom: '1px solid rgba(212,132,90,0.08)', background: 'rgba(240,235,228,0.015)' }}>
+              <div className="flex gap-2">
+                <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f56]" />
+                <span className="h-2.5 w-2.5 rounded-full bg-[#ffbd2e]" />
+                <span className="h-2.5 w-2.5 rounded-full bg-[#27c93f]" />
+              </div>
+              <span className="text-[11px] font-semibold tracking-widest uppercase" style={{ color: '#6a5a52' }}>Ezzo Trading Terminal</span>
+              <div className="w-12" />
             </div>
-            <span className="text-[11px] font-semibold tracking-widest uppercase" style={{ color: '#6a5a52' }}>Ezzo Trading Terminal</span>
-            <div className="w-12" />
-          </div>
 
-          <div className="relative aspect-video w-full overflow-hidden bg-black/70 sm:aspect-[21/9]">
-            <Image
-              src={SHOWCASE_IMAGES[showcaseIndex].src}
-              alt={SHOWCASE_IMAGES[showcaseIndex].title}
-              fill
-              priority={showcaseIndex === 0}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
-              className="object-cover transition-transform duration-[4500ms] ease-out hover:scale-[1.025]"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/15 to-transparent" />
-            <div className="absolute bottom-8 left-8 right-8 text-right">
-              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-orange-500/70 mb-2">Live Preview</p>
-              <h3 className="text-xl font-bold text-white sm:text-2xl" style={{ letterSpacing: '-0.02em' }}>{SHOWCASE_IMAGES[showcaseIndex].title}</h3>
+            <div className="relative aspect-video w-full overflow-hidden bg-black/70 sm:aspect-[21/9]">
+              <Image
+                src={SHOWCASE_IMAGES[showcaseIndex].src}
+                alt={SHOWCASE_IMAGES[showcaseIndex].title}
+                fill
+                priority={showcaseIndex === 0}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
+                className="object-cover transition-transform duration-[4500ms] ease-out hover:scale-[1.025]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/15 to-transparent" />
+              <div className="absolute bottom-8 left-8 right-8 text-right">
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-orange-500/70 mb-2">Live Preview</p>
+                <h3 className="text-xl font-bold text-white sm:text-2xl" style={{ letterSpacing: '-0.02em' }}>{SHOWCASE_IMAGES[showcaseIndex].title}</h3>
+              </div>
             </div>
           </div>
-        </div>
+        </Tilt3D>
       </FadeIn>
 
       <Advertisement />

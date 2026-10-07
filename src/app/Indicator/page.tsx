@@ -6,38 +6,22 @@ import FuturesIndicatorPreview from './FuturesIndicatorPreview';
 import { FadeIn, StaggerContainer, StaggerItem } from '@/components/animations/MotionComponents';
 
 export const metadata: Metadata = {
-  title: 'مؤشر 3zzo TickHunter | مؤشر ناسداك يحلّل السوق ويعطيك الصفقة جاهزة',
+  title: 'استراتيجية ايزو البرو | مؤشر تداول فني متقدم للفيوتشر والحسابات الممولة',
   description:
-    'مؤشر 3zzo TickHunter لعقود الناسداك الآجلة (MNQ · NQ · NAS100 · US100) يحلّل السوق نيابةً عنك ويرسم الدخول ووقف الخسارة والهدف على الشارت مباشرةً وفق مفاهيم ICT، مع تنبيهات لحظية على TradingView — بدون خبرة تحليل فني.',
+    'استراتيجية ايزو البرو المبنية على مفاهيم ICT — رصد دقيق لمناطق السيولة وكتل الأوامر مع تنبيهات لحظية لأسواق الفيوتشر وناسداك. احصل على نقاط دخول وخروج محسوبة.',
   keywords: [
-    '3zzo TickHunter', 'مؤشر 3zzo TickHunter', 'TickHunter', 'ايزو تيك هنتر', 'مؤشر تيك هنتر',
-    'مؤشر ناسداك', 'مؤشر ناسداك تريدنغ فيو', 'مؤشر فيوتشر ناسداك', 'مؤشر NQ', 'مؤشر MNQ',
-    'مؤشر NAS100', 'مؤشر US100', 'مؤشر تداول', 'مؤشر يحلل السوق', 'مؤشر صفقات جاهزة',
-    'مؤشر سيولة', 'مؤشر ICT', 'مؤشر Smart Money', 'كتل أوامر', 'Order Block', 'Liquidity Sweep',
-    'تنبيهات TradingView', 'استراتيجية ايزو', 'استراتيجية ايزو البرو', 'Ezzo indicator',
-    'best nasdaq indicator', 'NQ futures indicator', 'ICT liquidity indicator',
+    'استراتيجية ايزو', 'استراتيجية ايزو البرو', 'مؤشر تداول', 'ICT استراتيجية',
+    'فيوتشر', 'ناسداك', 'تداول SPX', 'استراتيجية لحظية', 'نقاط سيولة',
+    'كتل أوامر', 'تنبيهات تداول', 'TradingView', 'Ezzo indicator',
+    'Ezzo trading strategy', 'futures trading strategy',
   ],
   alternates: { canonical: 'https://3zzo.com/Indicator' },
   openGraph: {
-    type: 'website',
-    locale: 'ar_SA',
-    siteName: 'Ezzo Trading',
-    title: 'مؤشر 3zzo TickHunter | يحلّل الناسداك ويعطيك الصفقة جاهزة',
-    description:
-      'مؤشر لعقود الناسداك الآجلة (MNQ · NQ · NAS100 · US100) يحلّل السوق ويرسم الدخول ووقف الخسارة والهدف تلقائياً، مع تنبيهات لحظية على TradingView.',
+    title: 'استراتيجية ايزو البرو | مؤشر تداول فني متقدم',
+    description: 'استراتيجية ايزو البرو مبنية على ICT — نقاط دخول دقيقة وتنبيهات لحظية لأسواق الفيوتشر.',
     url: 'https://3zzo.com/Indicator',
-    images: [
-      { url: 'https://3zzo.com/img/3zzo-tickhunter.png', width: 1320, height: 1182, alt: 'مؤشر 3zzo TickHunter على شارت الناسداك' },
-      { url: 'https://3zzo.com/img/ezzoind.webp', width: 1200, height: 630 },
-    ],
+    images: [{ url: 'https://3zzo.com/img/ezzoind.webp', width: 1200, height: 630 }],
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'مؤشر 3zzo TickHunter | مؤشر ناسداك يحلّل ويعطيك الصفقة جاهزة',
-    description: 'يحلّل الناسداك نيابةً عنك: دخول ووقف وهدف على الشارت + تنبيهات TradingView لحظية.',
-    images: ['https://3zzo.com/img/3zzo-tickhunter.png'],
-  },
-  robots: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 },
 };
 
 // ─── Structured data (JSON-LD) ───────────────────────────────────────────────
@@ -124,12 +108,17 @@ const STRATEGY_VIDEO = {
   thumbnail: '/img/ezzoind.webp',
 };
 
+// مخفي مؤقتاً بطلب من صاحب الموقع — رجّعه إلى true عند الطلب لإظهار قسم 3zzo TickHunter مجدداً
+const SHOW_TICKHUNTER = false;
+
 const Indicator: React.FC = () => (
   <div className="relative isolate pb-24 pt-28">
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
-    />
+    {SHOW_TICKHUNTER && (
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
+      />
+    )}
     <div className="pointer-events-none absolute inset-0 -z-10">
       <div className="absolute left-[18%] top-[-18%] h-80 w-80 rounded-full bg-orange-500/20 blur-[160px]" />
       <div className="absolute bottom-[-25%] right-[12%] h-[360px] w-[360px] rounded-full bg-rose-500/18 blur-[190px]" />
@@ -186,7 +175,8 @@ const Indicator: React.FC = () => (
       </FadeIn>
     </section>
 
-    {/* ── قسم المؤشرات · مؤشر 3zzo TickHunter ─────────────────────────── */}
+    {/* ── قسم المؤشرات · مؤشر 3zzo TickHunter (مخفي مؤقتاً — SHOW_TICKHUNTER) ── */}
+    {SHOW_TICKHUNTER && (
     <section id="tickhunter" className="page-shell mt-20 scroll-mt-28">
       <FadeIn direction="up" className="glass-panel px-6 py-12 sm:px-10 sm:py-16">
         <div className="text-center">
@@ -282,6 +272,7 @@ const Indicator: React.FC = () => (
         </div>
       </FadeIn>
     </section>
+    )}
 
     <section className="page-shell mt-20">
       <FadeIn direction="up" className="glass-panel px-6 py-12 sm:px-10 sm:py-16 text-center">

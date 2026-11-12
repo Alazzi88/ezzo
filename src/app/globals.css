@@ -471,3 +471,211 @@
   0% { opacity: 1; transform: scale(1); }
   100% { opacity: 0; transform: scale(1.1); visibility: hidden; }
 }
+
+/* ========== MOTION & TEXTURE (nothing is dead still) ========== */
+@keyframes grid-drift {
+  from { background-position: 0 0; }
+  to { background-position: 40px 40px; }
+}
+
+.grid-drift {
+  animation: grid-drift 24s linear infinite; /* linear = continuous drift only */
+}
+
+@keyframes orb-float {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(6vw, 4vh, 0) scale(1.12); }
+}
+
+.ambient-orb {
+  position: absolute;
+  top: 30%;
+  right: 8%;
+  width: 28rem;
+  height: 28rem;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(212, 132, 90, 0.12), transparent 65%);
+  filter: blur(60px);
+  animation: orb-float 18s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  will-change: transform;
+}
+
+.vignette {
+  background: radial-gradient(ellipse at 50% 40%, transparent 55%, rgba(0, 0, 0, 0.45) 100%);
+}
+
+@keyframes grain-shift {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-3%, 2%); }
+  50% { transform: translate(2%, -3%); }
+  75% { transform: translate(-2%, -1%); }
+}
+
+.grain {
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  animation: grain-shift 0.9s steps(4) infinite;
+  mix-blend-mode: overlay;
+}
+
+/* Button sheen sweep */
+.btn-primary { position: relative; overflow: hidden; }
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.35) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+.btn-primary:hover::after { transform: translateX(120%); }
+
+/* Card edge light that wakes up on hover */
+.gradient-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(240, 176, 122, 0.55), transparent 40%, transparent 60%, rgba(201, 168, 76, 0.4));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+.gradient-card:hover::before { opacity: 1; }
+
+/* Gradient headline that breathes */
+.animate-gradient-text { animation: text-gradient 6s cubic-bezier(0.65, 0, 0.35, 1) infinite; }
+
+/* Respect users who ask for less motion */
+@media (prefers-reduced-motion: reduce) {
+  .grid-drift, .ambient-orb, .grain, .animate-gradient-text { animation: none !important; }
+  .btn-primary::after { display: none; }
+}
+
+/* ========== LINKS PAGE · 3D ========== */
+/* ---- medallion ---- */
+.medallion-stage { position: relative; width: 240px; height: 240px; margin: 4px auto -4px; perspective: 900px; }
+.medallion-sway { position: absolute; inset: 0; transform-style: preserve-3d; animation: medallion-sway 7s cubic-bezier(0.65, 0, 0.35, 1) infinite; }
+.medallion-body { position: absolute; inset: 0; transform-style: preserve-3d; }
+@keyframes medallion-sway {
+  0%, 100% { transform: rotateY(-14deg) rotateX(4deg) translateY(0); }
+  50% { transform: rotateY(14deg) rotateX(-4deg) translateY(-8px); }
+}
+.coin-face, .coin-layer {
+  position: absolute; left: 50%; top: 50%; width: 120px; height: 120px; margin: -60px 0 0 -60px; border-radius: 9999px;
+}
+.coin-face { overflow: hidden; border: 2px solid rgba(240, 176, 122, 0.55); box-shadow: 0 0 40px rgba(212, 132, 90, 0.45), inset 0 0 18px rgba(0,0,0,0.5); }
+.coin-layer { background: linear-gradient(135deg, #8a5430, #c9a84c 55%, #7a3e22); box-shadow: 0 0 20px rgba(201, 168, 76, 0.35); }
+.coin-shine {
+  position: absolute; inset: 0; border-radius: inherit;
+  background: linear-gradient(115deg, transparent 38%, rgba(255,255,255,0.38) 50%, transparent 62%);
+  transform: translateX(-130%); animation: coin-shine 5s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+@keyframes coin-shine { 0%, 55% { transform: translateX(-130%); } 100% { transform: translateX(130%); } }
+.medallion-glow {
+  position: absolute; left: 50%; top: 50%; width: 190px; height: 190px; margin: -95px 0 0 -95px; border-radius: 9999px;
+  background: radial-gradient(circle, rgba(212,132,90,0.5), transparent 68%); filter: blur(18px);
+  transform: translateZ(-40px); animation: glow-pulse 4s ease-in-out infinite;
+}
+.orbit-ring {
+  position: absolute; left: 50%; top: 50%; margin: 0; border-radius: 9999px; transform-style: preserve-3d;
+  border: 1px solid rgba(240, 176, 122, 0.38); box-shadow: 0 0 14px rgba(212,132,90,0.25), inset 0 0 14px rgba(212,132,90,0.12);
+  translate: -50% -50%;
+  animation: ring-spin var(--dur, 10s) linear infinite;
+}
+@keyframes ring-spin {
+  from { transform: rotateX(var(--tilt, 70deg)) rotateY(var(--tiltY, 0deg)) rotateZ(0deg); }
+  to   { transform: rotateX(var(--tilt, 70deg)) rotateY(var(--tiltY, 0deg)) rotateZ(360deg); }
+}
+.orbit-dot {
+  position: absolute; top: -5px; left: 50%; width: 10px; height: 10px; margin-left: -5px; border-radius: 9999px;
+  background: #f0b07a; box-shadow: 0 0 14px 3px rgba(240,176,122,0.85);
+}
+.orbit-dot-gold { background: #e8c145; box-shadow: 0 0 14px 3px rgba(232,193,69,0.85); }
+.letter-bob { animation: letter-bob 3.6s cubic-bezier(0.65, 0, 0.35, 1) infinite; }
+@keyframes letter-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+
+/* ---- backdrop scene ---- */
+.scene3d { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; perspective: 900px; }
+.scene-floor { position: absolute; left: -50%; right: -50%; bottom: 0; height: 58vh; perspective: 520px; mask-image: linear-gradient(to top, #000 15%, transparent 92%); -webkit-mask-image: linear-gradient(to top, #000 15%, transparent 92%); }
+.scene-floor-plane {
+  position: absolute; inset: -60% 0 0 0; transform-origin: 50% 100%; transform: rotateX(68deg);
+  background-image:
+    linear-gradient(rgba(212,132,90,0.34) 1.5px, transparent 1.5px),
+    linear-gradient(90deg, rgba(212,132,90,0.34) 1.5px, transparent 1.5px);
+  background-size: 64px 64px; animation: floor-rush 2.6s linear infinite;
+}
+@keyframes floor-rush { from { background-position: 0 0; } to { background-position: 0 64px; } }
+.scene-horizon { position: absolute; left: 0; right: 0; bottom: 34vh; height: 1px; background: linear-gradient(90deg, transparent, rgba(240,176,122,0.5), transparent); box-shadow: 0 0 40px 6px rgba(212,132,90,0.22); opacity: 0.6; }
+.scene-candle { position: absolute; width: var(--w); height: var(--h); transform-style: preserve-3d; animation: candle-float 10s cubic-bezier(0.65, 0, 0.35, 1) infinite; opacity: 0.55; }
+.candle-wick { position: absolute; left: 50%; top: -14px; bottom: -14px; width: 2px; margin-left: -1px; background: rgba(240,235,228,0.35); }
+.candle-body { position: absolute; inset: 0; border-radius: 3px; }
+.candle-up { background: linear-gradient(180deg, #f0b07a, #b86840); box-shadow: 0 0 24px rgba(212,132,90,0.5); }
+.candle-down { background: linear-gradient(180deg, #5c4a40, #2c231d); box-shadow: 0 0 18px rgba(0,0,0,0.6); border: 1px solid rgba(240,235,228,0.12); }
+@keyframes candle-float {
+  0%, 100% { transform: translate3d(0, 0, 0) rotateY(-24deg) rotateX(8deg); }
+  50% { transform: translate3d(0, -26px, 60px) rotateY(24deg) rotateX(-8deg); }
+}
+.scene-orb { position: absolute; border-radius: 9999px; filter: blur(70px); }
+.scene-orb-a { top: -8%; right: 10%; width: 26rem; height: 26rem; background: rgba(212,132,90,0.16); animation: orb-float 16s cubic-bezier(0.65, 0, 0.35, 1) infinite; }
+.scene-orb-b { bottom: 10%; left: -6%; width: 22rem; height: 22rem; background: rgba(201,168,76,0.1); animation: orb-float 20s cubic-bezier(0.65, 0, 0.35, 1) infinite reverse; }
+
+/* ---- 3D link card ---- */
+@property --ang { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+.card3d { transform-style: preserve-3d; will-change: transform; }
+.card3d-border {
+  position: absolute; inset: -1px; border-radius: 1.05rem; z-index: 0; opacity: 0.35; transition: opacity 0.4s;
+  background: conic-gradient(from var(--ang), transparent 0 55%, var(--c) 78%, transparent 100%);
+  animation: ang-spin 5s linear infinite;
+}
+.card3d:hover .card3d-border { opacity: 1; }
+.card3d > div { z-index: 1; margin: 0; }
+@keyframes ang-spin { to { --ang: 360deg; } }
+.card3d-sheen {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(110deg, transparent 35%, rgba(255,255,255,0.09) 50%, transparent 65%);
+  transform: translateX(-130%); transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card3d:hover .card3d-sheen { transform: translateX(130%); }
+
+/* ---- marquee ---- */
+.marquee { overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent); margin-top: 18px; }
+.marquee-track { display: flex; width: max-content; animation: marquee 28s linear infinite; }
+.marquee-row { display: flex; }
+.marquee-item { display: inline-flex; align-items: center; gap: 14px; padding-right: 14px; font-size: 11px; font-weight: 800; letter-spacing: 0.24em; color: rgba(201,168,76,0.55); white-space: nowrap; }
+.marquee-dot { width: 5px; height: 5px; border-radius: 9999px; background: #d4845a; box-shadow: 0 0 8px #d4845a; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+@media (max-width: 640px) {
+  .medallion-stage { transform: scale(0.88); margin-bottom: -14px; }
+  .scene-candle { opacity: 0.28; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .medallion-sway, .orbit-ring, .coin-shine, .scene-floor-plane, .scene-candle, .scene-orb, .card3d-border, .marquee-track, .letter-bob { animation: none !important; }
+}
+
+/* ========== SITE-WIDE 3D ========== */
+.site-scene .scene-floor { opacity: 0.5; height: 46vh; }
+.site-scene .scene-floor-plane { animation-duration: 3.6s; }
+.chip3d {
+  display: flex; align-items: center; gap: 10px; padding: 10px 16px; border-radius: 16px;
+  background: linear-gradient(135deg, rgba(40,31,24,0.75), rgba(16,13,10,0.8));
+  border: 1px solid color-mix(in srgb, var(--tone) 40%, transparent);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 22px 40px -18px rgba(0,0,0,0.9), 0 0 30px -8px color-mix(in srgb, var(--tone) 55%, transparent), inset 0 1px 0 rgba(255,255,255,0.08);
+  animation: chip-float 7s cubic-bezier(0.65, 0, 0.35, 1) infinite; text-align: right;
+}
+.chip3d-dot { width: 8px; height: 8px; border-radius: 9999px; background: var(--tone); box-shadow: 0 0 12px var(--tone); animation: glow-pulse 2.4s ease-in-out infinite; }
+.chip3d-label { font-size: 13px; font-weight: 800; letter-spacing: 0.12em; color: #f0ebe4; line-height: 1.1; }
+.chip3d-sub { font-size: 10.5px; font-weight: 600; color: #9a8a7e; margin-top: 3px; }
+@keyframes chip-float { 0%, 100% { transform: translateY(0) rotateZ(-1deg); } 50% { transform: translateY(-12px) rotateZ(1deg); } }
+
+/* depth for every card/panel on every page */
+.gradient-card, .glass-panel { transform-style: preserve-3d; }
+.gradient-card:hover { transform: none; } /* tilt is handled by Tilt3D; avoid fighting it */
+@media (prefers-reduced-motion: reduce) { .chip3d, .site-scene .scene-floor-plane { animation: none !important; } }

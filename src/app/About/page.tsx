@@ -1,6 +1,14 @@
+import type { Metadata } from 'next';
 import products, { Product } from '@/app/products';
 import Image from 'next/image';
 import { FadeIn, StaggerContainer, StaggerItem } from '@/components/animations/MotionComponents';
+
+export const metadata: Metadata = {
+  title: 'من نحن | فريق Ezzo للتداول',
+  // (template appends " | Ezzo")
+  description: 'تعرّف على Ezzo: فريق متخصص في استراتيجيات الفيوتشر والحسابات الممولة وبوت خيارات SPX، نقدّم أدوات وتحليلًا فنيًا لمساعدة المتداولين العرب.',
+  alternates: { canonical: '/About' },
+};
 
 const AboutPage: React.FC = () => {
   return (

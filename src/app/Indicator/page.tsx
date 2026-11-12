@@ -6,7 +6,7 @@ import FuturesIndicatorPreview from './FuturesIndicatorPreview';
 import { FadeIn, StaggerContainer, StaggerItem } from '@/components/animations/MotionComponents';
 
 export const metadata: Metadata = {
-  title: 'استراتيجية ايزو البرو | مؤشر تداول فني متقدم للفيوتشر والحسابات الممولة',
+  title: 'استراتيجية ايزو البرو | مؤشر ICT للفيوتشر والحسابات الممولة',
   description:
     'استراتيجية ايزو البرو المبنية على مفاهيم ICT — رصد دقيق لمناطق السيولة وكتل الأوامر مع تنبيهات لحظية لأسواق الفيوتشر وناسداك. احصل على نقاط دخول وخروج محسوبة.',
   keywords: [
@@ -22,6 +22,104 @@ export const metadata: Metadata = {
     url: 'https://3zzo.com/Indicator',
     images: [{ url: 'https://3zzo.com/img/ezzoind.webp', width: 1200, height: 630 }],
   },
+};
+
+// ─── Always-on schema for the Ezzo strategy (TickHunter schema below stays gated) ───
+const STRATEGY_JSON_LD = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "الرئيسية",
+          "item": "https://3zzo.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "استراتيجية ايزو",
+          "item": "https://3zzo.com/Indicator"
+        }
+      ]
+    },
+    {
+      "@type": "Product",
+      "name": "استراتيجية ايزو البرو",
+      "alternateName": "Ezzo Pro Strategy",
+      "url": "https://3zzo.com/Indicator",
+      "image": "https://3zzo.com/img/ezzoind.webp",
+      "description": "استراتيجية ايزو البرو المبنية على مفاهيم ICT — رصد مناطق السيولة وكتل الأوامر مع نقاط دخول وخروج محسوبة وتنبيهات لحظية لأسواق الفيوتشر والحسابات الممولة.",
+      "brand": {
+        "@type": "Brand",
+        "name": "Ezzo"
+      },
+      "category": "Trading Strategy"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "كيفية الإشتراك باستراتيجية ايزو؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "يمكنك الاشتراك من خلال متجرنا 3zzo.aryaf.sa أو التواصل مع الدعم الفني في حال واجهت أي مشكلة أثناء الاشتراك."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "هل يوجد شرح لاستراتيجية ايزو من الصفر؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "نعم، نوفر شروحات مفصلة للمبتدئين بخطوات واضحة من البداية حتى الاحتراف، ويمكنك الاطلاع عليها عبر مكتبة الفيديوهات في الموقع أو طلب توجيه من فريق الدعم."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "هل استراتيجية ايزو تحقق نجاحًا بنسبة 100%؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "لا توجد استراتيجية تحقق نتائج مضمونة 100%، فجميع الأدوات التحليلية معرضة للأخطاء والتقلبات السوقية. استراتيجية ايزو ترفع من احتمالية النجاح لكنها لا تضمنه بشكل مطلق."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "هل استراتيجية ايزو تعمل على الهاتف والكمبيوتر؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "نعم، تعمل الاستراتيجية على أجهزة الهاتف والكمبيوتر بسلاسة، ويمكنك استخدامها عبر متصفحات الويب أو تطبيقات التداول الداعمة."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "ما الفريم الزمني الأنسب لاستخدام الاستراتيجية؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "تعمل استراتيجية ايزو على مختلف الفريمات الزمنية (مثل الدقيقة، 5 دقائق، 15 دقيقة...). اختيار الفريم المناسب يعتمد على أسلوبك في التداول."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "هل توفر الاستراتيجية إشارات بيع وشراء مباشرة؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "الاستراتيجية تقدم مناطق دخول وخروج محتملة بناءً على معطيات تحليلية، لكنها ليست روبوتًا للتداول التلقائي. تبقى قرارات الشراء والبيع مسؤوليتك."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "هل يتوفر دعم فني أو تحديثات مستقبلية للاستراتيجية؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "نعم، يتوفر دعم فني للمشتركين في الاستراتيجية، كما نقدم تحديثات دورية للتحسين وإضافة مزايا جديدة بشكل مجاني للمشتركين الحاليين."
+          }
+        }
+      ]
+    }
+  ]
 };
 
 // ─── Structured data (JSON-LD) ───────────────────────────────────────────────
@@ -113,6 +211,10 @@ const SHOW_TICKHUNTER = false;
 
 const Indicator: React.FC = () => (
   <div className="relative isolate pb-24 pt-28">
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(STRATEGY_JSON_LD) }}
+    />
     {SHOW_TICKHUNTER && (
       <script
         type="application/ld+json"

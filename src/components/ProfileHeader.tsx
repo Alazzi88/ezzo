@@ -1,7 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
+import Medallion3D from "@/components/links/Medallion3D";
+import { ease } from "@/lib/motion";
+
+const LETTER_COLORS = ["#f0b07a", "#e8956a", "#d9a35c", "#c9a84c"];
 
 interface ProfileHeaderProps {
   brand: string;
@@ -28,45 +31,7 @@ export default function ProfileHeader({
       className="flex flex-col items-center text-center gap-4 pb-2"
       dir={dir}
     >
-      {/* ── Logo with rotating glow ring ─────────────────────── */}
-      <div className="relative">
-        {/* Spinning conic ring */}
-        <motion.div
-          className="absolute rounded-full"
-          style={{
-            inset: -6,
-            background: "conic-gradient(from 0deg, #d4845a, #c9a84c, #e8956a, #c9a84c, #d4845a)",
-            filter: "blur(10px)",
-            opacity: 0.65,
-          }}
-          animate={{ rotate: 360 }}
-          transition={{ duration: 7, repeat: Infinity, ease: "linear" }}
-        />
-        {/* Static softer ring */}
-        <div
-          className="absolute rounded-full"
-          style={{
-            inset: -3,
-            background: "conic-gradient(from 90deg, #d4845a40, #c9a84c40, #d4845a40)",
-            filter: "blur(5px)",
-          }}
-        />
-        {/* Logo container with breathing pulse */}
-        <motion.div 
-          className="relative w-28 h-28 rounded-full overflow-hidden border-2 shadow-2xl"
-          style={{ borderColor: "rgba(212,132,90,0.35)" }}
-          animate={{ scale: [1, 1.03, 1] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <Image
-            src="/img/logo.webp"
-            alt=""
-            fill
-            className="object-cover"
-            priority
-          />
-        </motion.div>
-      </div>
+      <Medallion3D />
 
       {/* ── Brand name with Verified Badge ────────────────────── */}
       <motion.div
@@ -76,17 +41,24 @@ export default function ProfileHeader({
         className="flex flex-col items-center gap-2"
       >
         <div className="flex items-center justify-center gap-2">
-          <h1
-            className="text-5xl font-extrabold tracking-widest"
-            style={{
-              background: "linear-gradient(135deg, #e8956a 0%, #d4845a 50%, #c9a84c 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              filter: "drop-shadow(0 0 22px rgba(212,132,90,0.4))",
-            }}
-          >
-            {brand}
+          <h1 className="flex text-5xl font-extrabold tracking-widest" dir="ltr" aria-label={brand} style={{ perspective: 600 }}>
+            {brand.split("").map((ch, i) => (
+              <motion.span
+                key={i}
+                aria-hidden
+                className="inline-block"
+                initial={{ opacity: 0, rotateX: -95, y: 18 }}
+                animate={{ opacity: 1, rotateX: 0, y: 0 }}
+                transition={{ delay: 0.3 + i * 0.1, duration: 0.9, ease: ease.out }}
+                style={{
+                  transformOrigin: "50% 100%",
+                  color: LETTER_COLORS[i % LETTER_COLORS.length],
+                  textShadow: "0 0 26px rgba(212,132,90,0.55), 0 3px 0 rgba(90,46,24,0.7)",
+                }}
+              >
+                <span className="letter-bob inline-block" style={{ animationDelay: `${i * 0.18}s` }}>{ch}</span>
+              </motion.span>
+            ))}
           </h1>
           <motion.div
             initial={{ scale: 0, rotate: -45 }}

@@ -4,8 +4,12 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
-import { FadeIn, HoverCard, ScaleIn, StaggerContainer, StaggerItem } from './animations/MotionComponents';
+import { FadeIn, HoverCard, ScaleIn, StaggerContainer, StaggerItem, WordReveal } from './animations/MotionComponents';
+import { AnimatePresence, m } from 'framer-motion';
+import { ease, easeOutExpo } from '@/lib/motion';
 import { Tilt3D } from './animations/Tilt3D';
+import FloatingChips from './animations/FloatingChips';
+import Medallion3D from './links/Medallion3D';
 
 // Lazy load heavy components
 const Advertisement = dynamic(() => import('./Advertisement'), { ssr: false });
@@ -118,7 +122,7 @@ const AnimatedCounter: React.FC = () => {
     const animate = (timestamp: number) => {
       if (startTime === null) startTime = timestamp;
       const progress = Math.min((timestamp - startTime) / duration, 1);
-      const nextValue = Math.floor(progress * target);
+      const nextValue = Math.floor(easeOutExpo(progress) * target);
 
       setCount((prev) => (prev === nextValue ? prev : nextValue));
 
@@ -186,7 +190,7 @@ const StatCard: React.FC<StatItem> = ({ value, suffix = '', label, description }
   useEffect(() => {
     if (!hasAnimated) return;
 
-    const duration = 1200;
+    const duration = 1600;
     const target = Math.max(value, 0);
     let frameId = 0;
     let startTime: number | null = null;
@@ -194,7 +198,7 @@ const StatCard: React.FC<StatItem> = ({ value, suffix = '', label, description }
     const animate = (timestamp: number) => {
       if (startTime === null) startTime = timestamp;
       const progress = Math.min((timestamp - startTime) / duration, 1);
-      const nextValue = Math.floor(progress * target);
+      const nextValue = Math.floor(easeOutExpo(progress) * target);
 
       setDisplayValue((prev) => (prev === nextValue ? prev : nextValue));
 
@@ -265,7 +269,7 @@ const Welcome: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setShowcaseIndex((prev) => (prev + 1) % SHOWCASE_IMAGES.length);
-    }, 3000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
@@ -278,7 +282,11 @@ const Welcome: React.FC = () => {
         <div className="absolute bottom-[-20%] left-[5%] h-[600px] w-[600px] rounded-full blur-[190px]" style={{ background: 'rgba(201,168,76,0.04)' }} />
       </div>
 
-      <section className="page-shell pt-16 text-center sm:pt-28">
+      <section className="page-shell relative pt-6 text-center sm:pt-10">
+        <FloatingChips />
+        <div className="relative z-10 -mb-6 flex justify-center">
+          <Medallion3D />
+        </div>
         <StaggerContainer className="flex flex-col items-center">
 
           {/* Trust badges row */}
@@ -308,11 +316,11 @@ const Welcome: React.FC = () => {
           <div className="relative z-10 container mx-auto px-4 h-full flex flex-col justify-center items-center text-center mt-6">
             <StaggerItem>
               <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-black mb-7" style={{ letterSpacing: '-0.03em', lineHeight: 1.08, color: '#f0ebe4' }}>
-                <span style={{ background: 'linear-gradient(135deg, #f0b07a 0%, #d4845a 50%, #c9a84c 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-                  تداول بذكاء
+                <span>
+                  <WordReveal text="تداول بذكاء" delay={0.15} wordStyle={{ background: 'linear-gradient(135deg, #f0b07a 0%, #d4845a 50%, #c9a84c 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }} />
                 </span>
                 <br />
-                <span style={{ color: '#f0ebe4' }}>مع أدوات <span className="ezzo-text">Ezzo</span> الاحترافية</span>
+                <span style={{ color: '#f0ebe4' }}><WordReveal text="مع أدوات" delay={0.45} /> <WordReveal text="Ezzo" wordClassName="ezzo-text" delay={0.63} /> <WordReveal text="الاحترافية" delay={0.72} /></span>
               </h1>
             </StaggerItem>
 
@@ -355,7 +363,7 @@ const Welcome: React.FC = () => {
 
       {/* Showcase App Mockup Window */}
       <FadeIn direction="up" delay={0.3} className="page-shell mt-20">
-        <Tilt3D max={3} scale={1.005}>
+        <Tilt3D max={6} scale={1.012} radius="2rem">
           <div className="relative rounded-[2rem] backdrop-blur-xl overflow-hidden" style={{ border: '1px solid rgba(212,132,90,0.12)', background: 'rgba(17,13,10,0.88)', boxShadow: '0 40px 100px -40px rgba(212,132,90,0.3), 0 0 0 1px rgba(240,235,228,0.025)' }}>
             {/* macOS window title bar */}
             <div className="flex items-center justify-between px-5 py-3.5" style={{ borderBottom: '1px solid rgba(212,132,90,0.08)', background: 'rgba(240,235,228,0.015)' }}>
@@ -369,18 +377,39 @@ const Welcome: React.FC = () => {
             </div>
 
             <div className="relative aspect-video w-full overflow-hidden bg-black/70 sm:aspect-[21/9]">
-              <Image
-                src={SHOWCASE_IMAGES[showcaseIndex].src}
-                alt={SHOWCASE_IMAGES[showcaseIndex].title}
-                fill
-                priority={showcaseIndex === 0}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
-                className="object-cover transition-transform duration-[4500ms] ease-out hover:scale-[1.025]"
-              />
+              <AnimatePresence initial={false}>
+                <m.div
+                  key={showcaseIndex}
+                  className="absolute inset-0"
+                  initial={{ opacity: 0, scale: 1.08 }}
+                  animate={{ opacity: 1, scale: 1, transition: { duration: 1.2, ease: ease.out } }}
+                  exit={{ opacity: 0, transition: { duration: 0.6, ease: ease.in } }}
+                >
+                  <Image
+                    src={SHOWCASE_IMAGES[showcaseIndex].src}
+                    alt={SHOWCASE_IMAGES[showcaseIndex].title}
+                    fill
+                    priority={showcaseIndex === 0}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
+                    className="object-cover"
+                  />
+                </m.div>
+              </AnimatePresence>
               <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/15 to-transparent" />
               <div className="absolute bottom-8 left-8 right-8 text-right">
                 <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-orange-500/70 mb-2">Live Preview</p>
-                <h3 className="text-xl font-bold text-white sm:text-2xl" style={{ letterSpacing: '-0.02em' }}>{SHOWCASE_IMAGES[showcaseIndex].title}</h3>
+                <AnimatePresence mode="wait" initial={false}>
+                  <m.h3
+                    key={showcaseIndex}
+                    className="text-xl font-bold text-white sm:text-2xl"
+                    style={{ letterSpacing: '-0.02em' }}
+                    initial={{ opacity: 0, y: 14 }}
+                    animate={{ opacity: 1, y: 0, transition: { duration: 0.6, ease: ease.out } }}
+                    exit={{ opacity: 0, y: -8, transition: { duration: 0.25, ease: ease.in } }}
+                  >
+                    {SHOWCASE_IMAGES[showcaseIndex].title}
+                  </m.h3>
+                </AnimatePresence>
               </div>
             </div>
           </div>

@@ -5,6 +5,9 @@ import { motion } from "framer-motion";
 import ProfileHeader from "@/components/ProfileHeader";
 import LinkCard from "@/components/LinkCard";
 import WorldGlobe from "@/components/WorldGlobe";
+import Scene3D from "@/components/links/Scene3D";
+import Marquee from "@/components/links/Marquee";
+import { Tilt3D } from "@/components/animations/Tilt3D";
 import arTranslations from "@/locales/ar.json";
 
 // ─── SVG Icons ────────────────────────────────────────────────────────────────
@@ -212,15 +215,7 @@ export default function LinksPage() {
 
   return (
     <>
-      {/* Background drifting stars */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        <div className="absolute top-1/4 left-[15%] w-1 h-1 rounded-full blur-[0.5px] animate-pulse" style={{ background: 'rgba(201,168,76,0.25)', animationDuration: '4s' }} />
-        <div className="absolute top-1/3 right-[20%] w-1.5 h-1.5 rounded-full blur-[1px] animate-pulse" style={{ background: 'rgba(212,132,90,0.18)', animationDuration: '6s' }} />
-        <div className="absolute top-2/3 left-[25%] w-2 h-2 rounded-full blur-[2px] animate-pulse" style={{ background: 'rgba(201,168,76,0.12)', animationDuration: '8s' }} />
-        <div className="absolute top-[80%] right-[15%] w-1 h-1 rounded-full blur-[0.5px] animate-pulse" style={{ background: 'rgba(212,132,90,0.22)', animationDuration: '5s' }} />
-        <div className="absolute top-24 right-12 w-2.5 h-2.5 rounded-full blur-[3px] animate-ping" style={{ background: 'rgba(212,132,90,0.08)', animationDuration: '12s' }} />
-        <div className="absolute bottom-[20%] left-12 w-1.5 h-1.5 rounded-full blur-[1.5px] animate-pulse" style={{ background: 'rgba(201,168,76,0.2)', animationDuration: '7s' }} />
-      </div>
+      <Scene3D />
 
       {/* Globe */}
       <WorldGlobe />
@@ -268,13 +263,12 @@ export default function LinksPage() {
               {socialCircles.map((social) => {
                 const linkData = t.links[social.key];
                 return (
+                  <Tilt3D key={social.key} max={22} scale={1.14}>
                   <motion.a
-                    key={social.key}
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.12, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
+                    whileTap={{ scale: 0.92 }}
                     className="relative flex items-center justify-center w-12 h-12 rounded-2xl border transition-all duration-300"
                     style={{
                       background: "rgba(255, 255, 255, 0.025)",
@@ -297,6 +291,7 @@ export default function LinksPage() {
                   >
                     {social.icon}
                   </motion.a>
+                  </Tilt3D>
                 );
               })}
             </div>
@@ -349,6 +344,8 @@ export default function LinksPage() {
               })}
             </div>
           </div>
+
+          <Marquee />
 
           {/* Divider */}
           <div

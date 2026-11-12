@@ -4,7 +4,7 @@ import { FadeIn, ScaleIn, StaggerContainer, StaggerItem, HoverCard } from '@/com
 import OptionsCalculator from './Calculator';
 
 export const metadata: Metadata = {
-  title: 'EZZO SPX BOT | إشارات عقود خيارات SPX على تيليجرام',
+  title: 'EZZO SPX BOT | إشارات خيارات SPX على تيليجرام',
   description:
     'بوت EZZO SPX BOT يرصد مؤشر S&P 500 ويرسل إشارات CALL وPUT مع سعر الدخول والهدف مباشرةً على تيليجرام. تعلم أساسيات عقود الخيارات وابدأ التداول بثقة.',
   keywords: [
@@ -20,6 +20,81 @@ export const metadata: Metadata = {
     url: 'https://3zzo.com/Options',
     images: [{ url: 'https://3zzo.com/img/spx.webp', width: 1200, height: 630 }],
   },
+};
+
+const OPTIONS_JSON_LD = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "الرئيسية",
+          "item": "https://3zzo.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "EZZO SPX BOT",
+          "item": "https://3zzo.com/Options"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "EZZO SPX BOT",
+      "alternateName": "بوت خيارات ايزو",
+      "url": "https://3zzo.com/Options",
+      "image": "https://3zzo.com/img/bot.webp",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Telegram",
+      "description": "بوت تيليجرام يرصد مؤشر S&P 500 ويرسل إشارات CALL وPUT لعقود خيارات SPX مع سعر الدخول والهدف.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Ezzo Trading",
+        "url": "https://3zzo.com"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "هل أحتاج خبرة مسبقة في الخيارات؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "لا، البوت يشرح كل إشارة بالتفصيل مع سعر الدخول والهدف. يُنصح بقراءة هذه الصفحة أولاً لفهم المبادئ الأساسية."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "ما هو مؤشر SPX؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SPX هو مؤشر S&P 500 الذي يضم أكبر 500 شركة أمريكية. خياراته هي الأكثر سيولةً في العالم."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "كيف أستلم الإشارات؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "انضم لقناة تيليجرام الخاصة بالبوت، وستصلك الإشارات فور نشرها مع جميع التفاصيل."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "هل الخيارات مضمونة الربح؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "لا. تداول الخيارات ينطوي على مخاطر عالية. هذه الإشارات للأغراض التعليمية ولا تمثل نصيحة مالية."
+          }
+        }
+      ]
+    }
+  ]
 };
 
 const BOT_LINK = 'https://t.me/ezzospxbot';
@@ -99,6 +174,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 export default function OptionsPage() {
   return (
     <div className="relative isolate pb-16">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(OPTIONS_JSON_LD) }} />
       {/* bg glow */}
       <div className="pointer-events-none absolute inset-0 -z-10 hidden sm:block">
         <div className="absolute -top-32 right-[25%] h-96 w-96 rounded-full bg-orange-500/20 blur-[130px]" />
